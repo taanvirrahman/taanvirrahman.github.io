@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog | Tanvir Rahman</title>
+    <link rel="stylesheet" href="src/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"
+    ></script>
+  </head>
+  <body>
+    <div class="custom-cursor is-hidden"></div>
+    <div class="scroll-progress-container">
+      <div class="scroll-progress-bar" id="progress-bar"></div>
+    </div>
+    <header class="header">
+      <nav class="nav container">
+        <a href="index.html" class="nav-logo">tanvir</a>
+        <ul class="nav-list">
+          <li><a href="index.html#projects" class="nav-link">projects</a></li>
+          <li><a href="blog.html" class="nav-link">blog</a></li>
+          <li><a href="index.html#contact" class="nav-link">contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="grid-background">
+      <div class="grid-line"></div>
+      <div class="grid-line"></div>
+      <div class="grid-line"></div>
+      <div class="grid-line"></div>
+      <div class="grid-line"></div>
+      <div class="grid-line"></div>
+      <div class="grid-line"></div>
+      <div class="grid-line"></div>
+    </div>
+
+    <section id="blog" class="blog-section reveal" style="padding-top: 15rem">
+      <div class="container">
+        <h2 class="section-title reveal">blog.</h2>
+        <div class="blog-list reveal" id="blog-list">
+          <!-- Blog items will be injected here -->
+        </div>
+
+        <div id="blog-content" class="blog-content-view hidden reveal">
+          <div class="blog-actions reveal">
+            <button id="close-blog" class="back-btn text-btn">
+              ← back to blog
+            </button>
+            <button id="copy-link" class="back-btn text-btn">share</button>
+          </div>
+          <div id="markdown-container" class="markdown-body"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <p class="footer-copy">
+          &copy; 2026 Tanvir Rahman. All rights reserved.
+        </p>
+        <div class="social-links">
+          <a
+            href="https://github.com/taanvirrahman"
+            target="_blank"
+            class="social-link"
+            >github</a
+          >
+          <a
+            href="https://linkedin.com/in/taanvirrahman"
+            target="_blank"
+            class="social-link"
+            >linkedin</a
+          >
+          <a
+            href="https://twitter.com/taanvirrahman"
+            target="_blank"
+            class="social-link"
+            >twitter</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="src/js/main.js"></script>
+  </body>
+</html>

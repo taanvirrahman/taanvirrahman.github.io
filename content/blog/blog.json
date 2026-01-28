@@ -1,0 +1,18 @@
+[
+  {
+    "id": "design-in-ai",
+    "title": "Design in the age of AI",
+    "date": "Jan 28, 2026",
+    "tags": ["Design", "AI", "Ethics"],
+    "readingTime": "5 min read",
+    "file": "content/blog/design-in-ai.md"
+  },
+  {
+    "id": "why-ibm-plex",
+    "title": "Why I use IBM Plex Mono for everything",
+    "date": "Jan 15, 2026",
+    "tags": ["Typography", "Design", "Code"],
+    "readingTime": "3 min read",
+    "file": "content/blog/why-ibm-plex.md"
+  }
+]
