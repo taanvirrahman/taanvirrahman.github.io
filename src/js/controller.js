@@ -6,6 +6,23 @@ export const init = async () => {
   // Bootstrap global effects
   initEffects();
 
+  // Feature: Latest Note Badge (for homepage)
+  if (view.elements.latestNoteBadge) {
+    const posts = await model.fetchBlogPosts();
+    if (posts.length > 0) {
+      // Sort by date descending (assuming date format 'MMM DD, YYYY')
+      const sortedPosts = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
+      const latestPost = sortedPosts[0];
+      view.renderLatestNoteBadge(latestPost);
+
+      // Add interaction for the badge
+      view.elements.latestNoteBadge.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.location.href = `notes.html#${latestPost.id}`;
+      });
+    }
+  }
+
   // Initial render - fetch then render
   if (view.elements.blogList) {
     console.log("Fetching notes...");
@@ -111,6 +128,14 @@ export const init = async () => {
   if (view.elements.copyLinkBtn) {
     view.elements.copyLinkBtn.addEventListener("click", () => {
       view.copyToClipboard(window.location.href);
+    });
+  }
+
+  if (view.elements.subscribeForm) {
+    view.elements.subscribeForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      view.showSubscribeSuccess();
+      view.triggerConfetti();
     });
   }
 };

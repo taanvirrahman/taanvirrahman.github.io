@@ -98,10 +98,7 @@ export const initEffects = () => {
   const revealCallback = (entries, observer) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // Add a slight delay for staggered feel
-        setTimeout(() => {
-          entry.target.classList.add("active");
-        }, 100);
+        entry.target.classList.add("active");
         observer.unobserve(entry.target);
       }
     });

@@ -1,179 +1,152 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tanvir Rahman</title>
-    <link rel="stylesheet" href="src/css/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"
-    ></script>
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"
-    ></script>
-  </head>
-  <body>
-    <div class="custom-cursor is-hidden"></div>
-    <div class="scroll-progress-container">
-      <div class="scroll-progress-bar" id="progress-bar"></div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tanvir Rahman</title>
+  <link rel="stylesheet" href="src/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+  <div class="custom-cursor is-hidden"></div>
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="progress-bar"></div>
+  </div>
+  <header class="header">
+    <nav class="nav container">
+      <a href="#" class="nav-logo">tanvir</a>
+      <ul class="nav-list">
+        <li><a href="#projects" class="nav-link">projects</a></li>
+        <li><a href="notes.html" class="nav-link">notes</a></li>
+        <li><a href="#contact" class="nav-link">contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="grid-background">
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+  </div>
+
+  <section class="hero reveal" id="hero">
+    <div class="container">
+      <a href="#" id="latest-note-badge" class="hero-badge hidden">
+        <span class="badge-label">New</span>
+        <span class="badge-text">Loading...</span>
+        <span class="badge-arrow">→</span>
+      </a>
+      <h1 class="hero-title reveal">
+        hi.<br />
+        i'm<br />
+        tanvir.
+      </h1>
+
+      <p class="hero-description reveal">
+        I’m an undergrad computer science student at
+        <a href="https://www.aiub.edu.bd" target="_blank" class="text-link">@AIUB</a>. My passion is to create emotional
+        experiences at the intersection
+        of art, design, and AI.
+      </p>
+
+      <div class="hero-actions reveal">
+        <a href="#" class="hero-button" id="say-hi-btn"> → say hi </a>
+
+        <div class="message-container hidden" id="message-container">
+          <button class="back-btn" id="back-btn">←</button>
+          <input type="text" id="message-input" placeholder="write something..." autocomplete="off" />
+          <button class="send-btn hidden" id="send-btn">send</button>
+        </div>
+      </div>
     </div>
-    <header class="header">
-      <nav class="nav container">
-        <a href="#" class="nav-logo">tanvir</a>
-        <ul class="nav-list">
-          <li><a href="#projects" class="nav-link">projects</a></li>
-          <li><a href="notes.html" class="nav-link">notes</a></li>
-          <li><a href="#contact" class="nav-link">contact</a></li>
-        </ul>
-      </nav>
-    </header>
+  </section>
 
-    <div class="grid-background">
-      <div class="grid-line"></div>
-      <div class="grid-line"></div>
-      <div class="grid-line"></div>
-      <div class="grid-line"></div>
-      <div class="grid-line"></div>
-      <div class="grid-line"></div>
-      <div class="grid-line"></div>
-      <div class="grid-line"></div>
+  <section id="projects" class="projects-section reveal">
+    <div class="container">
+      <h2 class="section-title reveal">projects.</h2>
+      <div class="projects-grid">
+        <div class="project-card reveal" tabindex="0" role="button">
+          <span class="project-tag">AI / Art</span>
+          <h3 class="project-name">Neural Canvas</h3>
+          <p class="project-desc">
+            Exploring emotional AI through generative art.
+          </p>
+          <a href="#" class="project-link">view project →</a>
+        </div>
+        <div class="project-card reveal" tabindex="0" role="button">
+          <span class="project-tag">Design</span>
+          <h3 class="project-name">Minimalist UI</h3>
+          <p class="project-desc">
+            A system design for high-performance dashboards.
+          </p>
+          <a href="#" class="project-link">view project →</a>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <section class="hero reveal" id="hero">
-      <div class="container">
-        <h1 class="hero-title reveal">
-          hi.<br />
-          i'm<br />
-          tanvir.
-        </h1>
-
-        <p class="hero-description reveal">
-          I’m a undergrad computer science student at
-          <a href="https://www.aiub.edu.bd" target="_blank" class="text-link"
-            >@AIUB</a
-          >. My passion is to create emotional experiences at the intersection
-          of art, design, and AI.
-        </p>
-
-        <div class="hero-actions reveal">
-          <a href="#" class="hero-button" id="say-hi-btn"> → say hi </a>
-
-          <div class="message-container hidden" id="message-container">
-            <button class="back-btn" id="back-btn">←</button>
-            <input
-              type="text"
-              id="message-input"
-              placeholder="write something..."
-              autocomplete="off"
-            />
-            <button class="send-btn hidden" id="send-btn">send</button>
-          </div>
+  <section id="skills" class="skills-section reveal">
+    <div class="container">
+      <h2 class="section-title reveal">skills.</h2>
+      <div class="skills-grid">
+        <div class="skill-item reveal" tabindex="0">
+          Frontend Development (React, Vue)
+        </div>
+        <div class="skill-item reveal" tabindex="0">
+          Backend Systems (Node.js, Python)
+        </div>
+        <div class="skill-item reveal" tabindex="0">
+          Artificial Intelligence & Machine Learning
+        </div>
+        <div class="skill-item reveal" tabindex="0">
+          UI/UX Design & Typography
+        </div>
+        <div class="skill-item reveal" tabindex="0">
+          Generative Art (GLSL, P5.js)
+        </div>
+        <div class="skill-item reveal" tabindex="0">
+          Software Engineering Principles
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="projects" class="projects-section reveal">
-      <div class="container">
-        <h2 class="section-title reveal">projects.</h2>
-        <div class="projects-grid">
-          <div class="project-card reveal" tabindex="0" role="button">
-            <span class="project-tag">AI / Art</span>
-            <h3 class="project-name">Neural Canvas</h3>
-            <p class="project-desc">
-              Exploring emotional AI through generative art.
-            </p>
-            <a href="#" class="project-link">view project →</a>
-          </div>
-          <div class="project-card reveal" tabindex="0" role="button">
-            <span class="project-tag">Design</span>
-            <h3 class="project-name">Minimalist UI</h3>
-            <p class="project-desc">
-              A system design for high-performance dashboards.
-            </p>
-            <a href="#" class="project-link">view project →</a>
-          </div>
-        </div>
+  <section id="contact" class="subscribe-section reveal">
+    <div class="container">
+      <h2 class="subscribe-title reveal">subscribe to notes.</h2>
+      <p class="subscribe-desc reveal">
+        Stay updated with my latest thoughts on AI, design, and art.
+      </p>
+      <form class="subscribe-form reveal">
+        <input type="email" placeholder="your@email.com" required class="subscribe-input" />
+        <button type="submit" class="subscribe-btn">Join</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-copy">
+        &copy; 2026 Tanvir Rahman. All rights reserved.
+      </p>
+      <div class="social-links">
+        <a href="https://github.com/taanvirrahman" target="_blank" class="social-link">github</a>
+        <a href="https://linkedin.com/in/taanvirrahman" target="_blank" class="social-link">linkedin</a>
+        <a href="https://twitter.com/taanvirrahman" target="_blank" class="social-link">twitter</a>
       </div>
-    </section>
+    </div>
+  </footer>
 
-    <section id="skills" class="skills-section reveal">
-      <div class="container">
-        <h2 class="section-title reveal">skills.</h2>
-        <div class="skills-grid">
-          <div class="skill-item reveal" tabindex="0">
-            Frontend Development (React, Vue)
-          </div>
-          <div class="skill-item reveal" tabindex="0">
-            Backend Systems (Node.js, Python)
-          </div>
-          <div class="skill-item reveal" tabindex="0">
-            Artifical Intelligence & Machine Learning
-          </div>
-          <div class="skill-item reveal" tabindex="0">
-            UI/UX Design & Typography
-          </div>
-          <div class="skill-item reveal" tabindex="0">
-            Generative Art (GLSL, P5.js)
-          </div>
-          <div class="skill-item reveal" tabindex="0">
-            Software Engineering Principles
-          </div>
-        </div>
-      </div>
-    </section>
+  <script type="module" src="src/js/main.js"></script>
+</body>
 
-    <section id="contact" class="subscribe-section reveal">
-      <div class="container">
-        <h2 class="subscribe-title reveal">subscribe to notes.</h2>
-        <p class="subscribe-desc reveal">
-          Stay updated with my latest thoughts on AI, design, and art.
-        </p>
-        <form class="subscribe-form reveal">
-          <input
-            type="email"
-            placeholder="your@email.com"
-            required
-            class="subscribe-input"
-          />
-          <button type="submit" class="subscribe-btn">Join</button>
-        </form>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="container footer-content">
-        <p class="footer-copy">
-          &copy; 2026 Tanvir Rahman. All rights reserved.
-        </p>
-        <div class="social-links">
-          <a
-            href="https://github.com/taanvirrahman"
-            target="_blank"
-            class="social-link"
-            >github</a
-          >
-          <a
-            href="https://linkedin.com/in/taanvirrahman"
-            target="_blank"
-            class="social-link"
-            >linkedin</a
-          >
-          <a
-            href="https://twitter.com/taanvirrahman"
-            target="_blank"
-            class="social-link"
-            >twitter</a
-          >
-        </div>
-      </div>
-    </footer>
-
-    <script type="module" src="src/js/main.js"></script>
-  </body>
 </html>

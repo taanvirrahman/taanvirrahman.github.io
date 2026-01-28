@@ -9,6 +9,9 @@ export const elements = {
   closeBlog: document.getElementById("close-blog"),
   copyLinkBtn: document.getElementById("copy-link"),
   markdownContainer: document.getElementById("markdown-container"),
+  subscribeForm: document.querySelector(".subscribe-form"),
+  subscribeBtn: document.querySelector(".subscribe-btn"),
+  latestNoteBadge: document.getElementById("latest-note-badge"),
 };
 
 export const renderBlogList = (posts) => {
@@ -36,6 +39,16 @@ export const renderBlogList = (posts) => {
   `,
     )
     .join("");
+};
+
+export const renderLatestNoteBadge = (note) => {
+  if (!elements.latestNoteBadge || !note) return;
+
+  const badgeText = elements.latestNoteBadge.querySelector(".badge-text");
+  if (badgeText) badgeText.innerText = note.title;
+
+  elements.latestNoteBadge.href = `#${note.id}`;
+  elements.latestNoteBadge.classList.remove("hidden");
 };
 
 export const showBlogPost = (content) => {
@@ -119,6 +132,16 @@ export const showThankYou = () => {
   elements.sayHiBtn.style.color = "#888888";
   elements.messageInput.value = "";
   elements.sendBtn.classList.add("hidden");
+};
+
+export const showSubscribeSuccess = () => {
+  if (!elements.subscribeBtn) return;
+  elements.subscribeBtn.innerText = "Joined!";
+  elements.subscribeBtn.style.backgroundColor = "#fff";
+  elements.subscribeBtn.style.color = "#000";
+  setTimeout(() => {
+    elements.subscribeBtn.innerText = "Thank you";
+  }, 1000);
 };
 
 export const triggerConfetti = () => {

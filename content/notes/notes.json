@@ -1,9 +1,25 @@
 [
   {
+    "id": "what-is-the-purpose-of-life",
+    "title": "What is the purpose of life?",
+    "date": "Jan 29, 2026",
+    "tags": [
+      "Philosophy",
+      "Life",
+      "Meaning"
+    ],
+    "readingTime": "7 min read",
+    "file": "content/notes/what-is-the-purpose-of-life.md"
+  },
+  {
     "id": "design-in-ai",
     "title": "Design in the age of AI",
     "date": "Jan 28, 2026",
-    "tags": ["Design", "AI", "Ethics"],
+    "tags": [
+      "Design",
+      "AI",
+      "Ethics"
+    ],
     "readingTime": "5 min read",
     "file": "content/notes/design-in-ai.md"
   },
@@ -11,7 +27,11 @@
     "id": "why-ibm-plex",
     "title": "Why I use IBM Plex Mono for everything",
     "date": "Jan 15, 2026",
-    "tags": ["Typography", "Design", "Code"],
+    "tags": [
+      "Typography",
+      "Design",
+      "Code"
+    ],
     "readingTime": "3 min read",
     "file": "content/notes/why-ibm-plex.md"
   }
