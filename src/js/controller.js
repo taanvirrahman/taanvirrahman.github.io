@@ -1,6 +1,6 @@
 import * as model from "./model.js";
 import * as view from "./view.js";
-import { initEffects } from "./effects.js";
+import { initEffects, observeReveal } from "./effects.js";
 
 export const init = async () => {
   // Bootstrap global effects
@@ -8,8 +8,17 @@ export const init = async () => {
 
   // Initial render - fetch then render
   if (view.elements.blogList) {
+    console.log("Fetching notes...");
     const posts = await model.fetchBlogPosts();
+    console.log(`Fetched ${posts.length} notes`);
     view.renderBlogList(posts);
+
+    // Re-observe dynamically added reveal elements
+    const blogItems = document.querySelectorAll(".blog-item.reveal");
+    console.log(`Setting up reveal for ${blogItems.length} items`);
+    blogItems.forEach((el) => {
+      observeReveal(el);
+    });
   }
 
   // Subscribe to Hi interactions

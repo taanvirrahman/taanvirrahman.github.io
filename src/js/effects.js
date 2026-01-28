@@ -108,10 +108,18 @@ export const initEffects = () => {
   };
 
   const revealObserver = new IntersectionObserver(revealCallback, {
-    threshold: 0.15, // Increased for intentionality
+    threshold: 0.1, // Reduced for better triggering on large sections
   });
+
+  window.revealObserver = revealObserver; // Expose to global for dynamic elements
 
   document.querySelectorAll(".reveal").forEach((el) => {
     revealObserver.observe(el);
   });
+};
+
+export const observeReveal = (el) => {
+  if (window.revealObserver) {
+    window.revealObserver.observe(el);
+  }
 };

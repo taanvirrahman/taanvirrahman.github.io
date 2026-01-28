@@ -13,6 +13,13 @@ export const elements = {
 
 export const renderBlogList = (posts) => {
   if (!elements.blogList) return;
+
+  if (posts.length === 0) {
+    elements.blogList.innerHTML =
+      '<p class="loading-indicator">No notes found or error loading notes.</p>';
+    return;
+  }
+
   elements.blogList.innerHTML = posts
     .map(
       (post, index) => `

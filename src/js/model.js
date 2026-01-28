@@ -17,12 +17,13 @@ export const markAsSent = () => {
 export const fetchBlogPosts = async () => {
   if (state.blogPosts.length > 0) return state.blogPosts;
   try {
-    const response = await fetch("content/blog/blog.json");
+    const response = await fetch("content/notes/notes.json");
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
     state.blogPosts = data;
     return state.blogPosts;
   } catch (error) {
-    console.error("Error fetching blog post list:", error);
+    console.error("Error fetching notes list:", error);
     return [];
   }
 };
