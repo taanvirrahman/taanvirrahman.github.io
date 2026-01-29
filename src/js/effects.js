@@ -64,9 +64,18 @@ export const initEffects = () => {
     threshold: 0.1, // Reduced for better triggering on large sections
   });
 
-  document.querySelectorAll(".reveal").forEach((el) => {
-    _revealObserver.observe(el);
-  });
+  const startObserving = () => {
+    document.querySelectorAll(".reveal").forEach((el) => {
+      _revealObserver.observe(el);
+    });
+  };
+
+  // Only start observing after splash screen is gone
+  if (document.body.classList.contains("loaded")) {
+    startObserving();
+  } else {
+    window.addEventListener("page-reveal", startObserving, { once: true });
+  }
 };
 
 // Module-level observer reference (no global pollution)

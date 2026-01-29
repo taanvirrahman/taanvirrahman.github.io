@@ -366,7 +366,8 @@
     align-items: center;
     justify-content: center;
     background: transparent;
-    pointer-events: none;
+    pointer-events: auto;
+    /* Changed from none to auto so it blocks interaction */
 }
 
 .splash-curtain {

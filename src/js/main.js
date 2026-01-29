@@ -7,30 +7,38 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("load", () => {
   const splash = document.getElementById("splash-screen");
 
-  // If no splash screen (e.g. photography page), just mark as loaded
-  if (!splash) {
-    document.body.classList.add("loaded");
-    return;
-  }
+  const finishLoading = () => {
+    if (document.body.classList.contains("loaded")) return;
 
-  const minDelay = 2000; // Minimum time to show splash
-  const startTime = Date.now();
+    if (!splash) {
+      document.body.classList.add("loaded");
+      return;
+    }
 
-  const hideSplash = () => {
-    const currentTime = Date.now();
-    const elapsed = currentTime - startTime;
+    const minDelay = 2000;
+    const startTime = window.splashStartTime || Date.now();
+    const elapsed = Date.now() - startTime;
     const remaining = Math.max(0, minDelay - elapsed);
 
     setTimeout(() => {
       splash.classList.add("hidden");
       document.body.classList.add("loaded");
 
-      // Cleanup from DOM after transition
+      // Dispatch a custom event to start reveal animations
+      window.dispatchEvent(new CustomEvent("page-reveal"));
+
       setTimeout(() => {
         splash.remove();
-      }, 1200); // Wait for the longer curtain transition
+      }, 1500);
     }, remaining);
   };
 
-  hideSplash();
+  // Standard load completion
+  finishLoading();
+
+  // Safety fallback (5s max)
+  setTimeout(finishLoading, 5000);
 });
+
+// Track start time as soon as possible
+window.splashStartTime = Date.now();
