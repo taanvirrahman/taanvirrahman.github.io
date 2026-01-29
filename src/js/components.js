@@ -6,7 +6,7 @@
 const components = {
   header: `
     <nav class="nav container">
-      <a href="index.html" class="nav-logo">tanvir</a>
+      <a href="index.html" class="nav-logo">tanvir.</a>
       <div class="nav-right">
         <ul class="nav-list">
           <li><a href="index.html#projects" class="nav-link">projects</a></li>
