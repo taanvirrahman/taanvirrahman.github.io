@@ -12,27 +12,28 @@
     "file": "content/notes/what-is-the-purpose-of-life.md"
   },
   {
-    "id": "design-in-ai",
-    "title": "Design in the age of AI",
-    "date": "Jan 28, 2026",
+    "id": "build-with-purpose",
+    "title": "Build With Purpose",
+    "date": "Jan 29, 2026",
     "tags": [
-      "Design",
-      "AI",
-      "Ethics"
+      "Purpose",
+      "Ethics",
+      "Design"
+
     ],
     "readingTime": "5 min read",
-    "file": "content/notes/design-in-ai.md"
+    "file": "content/notes/build-with-purpose.md"
   },
   {
-    "id": "why-ibm-plex",
-    "title": "Why I use IBM Plex Mono for everything",
+    "id": "mistakes-are-part-of-growth",
+    "title": "Mistakes Are Part of Growth",
     "date": "Jan 15, 2026",
     "tags": [
-      "Typography",
+      "Ethics",
       "Design",
-      "Code"
+      "Code"  
     ],
     "readingTime": "3 min read",
-    "file": "content/notes/why-ibm-plex.md"
+    "file": "content/notes/mistakes-are-part-of-growth.md"
   }
 ]
