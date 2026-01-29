@@ -50,18 +50,29 @@ export const updateMessage = (text) => {
 };
 
 export const submitToSheet = async (data) => {
-  // Fire and forget - don't wait for response (Google Apps Script can be slow)
-  fetch(SHEET_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ ...data, ip: _state.clientIP, timestamp: new Date().toISOString() }),
-  }).catch(e => console.warn("Submission may have failed:", e));
+  if (!data) return false;
 
-  // Return immediately - don't wait
-  return true;
+  try {
+    // Fire and forget - don't wait for response (Google Apps Script can be slow)
+    fetch(SHEET_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...data,
+        ip: _state.clientIP || "unknown",
+        timestamp: new Date().toISOString()
+      }),
+    }).catch(e => console.warn("Submission background fetch failed:", e));
+
+    // Return immediately to provide snappy UI feedback
+    return true;
+  } catch (error) {
+    console.error("Critical error during submission:", error);
+    return false;
+  }
 };
 
 export const markAsSent = () => {

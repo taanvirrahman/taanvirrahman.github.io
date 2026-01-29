@@ -112,31 +112,37 @@ const initMobileMenu = () => {
 
   if (!menuBtn || !mobileNav) return;
 
-  menuBtn.addEventListener('click', () => {
-    const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
-    menuBtn.setAttribute('aria-expanded', !isExpanded);
-    menuBtn.classList.toggle('active');
-    mobileNav.classList.toggle('active');
-    document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
-  });
+  const toggleMenu = (forceClose = null) => {
+    const isNowActive = forceClose !== null ? !forceClose : !mobileNav.classList.contains('active');
+
+    menuBtn.setAttribute('aria-expanded', isNowActive);
+    menuBtn.classList.toggle('active', isNowActive);
+    mobileNav.classList.toggle('active', isNowActive);
+    document.body.style.overflow = isNowActive ? 'hidden' : '';
+  };
+
+  menuBtn.addEventListener('click', () => toggleMenu());
 
   // Close menu when a link is clicked
   const mobileLinks = mobileNav.querySelectorAll('.mobile-nav-link');
   mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      menuBtn.classList.remove('active');
-      mobileNav.classList.remove('active');
-      document.body.style.overflow = '';
-    });
+    link.addEventListener('click', () => toggleMenu(true));
   });
 
   // Set active state for mobile nav links
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
   mobileLinks.forEach(link => {
     const href = link.getAttribute('href');
-    const hrefBase = href.split('#')[0];
+    const hrefBase = href ? href.split('#')[0] : '';
     if (hrefBase === currentPath || (currentPath === 'index.html' && href === 'index.html')) {
       link.classList.add('active');
+    }
+  });
+
+  // Close on ESC key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+      toggleMenu(true);
     }
   });
 };

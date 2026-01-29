@@ -1,8 +1,15 @@
+let _revealObserver = null;
+
 export const initEffects = () => {
   const progressBar = document.getElementById("progress-bar");
 
-  // Keyboard Accessibility for cards
+  // Keyboard Accessibility for elements with role="button"
   document.querySelectorAll('[role="button"]').forEach((btn) => {
+    // Ensure it's focusable
+    if (!btn.hasAttribute("tabindex")) {
+      btn.setAttribute("tabindex", "0");
+    }
+
     btn.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -78,15 +85,13 @@ export const initEffects = () => {
   }
 };
 
-// Module-level observer reference (no global pollution)
-let _revealObserver = null;
-
 /**
  * Observe a new element for reveal animation.
  * Must call initEffects() first.
  */
 export const observeReveal = (el) => {
-  if (_revealObserver) {
+  if (_revealObserver && el) {
     _revealObserver.observe(el);
   }
 };
+

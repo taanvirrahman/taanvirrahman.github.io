@@ -17,6 +17,7 @@ window.addEventListener("load", () => {
     }
 
     const minDelay = 2000;
+    // Accuracy fix: ensure we use the early timestamp from index.html
     const startTime = window.splashStartTime || Date.now();
     const elapsed = Date.now() - startTime;
     const remaining = Math.max(0, minDelay - elapsed);
@@ -41,5 +42,3 @@ window.addEventListener("load", () => {
   setTimeout(finishLoading, 5000);
 });
 
-// Track start time as soon as possible
-window.splashStartTime = Date.now();

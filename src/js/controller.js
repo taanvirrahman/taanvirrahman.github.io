@@ -15,6 +15,17 @@ const initBentoListeners = () => {
         if (link) link.click();
       }
     });
+
+    // Keyboard accessibility for bento cards
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        if (!e.target.closest("a")) {
+          e.preventDefault();
+          const link = card.querySelector(".bento-link");
+          if (link) link.click();
+        }
+      }
+    });
   });
 };
 
@@ -123,17 +134,21 @@ export const init = async () => {
 
   // Initial render - fetch then render
   if (view.elements.blogList) {
-    console.log("Fetching notes...");
-    const posts = await model.fetchBlogPosts();
-    console.log(`Fetched ${posts.length} notes`);
-    view.renderBlogList(posts);
+    try {
+      console.log("Fetching notes...");
+      const posts = await model.fetchBlogPosts();
+      console.log(`Fetched ${posts.length} notes`);
+      view.renderBlogList(posts);
 
-    // Re-observe dynamically added reveal elements
-    const blogItems = document.querySelectorAll(".blog-item.reveal");
-    console.log(`Setting up reveal for ${blogItems.length} items`);
-    blogItems.forEach((el) => {
-      observeReveal(el);
-    });
+      // Re-observe dynamically added reveal elements
+      const blogItems = document.querySelectorAll(".blog-item.reveal");
+      console.log(`Setting up reveal for ${blogItems.length} items`);
+      blogItems.forEach((el) => {
+        observeReveal(el);
+      });
+    } catch (error) {
+      console.error("Failed to initialize blog list:", error);
+    }
   }
 
   // Subscribe to Hi interactions
