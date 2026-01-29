@@ -1,0 +1,37 @@
+[
+    {
+        "id": "neural-logic-2025",
+        "title": "Neural Logic: Bridging Symbolic Reasoning and Gradient Descent",
+        "authors": "Tanvir Rahman, A. Smith, J. Doe",
+        "venue": "International Conference on Machine Learning (ICML)",
+        "year": "2025",
+        "abstract": "This paper explores the integration of symbolic logic into neural network architectures to improve interpretability and logical consistency in large language models.",
+        "tags": [
+            "AI",
+            "Neural Networks",
+            "Logic"
+        ],
+        "links": {
+            "paper": "#",
+            "code": "#",
+            "slides": "#"
+        }
+    },
+    {
+        "id": "generative-art-glsl",
+        "title": "Procedural Aesthetics: Reactive GLSL Paradigms in Modern Web Art",
+        "authors": "Tanvir Rahman",
+        "venue": "Web Graphics Symposium (WGS)",
+        "year": "2024",
+        "abstract": "An investigation into high-performance shader techniques for creating immersive, reactive generative art in browser-based environments.",
+        "tags": [
+            "Graphics",
+            "GLSL",
+            "UX"
+        ],
+        "links": {
+            "paper": "#",
+            "demo": "#"
+        }
+    }
+]

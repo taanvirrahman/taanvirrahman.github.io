@@ -26,10 +26,22 @@ const initCertListeners = () => {
 };
 
 export const init = async () => {
+  // Theme initialization
+  view.applyTheme(model.state.theme);
+
   // Bootstrap global components & effects
   initComponents();
   view.refreshElements(); // Crucial: Update pointers after header/footer injection
   initEffects();
+
+  // Theme Toggle Listener
+  if (view.elements.themeToggle) {
+    view.elements.themeToggle.addEventListener("click", () => {
+      const newTheme = model.state.theme === "dark" ? "light" : "dark";
+      model.setTheme(newTheme);
+      view.applyTheme(newTheme);
+    });
+  }
 
   // Feature: Latest Note Badge & Dynamic Content (for homepage)
   if (view.elements.latestNoteBadge) {
@@ -61,6 +73,16 @@ export const init = async () => {
         window.location.href = `notes.html#${latestPost.id}`;
       });
     }
+  }
+
+  // Research list initialization
+  if (view.elements.researchList) {
+    const papers = await model.fetchResearchPapers();
+    view.renderResearchList(papers);
+
+    document.querySelectorAll(".research-item.reveal").forEach((el) => {
+      observeReveal(el);
+    });
   }
 
   // Initial render - fetch then render

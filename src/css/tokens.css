@@ -5,7 +5,7 @@
     --section-padding: 4rem;
     --section-gap: 4rem;
 
-    /* Neutral Color Palette */
+    /* Base Palette (Dark-first, as per current design) */
     --neutral-950: #0a0a0a;
     --neutral-900: #171717;
     --neutral-800: #262626;
@@ -18,17 +18,70 @@
     --neutral-100: #f5f5f5;
     --white: #ffffff;
 
-    /* Accent Colors */
+    /* Semantic Variables */
+    --bg-main: var(--neutral-950);
+    --bg-secondary: var(--neutral-900);
+    --bg-tertiary: var(--neutral-800);
+
+    --text-primary: var(--white);
+    --text-secondary: var(--neutral-400);
+    --text-tertiary: var(--neutral-500);
+    --text-muted: var(--neutral-600);
+
+    --border-main: var(--neutral-800);
+    --border-secondary: var(--neutral-700);
+
+    /* Accent Colors - Premium Palette */
     --accent-blue: #3b82f6;
     --accent-emerald: #10b981;
     --accent-indigo: #6366f1;
+    --accent-rose: #f43f5e;
+    --accent-amber: #f59e0b;
+    --accent-violet: #8b5cf6;
 
-    /* Legacy Compat */
+    /* Gradients */
+    --grad-primary: linear-gradient(135deg, var(--accent-indigo), var(--accent-blue));
+    --grad-warm: linear-gradient(135deg, var(--accent-rose), var(--accent-amber));
+    --grad-cool: linear-gradient(135deg, var(--accent-emerald), var(--accent-blue));
+    --grad-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+
     --apple-blue: var(--accent-blue);
 
     /* Typography */
     --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     --font-mono: "SF Mono", "Menlo", "Monaco", "Courier New", monospace;
+}
+
+[data-theme="light"] {
+    --bg-main: #fbfbfd;
+    /* Apple Light style */
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f5f5f7;
+
+    --text-primary: #111112;
+    --text-secondary: #3b3b3d;
+    --text-tertiary: #515154;
+    --text-muted: #666668;
+
+    --border-main: #d2d2d7;
+    --border-secondary: #e5e5e5;
+
+    /* Gradients (Light mode) */
+    --grad-surface: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0) 100%);
+
+    /* High contrast text on accent backgrounds should stay white */
+    --white: #ffffff;
+
+    /* Swap neutrals for light use - high contrast */
+    --neutral-950: #ffffff;
+    --neutral-900: #f5f5f7;
+    --neutral-800: #e5e5e5;
+    --neutral-700: #d2d2d7;
+    --neutral-600: #666668;
+    --neutral-500: #515154;
+    --neutral-400: #3b3b3d;
+    --neutral-300: #2c2c2e;
+    --neutral-200: #111112;
 }
 
 @media (max-width: 768px) {

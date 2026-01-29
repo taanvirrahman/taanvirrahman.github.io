@@ -4,9 +4,16 @@ export const state = {
   isMessageSent: false,
   message: "",
   blogPosts: [],
+  researchPapers: [],
   currentPost: null,
   config: null,
-  cache: new Map(), // Added caching for instantaneous page loads
+  cache: new Map(),
+  theme: localStorage.getItem("theme") || "dark",
+};
+
+export const setTheme = (theme) => {
+  state.theme = theme;
+  localStorage.setItem("theme", theme);
 };
 
 export const updateMessage = (text) => {
@@ -83,6 +90,20 @@ export const fetchBlogPost = async (postId) => {
     return null;
   }
 };
+export const fetchResearchPapers = async () => {
+  if (state.researchPapers.length > 0) return state.researchPapers;
+  try {
+    const response = await fetch("content/research/papers.json");
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const data = await response.json();
+    state.researchPapers = data;
+    return state.researchPapers;
+  } catch (error) {
+    console.error("Error fetching research papers:", error);
+    return [];
+  }
+};
+
 export const fetchConfig = async () => {
   if (state.config) return state.config;
   try {

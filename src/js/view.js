@@ -17,6 +17,8 @@ export const refreshElements = () => {
   elements.bentoGrid = document.querySelector(".bento-grid");
   elements.skillsGrid = document.querySelector(".skills-grid");
   elements.certificationsGrid = document.querySelector(".certifications-grid");
+  elements.themeToggle = document.getElementById("theme-toggle");
+  elements.researchList = document.getElementById("research-list");
 };
 
 // Initial run
@@ -228,6 +230,10 @@ export const renderSkills = (skills) => {
     .join("");
 };
 
+export const applyTheme = (theme) => {
+  document.documentElement.setAttribute("data-theme", theme);
+};
+
 export const renderCertifications = (certifications) => {
   if (!elements.certificationsGrid || !certifications) return;
 
@@ -247,6 +253,43 @@ export const renderCertifications = (certifications) => {
         <a href="${cert.url}" class="cert-link" target="_blank">Verify →</a>
       </div>
     </div>
+  `,
+    )
+    .join("");
+};
+
+export const renderResearchList = (papers) => {
+  if (!elements.researchList || !papers) return;
+
+  if (papers.length === 0) {
+    elements.researchList.innerHTML =
+      '<p class="loading-indicator">No research papers found.</p>';
+    return;
+  }
+
+  elements.researchList.innerHTML = papers
+    .map(
+      (paper, index) => `
+    <article class="research-item reveal" style="transition-delay: ${index * 100}ms">
+      <div class="research-meta">
+        <span class="research-venue">${paper.venue}</span>
+        <span class="research-year">${paper.year}</span>
+      </div>
+      <h3 class="research-title">${paper.title}</h3>
+      <p class="research-authors">${paper.authors}</p>
+      <p class="research-abstract">${paper.abstract}</p>
+      <div class="research-tags">
+        ${paper.tags.map((tag) => `<span class="research-tag">${tag}</span>`).join("")}
+      </div>
+      <div class="research-links">
+        ${Object.entries(paper.links)
+          .map(
+            ([label, url]) =>
+              `<a href="${url}" class="research-link" target="_blank">${label} ↗</a>`,
+          )
+          .join("")}
+      </div>
+    </article>
   `,
     )
     .join("");
