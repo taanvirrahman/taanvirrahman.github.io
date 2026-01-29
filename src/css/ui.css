@@ -356,3 +356,152 @@
         transform: none;
     }
 }
+
+/* Premium Splash Screen - Cinematic Curtain */
+.splash-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    pointer-events: none;
+}
+
+.splash-curtain {
+    position: absolute;
+    inset: 0;
+    background: var(--bg-main);
+    z-index: -1;
+    transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.splash-screen.hidden .splash-curtain {
+    transform: translateY(-100%);
+}
+
+.splash-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    transition: all 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.splash-screen.hidden .splash-content {
+    opacity: 0;
+    transform: translateY(-30px);
+    filter: blur(10px);
+}
+
+.splash-text-wrapper {
+    overflow: hidden;
+    padding: 0.5rem;
+}
+
+.splash-text {
+    font-size: clamp(2.5rem, 10vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    color: var(--text-primary);
+    display: flex;
+}
+
+.splash-text .letter {
+    display: inline-block;
+    transform: translateY(110%) skewY(10deg);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: reveal-premium 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.splash-text .letter:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.splash-text .letter:nth-child(2) {
+    animation-delay: 0.28s;
+}
+
+.splash-text .letter:nth-child(3) {
+    animation-delay: 0.36s;
+}
+
+.splash-text .letter:nth-child(4) {
+    animation-delay: 0.44s;
+}
+
+.splash-text .letter:nth-child(5) {
+    animation-delay: 0.52s;
+}
+
+.splash-text .letter:nth-child(6) {
+    animation-delay: 0.60s;
+}
+
+.splash-text .dot {
+    color: var(--accent-blue);
+    opacity: 0;
+    transform: scale(0);
+    animation: reveal-dot-premium 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: 1s;
+}
+
+.splash-loader {
+    width: 80px;
+    height: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.loader-track {
+    position: absolute;
+    inset: 0;
+    background: var(--neutral-900);
+}
+
+.loader-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--text-primary);
+    transform: translateX(-100%);
+    animation: loader-fill-premium 2s cubic-bezier(0.85, 0, 0.15, 1) infinite;
+}
+
+@keyframes reveal-premium {
+    to {
+        transform: translateY(0) skewY(0);
+    }
+}
+
+@keyframes reveal-dot-premium {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes loader-fill-premium {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Base Body State */
+body.loaded {
+    overflow-y: auto;
+}
+
+body:not(.loaded) {
+    overflow: hidden;
+}
