@@ -1,3 +1,5 @@
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbydT3i4nOwfTakcqLwjTEI_EQcsSMuWZmSpmWHJPuyBC5AcdDXVPL9feHAkYXvcKs0i/exec";
+
 export const state = {
   isMessageSent: false,
   message: "",
@@ -9,6 +11,33 @@ export const state = {
 
 export const updateMessage = (text) => {
   state.message = text;
+};
+
+export const submitToSheet = async (data) => {
+  try {
+    // Senior move: Get client IP for security/analytics
+    let ip = "unknown";
+    try {
+      const ipRes = await fetch("https://api.ipify.org?format=json");
+      const ipData = await ipRes.json();
+      ip = ipData.ip;
+    } catch (e) {
+      console.warn("Could not fetch IP", e);
+    }
+
+    const response = await fetch(SHEET_URL, {
+      method: "POST",
+      mode: "no-cors", // Required for Google Apps Script Web App
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...data, ip }),
+    });
+    return true;
+  } catch (error) {
+    console.error("Submission failed:", error);
+    return false;
+  }
 };
 
 export const markAsSent = () => {

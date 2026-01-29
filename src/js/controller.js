@@ -101,10 +101,31 @@ export const init = async () => {
   }
 
   if (view.elements.sendBtn) {
-    view.elements.sendBtn.addEventListener("click", () => {
-      model.markAsSent();
-      view.triggerConfetti();
-      view.showThankYou();
+    view.elements.sendBtn.addEventListener("click", async () => {
+      const message = model.state.message;
+      if (!message) return;
+
+      // Visual feedback: disabling button during submission
+      const originalText = view.elements.sendBtn.innerText;
+      view.elements.sendBtn.innerText = "sending...";
+      view.elements.sendBtn.disabled = true;
+
+      const success = await model.submitToSheet({
+        type: "Message",
+        message: message
+      });
+
+      if (success) {
+        model.markAsSent();
+        view.triggerConfetti();
+        view.showThankYou();
+      } else {
+        view.elements.sendBtn.innerText = "failed";
+        setTimeout(() => {
+          view.elements.sendBtn.innerText = originalText;
+          view.elements.sendBtn.disabled = false;
+        }, 2000);
+      }
     });
   }
 
@@ -162,10 +183,35 @@ export const init = async () => {
   }
 
   if (view.elements.subscribeForm) {
-    view.elements.subscribeForm.addEventListener("submit", (e) => {
+    view.elements.subscribeForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      view.showSubscribeSuccess();
-      view.triggerConfetti();
+      const emailInput = view.elements.subscribeForm.querySelector('input[type="email"]');
+      const email = emailInput ? emailInput.value : "";
+
+      if (!email) return;
+
+      // Visual feedback
+      const originalBtnText = view.elements.subscribeBtn.innerText;
+      view.elements.subscribeBtn.innerText = "...";
+      view.elements.subscribeBtn.disabled = true;
+
+      const success = await model.submitToSheet({
+        type: "Subscription",
+        email: email
+      });
+
+      if (success) {
+        view.showSubscribeSuccess();
+        view.triggerConfetti();
+        if (emailInput) emailInput.value = "";
+      } else {
+        view.elements.subscribeBtn.innerText = "Error";
+      }
+
+      setTimeout(() => {
+        view.elements.subscribeBtn.innerText = originalBtnText;
+        view.elements.subscribeBtn.disabled = false;
+      }, 2000);
     });
   }
 };
