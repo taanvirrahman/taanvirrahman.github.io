@@ -358,44 +358,50 @@
     padding: var(--section-gap) 0;
 }
 
-.certifications-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-}
-
-.cert-card {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-main);
-    border-radius: 20px;
-    padding: 1.5rem;
+.certifications-list {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 1.5rem;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: pointer;
-    min-height: 180px;
+    max-width: 800px;
 }
 
-.cert-card:hover {
-    background: var(--bg-tertiary);
-    border-color: var(--border-secondary);
-    transform: translateY(-4px);
-}
-
-.cert-header {
+.cert-item {
     display: flex;
-    gap: 1.25rem;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-main);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.cert-item:hover {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    background: var(--bg-secondary);
+    border-color: transparent;
+}
+
+.cert-item:hover .cert-name {
+    color: var(--text-primary);
+}
+
+.cert-item:hover .cert-arrow {
+    transform: translate(2px, -2px);
+    opacity: 1;
+}
+
+.cert-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
 }
 
 .cert-name {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.125rem;
+    font-weight: 500;
     color: var(--text-primary);
-    margin-bottom: 0.25rem;
-    line-height: 1.4;
+    transition: color 0.3s ease;
 }
 
 .cert-issuer {
@@ -403,32 +409,37 @@
     color: var(--neutral-500);
 }
 
+.cert-meta {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
 .cert-date {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     color: var(--neutral-600);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
 }
 
-.cert-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-}
-
-.cert-link {
-    color: var(--neutral-400);
-    text-decoration: none;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.cert-card:hover .cert-link {
+.cert-arrow {
+    width: 18px;
+    height: 18px;
     color: var(--text-primary);
-    transform: translateX(4px);
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 600px) {
+    .cert-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .cert-meta {
+        width: 100%;
+        justify-content: space-between;
+    }
 }
 
 .blog-list {
@@ -901,5 +912,128 @@
     .edu-header {
         flex-direction: column;
         gap: 0.25rem;
+    }
+}
+
+/* Latest Notes Section */
+.latest-notes-section {
+    padding: var(--section-gap) 0;
+}
+
+.latest-notes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2.5rem;
+}
+
+.section-title-small {
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.view-all-link {
+    font-size: 0.875rem;
+    color: var(--neutral-400);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-weight: 500;
+}
+
+.view-all-link:hover {
+    color: var(--text-primary);
+}
+
+.latest-notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.25rem;
+}
+
+.note-card {
+    position: relative;
+    aspect-ratio: 1/1;
+    /* Square for compact small cards */
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-decoration: none;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.note-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.note-card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.note-card-title {
+    font-size: 1rem;
+    line-height: 1.3;
+    font-weight: 600;
+    color: #ffffff;
+    /* Always white on colored cards */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: -webkit-box;
+    display: box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    overflow: hidden;
+}
+
+.note-card-date {
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.note-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+@media (max-width: 900px) {
+    .latest-notes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .section-title-small {
+        font-size: 2rem;
+    }
+
+    .latest-notes-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .note-card {
+        aspect-ratio: 16/9;
+        /* Landscape on mobile for better list feel */
     }
 }

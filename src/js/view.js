@@ -179,45 +179,48 @@ export const showSubscribeSuccess = () => {
 };
 
 export const triggerConfetti = () => {
-  const duration = 2 * 1000;
+  const duration = 2.5 * 1000;
   const end = Date.now() + duration;
+
+  // Premium color palette - gold, white, and subtle accents
+  const colors = [
+    "#FFD700", // Gold
+    "#FFF8DC", // Cornsilk (soft gold)
+    "#FFFFFF", // White
+    "#E8E8E8", // Light gray
+    "#C0C0C0", // Silver
+    "#FF6B6B", // Soft coral (matches footer red)
+  ];
 
   (function frame() {
     confetti({
-      particleCount: 3,
+      particleCount: 4,
       angle: 60,
-      spread: 55,
-      origin: { x: 0, y: 0.8 },
-      colors: [
-        "#ff0000",
-        "#ffa500",
-        "#ffff00",
-        "#00ff00",
-        "#0000ff",
-        "#ff00ff",
-        "#00ffff",
-      ],
+      spread: 65,
+      origin: { x: 0, y: 0.7 },
+      colors: colors,
+      shapes: ["circle", "square"],
+      gravity: 1.2,
+      drift: 0,
+      ticks: 200,
     });
     confetti({
-      particleCount: 3,
+      particleCount: 4,
       angle: 120,
-      spread: 55,
-      origin: { x: 1, y: 0.8 },
-      colors: [
-        "#ff0000",
-        "#ffa500",
-        "#ffff00",
-        "#00ff00",
-        "#0000ff",
-        "#ff00ff",
-        "#00ffff",
-      ],
+      spread: 65,
+      origin: { x: 1, y: 0.7 },
+      colors: colors,
+      shapes: ["circle", "square"],
+      gravity: 1.2,
+      drift: 0,
+      ticks: 200,
     });
 
     if (Date.now() < end) {
       requestAnimationFrame(frame);
     }
   })();
+
 };
 export const renderProjects = (projects) => {
   if (!elements.bentoGrid || !projects) return;
@@ -269,19 +272,18 @@ export const applyTheme = (theme) => {
 export const renderCertifications = (certifications) => {
   if (!elements.certificationsGrid || !certifications) return;
 
+  elements.certificationsGrid.className = 'certifications-list'; // Change class from grid to list
   elements.certificationsGrid.innerHTML = certifications
     .map(
-      (cert) => `
-    <div class="cert-card reveal" tabindex="0" role="button">
-      <div class="cert-header">
-        <div class="cert-meta">
-          <h3 class="cert-name">${cert.name}</h3>
-          <span class="cert-issuer">${cert.issuer}</span>
-        </div>
+      (cert, index) => `
+    <div class="cert-item reveal" style="transition-delay: ${index * 100}ms" tabindex="0" onclick="window.open('${cert.url}', '_blank')">
+      <div class="cert-details">
+        <h3 class="cert-name">${cert.name}</h3>
+        <span class="cert-issuer">${cert.issuer}</span>
       </div>
-      <div class="cert-footer">
+      <div class="cert-meta">
         <span class="cert-date">${cert.date}</span>
-        <a href="${cert.url}" class="cert-link" target="_blank">Verify →</a>
+        <svg class="cert-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
       </div>
     </div>
   `,
@@ -347,6 +349,41 @@ export const renderEducation = (education) => {
       </div>
       <p class="edu-desc">${edu.description}</p>
     </div>
+  `,
+    )
+    .join("");
+};
+
+const getGradient = (index) => {
+  const gradients = [
+    "linear-gradient(135deg, #1e3a8a, #3b82f6)", // Deep Blue
+    "linear-gradient(135deg, #881337, #f43f5e)", // Rose
+    "linear-gradient(135deg, #064e3b, #10b981)", // Emerald
+    "linear-gradient(135deg, #4c1d95, #8b5cf6)", // Violet
+    "linear-gradient(135deg, #78350f, #f59e0b)", // Amber
+  ];
+  return gradients[index % gradients.length];
+};
+
+export const renderLatestNotes = (posts) => {
+  const container = document.querySelector(".latest-notes-grid");
+  if (!container || !posts) return;
+
+  if (posts.length === 0) {
+    container.innerHTML = '<p class="loading-indicator">No notes found.</p>';
+    return;
+  }
+
+  container.innerHTML = posts
+    .map(
+      (post, index) => `
+    <a href="notes.html#${post.id}" class="note-card reveal" style="background: ${getGradient(index)}; transition-delay: ${index * 100}ms">
+        <div class="note-card-content">
+            <h3 class="note-card-title">${post.title}</h3>
+            <span class="note-card-date">${post.date}</span>
+        </div>
+        <div class="note-card-overlay"></div>
+    </a>
   `,
     )
     .join("");

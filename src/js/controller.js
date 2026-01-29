@@ -43,9 +43,23 @@ export const init = async () => {
     });
   }
 
-  // Feature: Latest Note Badge & Dynamic Content (for homepage)
+  // Feature: Latest Note Badge (Hero)
   if (view.elements.latestNoteBadge) {
-    // Load Projects and Skills from config
+    const posts = await model.fetchBlogPosts();
+    if (posts.length > 0) {
+      const sortedPosts = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
+      const latestPost = sortedPosts[0];
+      view.renderLatestNoteBadge(latestPost);
+
+      view.elements.latestNoteBadge.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.location.href = `notes.html#${latestPost.id}`;
+      });
+    }
+  }
+
+  // Load config-based content (homepage only)
+  if (view.elements.bentoGrid) {
     const config = await model.fetchConfig();
     if (config) {
       view.renderProjects(config.projects);
@@ -62,17 +76,17 @@ export const init = async () => {
       initBentoListeners();
       initCertListeners();
     }
+  }
 
+  // Feature: Latest Notes Section (Footer Preview)
+  const latestNotesGrid = document.querySelector(".latest-notes-grid");
+  if (latestNotesGrid) {
     const posts = await model.fetchBlogPosts();
     if (posts.length > 0) {
       const sortedPosts = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
-      const latestPost = sortedPosts[0];
-      view.renderLatestNoteBadge(latestPost);
-
-      view.elements.latestNoteBadge.addEventListener("click", (e) => {
-        e.preventDefault();
-        window.location.href = `notes.html#${latestPost.id}`;
-      });
+      view.renderLatestNotes(sortedPosts.slice(0, 4));
+    } else {
+      view.renderLatestNotes([]);
     }
   }
 

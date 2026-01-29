@@ -24,34 +24,55 @@ const components = {
   `,
 
   footer: `
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-subscribe">
-          <h2 class="footer-subscribe-title">Subscribe to notes.</h2>
-          <p class="footer-subscribe-desc">Get updates on AI, design, and art.</p>
-          <form class="footer-form">
-            <input type="email" placeholder="your@email.com" required class="footer-input" />
-            <button type="submit" class="footer-submit">Join</button>
-          </form>
+    <div class="footer-brutalist">
+      <div class="footer-overlay"></div>
+      <div class="container">
+        
+        <div class="footer-top-centered">
+          <h2 class="footer-cta-text">Let's build something<br>meaningful together.</h2>
+          <a href="mailto:tanvir.rahman@aiub.edu" class="footer-mail-link">
+            <span class="mail-prefix">Drop a line →</span>
+            <span class="underline">mailtanvirrahman@gmail.com</span>
+          </a>
         </div>
-        <div class="footer-nav">
+
+        <div class="footer-split-grid">
+          
           <div class="footer-col">
-            <h4 class="footer-heading">Navigate</h4>
-            <a href="index.html#projects" class="footer-link">Projects</a>
-            <a href="notes.html" class="footer-link">Notes</a>
-            <a href="photography.html" class="footer-link">Photography</a>
+            <h3 class="footer-brand-large">TAN<br>VIR<span class="sup">®</span></h3>
+            <div class="footer-address">
+              <p>Software Engineer Aspiring</p>
+              <p>Dhaka</p>
+            </div>
+            <a href="https://maps.google.com/?q=Dhaka" target="_blank" class="footer-small-link">View on Map →</a>
           </div>
+
           <div class="footer-col">
-            <h4 class="footer-heading">Connect</h4>
-            <a href="https://github.com/taanvirrahman" target="_blank" class="footer-link">GitHub</a>
-            <a href="https://linkedin.com/in/taanvirrahman" target="_blank" class="footer-link">LinkedIn</a>
-            <a href="https://twitter.com/taanvirrahman" target="_blank" class="footer-link">Twitter</a>
+            <h3 class="footer-brand-large">OPEN<br>TO<span class="sup">work</span></h3>
+            <div class="footer-address">
+              <p>Freelance & Collaboration</p>
+              <p>Remote / Worldwide</p>
+            </div>
+            <a href="notes.html" class="footer-small-link">Read Notes →</a>
+          </div>
+
+        </div>
+
+        <div class="footer-bottom-bar">
+          <p class="footer-copy">© ${new Date().getFullYear()} Tanvir Rahman</p>
+          <div class="footer-nav-links">
+            <a href="index.html" class="footer-nav-link">Home</a>
+            <a href="notes.html" class="footer-nav-link">Notes</a>
+            <a href="research.html" class="footer-nav-link">Research</a>
           </div>
         </div>
-      </div>
-      <div class="footer-bottom">
-        <p class="footer-copy">&copy; ${new Date().getFullYear()} Tanvir Rahman</p>
-        <p class="footer-made">Made with intention</p>
+
+        <div class="footer-pills">
+          <a href="https://github.com/taanvirrahman" target="_blank" class="social-pill pill-1">GitHub</a>
+          <a href="https://x.com/tanvir_tweet" target="_blank" class="social-pill pill-2">Twitter</a>
+          <a href="https://www.linkedin.com/in/muhammud-tanvir-rahman/" target="_blank" class="social-pill pill-3">LinkedIn</a>
+        </div>
+
       </div>
     </div>
   `

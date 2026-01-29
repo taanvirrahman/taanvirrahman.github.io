@@ -9,7 +9,19 @@ export const state = {
   config: null,
   cache: new Map(),
   theme: localStorage.getItem("theme") || "dark",
+  clientIP: "unknown", // Pre-cached IP
 };
+
+// Pre-fetch IP on page load (runs in background, doesn't block)
+(async () => {
+  try {
+    const res = await fetch("https://api.ipify.org?format=json");
+    const data = await res.json();
+    state.clientIP = data.ip;
+  } catch (e) {
+    console.warn("Could not pre-fetch IP");
+  }
+})();
 
 export const setTheme = (theme) => {
   state.theme = theme;
@@ -21,30 +33,18 @@ export const updateMessage = (text) => {
 };
 
 export const submitToSheet = async (data) => {
-  try {
-    // Senior move: Get client IP for security/analytics
-    let ip = "unknown";
-    try {
-      const ipRes = await fetch("https://api.ipify.org?format=json");
-      const ipData = await ipRes.json();
-      ip = ipData.ip;
-    } catch (e) {
-      console.warn("Could not fetch IP", e);
-    }
+  // Fire and forget - don't wait for response (Google Apps Script can be slow)
+  fetch(SHEET_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ...data, ip: state.clientIP, timestamp: new Date().toISOString() }),
+  }).catch(e => console.warn("Submission may have failed:", e));
 
-    const response = await fetch(SHEET_URL, {
-      method: "POST",
-      mode: "no-cors", // Required for Google Apps Script Web App
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...data, ip }),
-    });
-    return true;
-  } catch (error) {
-    console.error("Submission failed:", error);
-    return false;
-  }
+  // Return immediately - don't wait
+  return true;
 };
 
 export const markAsSent = () => {
