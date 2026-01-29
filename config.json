@@ -1,0 +1,75 @@
+{
+    "projects": [
+        {
+            "id": "neural-canvas",
+            "title": "Neural Canvas",
+            "desc": "Exploring emotional AI through generative art and creative coding.",
+            "tag": "AI / Art",
+            "icon": "✦",
+            "link": "View project →",
+            "url": "#",
+            "size": "large"
+        },
+        {
+            "id": "minimalist-ui",
+            "title": "Minimalist UI",
+            "desc": "System design for high-performance dashboards.",
+            "tag": "Design",
+            "icon": "◈",
+            "link": "View →",
+            "url": "#",
+            "size": "normal"
+        },
+        {
+            "id": "devflow",
+            "title": "DevFlow",
+            "desc": "CLI toolkit for streamlined development workflows.",
+            "tag": "Open Source",
+            "icon": "⬡",
+            "link": "View →",
+            "url": "#",
+            "size": "normal"
+        },
+        {
+            "id": "cognitive-interfaces",
+            "title": "Cognitive Interfaces",
+            "desc": "Exploring human-AI interaction patterns and adaptive user experiences.",
+            "tag": "Research",
+            "icon": "◉",
+            "link": "View project →",
+            "url": "#",
+            "size": "wide"
+        }
+    ],
+    "skills": [
+        "Frontend Development (React, Vue)",
+        "Backend Systems (Node.js, Python)",
+        "Artificial Intelligence & Machine Learning",
+        "UI/UX Design & Typography",
+        "Generative Art (GLSL, P5.js)",
+        "Software Engineering Principles"
+    ],
+    "certifications": [
+        {
+            "name": "AWS Certified Cloud Practitioner",
+            "issuer": "Amazon Web Services",
+            "date": "2025",
+            "icon": "☁️",
+            "url": "#"
+        },
+        {
+            "name": "Meta Front-End Developer Professional Certificate",
+            "issuer": "Meta",
+            "date": "2024",
+            "icon": "⚛️",
+            "url": "#"
+        },
+        {
+            "name": "Google UX Design Professional Certificate",
+            "issuer": "Google",
+            "date": "2024",
+            "icon": "🎨",
+            "url": "#"
+        }
+    ]
+}

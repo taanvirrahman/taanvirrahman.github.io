@@ -1,21 +1,61 @@
 import * as model from "./model.js";
 import * as view from "./view.js";
 import { initEffects, observeReveal } from "./effects.js";
+import { initComponents } from "./components.js";
+
+const initBentoListeners = () => {
+  document.querySelectorAll(".bento-card").forEach((card) => {
+    card.addEventListener("click", (e) => {
+      if (!e.target.closest("a")) {
+        const link = card.querySelector(".bento-link");
+        if (link) link.click();
+      }
+    });
+  });
+};
+
+const initCertListeners = () => {
+  document.querySelectorAll(".cert-card").forEach((card) => {
+    card.addEventListener("click", (e) => {
+      if (!e.target.closest("a")) {
+        const link = card.querySelector(".cert-link");
+        if (link) link.click();
+      }
+    });
+  });
+};
 
 export const init = async () => {
-  // Bootstrap global effects
+  // Bootstrap global components & effects
+  initComponents();
+  view.refreshElements(); // Crucial: Update pointers after header/footer injection
   initEffects();
 
-  // Feature: Latest Note Badge (for homepage)
+  // Feature: Latest Note Badge & Dynamic Content (for homepage)
   if (view.elements.latestNoteBadge) {
+    // Load Projects and Skills from config
+    const config = await model.fetchConfig();
+    if (config) {
+      view.renderProjects(config.projects);
+      view.renderSkills(config.skills);
+      view.renderCertifications(config.certifications);
+
+      // Re-observe new elements
+      document.querySelectorAll(".reveal").forEach((el) => {
+        observeReveal(el);
+      });
+
+      // Setup listeners for dynamic content
+      initBentoListeners();
+      initCertListeners();
+    }
+
     const posts = await model.fetchBlogPosts();
     if (posts.length > 0) {
-      // Sort by date descending (assuming date format 'MMM DD, YYYY')
       const sortedPosts = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
       const latestPost = sortedPosts[0];
       view.renderLatestNoteBadge(latestPost);
 
-      // Add interaction for the badge
       view.elements.latestNoteBadge.addEventListener("click", (e) => {
         e.preventDefault();
         window.location.href = `notes.html#${latestPost.id}`;
@@ -68,17 +108,7 @@ export const init = async () => {
     });
   }
 
-  // Project cards - navigate on whole card click
-  document.querySelectorAll(".project-card").forEach((card) => {
-    card.addEventListener("click", (e) => {
-      // If user clicked the link itself, let the link handle it (or common behavior)
-      // Otherwise, trigger the link.
-      if (!e.target.closest("a")) {
-        const link = card.querySelector(".project-link");
-        if (link) link.click();
-      }
-    });
-  });
+
 
   // Blog interactions
   const handleRouting = async () => {

@@ -1,18 +1,26 @@
-export const elements = {
-  sayHiBtn: document.getElementById("say-hi-btn"),
-  messageContainer: document.getElementById("message-container"),
-  backBtn: document.getElementById("back-btn"),
-  messageInput: document.getElementById("message-input"),
-  sendBtn: document.getElementById("send-btn"),
-  blogList: document.getElementById("blog-list"),
-  blogContent: document.getElementById("blog-content"),
-  closeBlog: document.getElementById("close-blog"),
-  copyLinkBtn: document.getElementById("copy-link"),
-  markdownContainer: document.getElementById("markdown-container"),
-  subscribeForm: document.querySelector(".subscribe-form"),
-  subscribeBtn: document.querySelector(".subscribe-btn"),
-  latestNoteBadge: document.getElementById("latest-note-badge"),
+export let elements = {};
+
+export const refreshElements = () => {
+  elements.sayHiBtn = document.getElementById("say-hi-btn");
+  elements.messageContainer = document.getElementById("message-container");
+  elements.backBtn = document.getElementById("back-btn");
+  elements.messageInput = document.getElementById("message-input");
+  elements.sendBtn = document.getElementById("send-btn");
+  elements.blogList = document.getElementById("blog-list");
+  elements.blogContent = document.getElementById("blog-content");
+  elements.closeBlog = document.getElementById("close-blog");
+  elements.copyLinkBtn = document.getElementById("copy-link");
+  elements.markdownContainer = document.getElementById("markdown-container");
+  elements.subscribeForm = document.querySelector(".footer-form");
+  elements.subscribeBtn = document.querySelector(".footer-submit"); // Updated to match footer-form button
+  elements.latestNoteBadge = document.getElementById("latest-note-badge");
+  elements.bentoGrid = document.querySelector(".bento-grid");
+  elements.skillsGrid = document.querySelector(".skills-grid");
+  elements.certificationsGrid = document.querySelector(".certifications-grid");
 };
+
+// Initial run
+refreshElements();
 
 export const renderBlogList = (posts) => {
   if (!elements.blogList) return;
@@ -136,12 +144,15 @@ export const showThankYou = () => {
 
 export const showSubscribeSuccess = () => {
   if (!elements.subscribeBtn) return;
+  const originalText = elements.subscribeBtn.innerText;
   elements.subscribeBtn.innerText = "Joined!";
-  elements.subscribeBtn.style.backgroundColor = "#fff";
-  elements.subscribeBtn.style.color = "#000";
+  elements.subscribeBtn.style.backgroundColor = "var(--accent-emerald)";
+  elements.subscribeBtn.style.color = "var(--white)";
   setTimeout(() => {
-    elements.subscribeBtn.innerText = "Thank you";
-  }, 1000);
+    elements.subscribeBtn.innerText = originalText;
+    elements.subscribeBtn.style.backgroundColor = "";
+    elements.subscribeBtn.style.color = "";
+  }, 2000);
 };
 
 export const triggerConfetti = () => {
@@ -184,4 +195,59 @@ export const triggerConfetti = () => {
       requestAnimationFrame(frame);
     }
   })();
+};
+export const renderProjects = (projects) => {
+  if (!elements.bentoGrid || !projects) return;
+
+  elements.bentoGrid.innerHTML = projects
+    .map(
+      (project) => `
+    <div class="bento-card ${project.size === "large" ? "bento-large" : project.size === "wide" ? "bento-wide" : ""} reveal" tabindex="0" role="button">
+      <div class="bento-icon">${project.icon}</div>
+      <span class="bento-tag">${project.tag}</span>
+      <h3 class="bento-title">${project.title}</h3>
+      <p class="bento-desc">${project.desc}</p>
+      <a href="${project.url}" class="bento-link">${project.link}</a>
+    </div>
+  `,
+    )
+    .join("");
+};
+
+export const renderSkills = (skills) => {
+  if (!elements.skillsGrid || !skills) return;
+
+  elements.skillsGrid.innerHTML = skills
+    .map(
+      (skill) => `
+    <div class="skill-item reveal" tabindex="0">
+      ${skill}
+    </div>
+  `,
+    )
+    .join("");
+};
+
+export const renderCertifications = (certifications) => {
+  if (!elements.certificationsGrid || !certifications) return;
+
+  elements.certificationsGrid.innerHTML = certifications
+    .map(
+      (cert) => `
+    <div class="cert-card reveal" tabindex="0" role="button">
+      <div class="cert-header">
+        <div class="cert-icon">${cert.icon}</div>
+        <div class="cert-meta">
+          <h3 class="cert-name">${cert.name}</h3>
+          <span class="cert-issuer">${cert.issuer}</span>
+        </div>
+      </div>
+      <div class="cert-footer">
+        <span class="cert-date">${cert.date}</span>
+        <a href="${cert.url}" class="cert-link" target="_blank">Verify →</a>
+      </div>
+    </div>
+  `,
+    )
+    .join("");
 };

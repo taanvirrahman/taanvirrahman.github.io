@@ -3,6 +3,7 @@ export const state = {
   message: "",
   blogPosts: [],
   currentPost: null,
+  config: null,
   cache: new Map(), // Added caching for instantaneous page loads
 };
 
@@ -50,6 +51,18 @@ export const fetchBlogPost = async (postId) => {
     return result;
   } catch (error) {
     console.error("Error fetching blog post:", error);
+    return null;
+  }
+};
+export const fetchConfig = async () => {
+  if (state.config) return state.config;
+  try {
+    const response = await fetch("config.json");
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    state.config = await response.json();
+    return state.config;
+  } catch (error) {
+    console.error("Error fetching config:", error);
     return null;
   }
 };
