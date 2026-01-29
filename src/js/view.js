@@ -26,7 +26,7 @@ export const refreshElements = () => {
   elements.copyLinkBtn = document.getElementById("copy-link");
   elements.markdownContainer = document.getElementById("markdown-container");
   elements.subscribeForm = document.querySelector(".footer-form");
-  elements.subscribeBtn = document.querySelector(".footer-submit"); // Updated to match footer-form button
+  elements.subscribeBtn = document.querySelector(".footer-submit");
   elements.latestNoteBadge = document.getElementById("latest-note-badge");
   elements.bentoGrid = document.querySelector(".bento-grid");
   elements.skillsGrid = document.querySelector(".skills-grid");
@@ -34,6 +34,11 @@ export const refreshElements = () => {
   elements.themeToggle = document.getElementById("theme-toggle");
   elements.researchList = document.getElementById("research-list");
   elements.educationList = document.getElementById("education-list");
+  elements.latestNotesGrid = document.querySelector(".latest-notes-grid");
+  elements.photoGallery = document.getElementById("gallery");
+  elements.photoStats = document.querySelector(".gallery-stats");
+  elements.photoBadge = document.querySelector(".photo-hero-badge span:last-child");
+  elements.lightboxTotal = document.getElementById("lightbox-total");
 };
 
 // Initial run
@@ -276,7 +281,7 @@ export const renderCertifications = (certifications) => {
   elements.certificationsGrid.innerHTML = certifications
     .map(
       (cert, index) => `
-    <div class="cert-item reveal" style="transition-delay: ${index * 100}ms" tabindex="0" onclick="window.open('${cert.url}', '_blank')">
+    <div class="cert-item reveal" style="transition-delay: ${index * 100}ms" tabindex="0" data-url="${cert.url}" role="button">
       <div class="cert-details">
         <h3 class="cert-name">${cert.name}</h3>
         <span class="cert-issuer">${cert.issuer}</span>
@@ -366,15 +371,14 @@ const getGradient = (index) => {
 };
 
 export const renderLatestNotes = (posts) => {
-  const container = document.querySelector(".latest-notes-grid");
-  if (!container || !posts) return;
+  if (!elements.latestNotesGrid || !posts) return;
 
   if (posts.length === 0) {
-    container.innerHTML = '<p class="loading-indicator">No notes found.</p>';
+    elements.latestNotesGrid.innerHTML = '<p class="loading-indicator">No notes found.</p>';
     return;
   }
 
-  container.innerHTML = posts
+  elements.latestNotesGrid.innerHTML = posts
     .map(
       (post, index) => `
     <a href="notes.html#${post.id}" class="note-card reveal" style="background: ${getGradient(index)}; transition-delay: ${index * 100}ms">
@@ -387,4 +391,38 @@ export const renderLatestNotes = (posts) => {
   `,
     )
     .join("");
+};
+
+export const renderPhotographyGallery = (photos) => {
+  if (!elements.photoGallery || !photos) return;
+
+  elements.photoGallery.innerHTML = photos
+    .map(
+      (photo, index) => `
+    <div class="gallery-item ${photo.size || "standard"} reveal" data-category="${photo.category}" data-index="${index}">
+        <div class="gallery-img-wrapper">
+            <img src="${photo.src}" alt="${photo.alt}" loading="lazy" />
+            <div class="gallery-overlay">
+                <div class="gallery-overlay-content">
+                    <span class="gallery-category">${photo.category}</span>
+                    <h3 class="gallery-title">${photo.title}</h3>
+                    <p class="gallery-location">${photo.location}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  `,
+    )
+    .join("");
+
+  // Update stats
+  if (elements.photoBadge) elements.photoBadge.textContent = `${photos.length} Photographs`;
+  if (elements.lightboxTotal) elements.lightboxTotal.textContent = photos.length;
+
+  const statNumbers = document.querySelectorAll(".stat-number");
+  if (statNumbers.length >= 2) {
+    statNumbers[0].textContent = photos.length;
+    const categories = new Set(photos.map(p => p.category)).size;
+    statNumbers[1].textContent = categories;
+  }
 };

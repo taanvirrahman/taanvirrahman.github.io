@@ -3,6 +3,10 @@ import * as view from "./view.js";
 import { initEffects, observeReveal } from "./effects.js";
 import { initComponents } from "./components.js";
 
+/**
+ * Setup click delegation for bento cards.
+ * Follows MVC: Controller handles events, delegates to View actions.
+ */
 const initBentoListeners = () => {
   document.querySelectorAll(".bento-card").forEach((card) => {
     card.addEventListener("click", (e) => {
@@ -14,20 +18,37 @@ const initBentoListeners = () => {
   });
 };
 
+/**
+ * Setup click delegation for certification cards.
+ * Uses data-url attribute instead of inline onclick (separation of concerns).
+ */
 const initCertListeners = () => {
-  document.querySelectorAll(".cert-card").forEach((card) => {
+  document.querySelectorAll(".cert-item").forEach((card) => {
     card.addEventListener("click", (e) => {
-      if (!e.target.closest("a")) {
-        const link = card.querySelector(".cert-link");
-        if (link) link.click();
+      const url = card.dataset.url;
+      if (url) {
+        window.open(url, "_blank");
+      }
+    });
+    // Keyboard accessibility
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const url = card.dataset.url;
+        if (url) {
+          window.open(url, "_blank");
+        }
       }
     });
   });
 };
 
 export const init = async () => {
-  // Theme initialization
-  view.applyTheme(model.state.theme);
+  // Initialize model (pre-fetch IP, etc.)
+  model.initModel();
+
+  // Theme initialization - use getter
+  view.applyTheme(model.getTheme());
 
   // Bootstrap global components & effects
   initComponents();
@@ -37,7 +58,8 @@ export const init = async () => {
   // Theme Toggle Listener
   if (view.elements.themeToggle) {
     view.elements.themeToggle.addEventListener("click", () => {
-      const newTheme = model.state.theme === "dark" ? "light" : "dark";
+      const currentTheme = model.getTheme();
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
       model.setTheme(newTheme);
       view.applyTheme(newTheme);
     });
@@ -79,8 +101,7 @@ export const init = async () => {
   }
 
   // Feature: Latest Notes Section (Footer Preview)
-  const latestNotesGrid = document.querySelector(".latest-notes-grid");
-  if (latestNotesGrid) {
+  if (view.elements.latestNotesGrid) {
     const posts = await model.fetchBlogPosts();
     if (posts.length > 0) {
       const sortedPosts = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -139,7 +160,7 @@ export const init = async () => {
 
   if (view.elements.sendBtn) {
     view.elements.sendBtn.addEventListener("click", async () => {
-      const message = model.state.message;
+      const message = model.getMessage();
       if (!message) return;
 
       // Visual feedback: disabling button during submission
@@ -251,4 +272,125 @@ export const init = async () => {
       }, 2000);
     });
   }
+
+  // Feature: Photography Gallery
+  if (view.elements.photoGallery) {
+    const photos = await model.fetchPhotos();
+    view.renderPhotographyGallery(photos);
+
+    // Re-observe new gallery items
+    document.querySelectorAll(".gallery-item.reveal").forEach((el) => {
+      observeReveal(el);
+    });
+
+    initPhotographyListeners(photos);
+  }
+};
+
+/**
+ * Photography specific logic: Filters and Lightbox
+ */
+let lightboxState = {
+  currentIndex: 0,
+  visiblePhotos: []
+};
+
+const initPhotographyListeners = (allPhotos) => {
+  const filterPills = document.querySelectorAll(".filter-pill");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxTitle = document.querySelector(".lightbox-title");
+  const lightboxCategory = document.querySelector(".lightbox-category");
+  const lightboxLocation = document.querySelector(".lightbox-location");
+  const lightboxCurrent = document.getElementById("lightbox-current");
+  const gallery = view.elements.photoGallery;
+
+  lightboxState.visiblePhotos = [...allPhotos];
+
+  // 1. Filter Logic
+  filterPills.forEach(pill => {
+    pill.addEventListener("click", () => {
+      filterPills.forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+
+      const filter = pill.dataset.filter;
+      const items = document.querySelectorAll(".gallery-item");
+
+      let visibleIndices = [];
+      items.forEach((item, index) => {
+        if (filter === "all" || item.dataset.category === filter) {
+          item.classList.remove("hidden");
+          visibleIndices.push(index);
+        } else {
+          item.classList.add("hidden");
+        }
+      });
+
+      lightboxState.visiblePhotos = visibleIndices.map(idx => allPhotos[idx]);
+      document.getElementById("lightbox-total").textContent = lightboxState.visiblePhotos.length;
+    });
+  });
+
+  // 2. Lightbox Open Logic (Delegated)
+  gallery.addEventListener("click", (e) => {
+    const item = e.target.closest(".gallery-item");
+    if (!item || item.classList.contains("hidden")) return;
+
+    const indexInAll = parseInt(item.dataset.index);
+    const photo = allPhotos[indexInAll];
+    const indexInVisible = lightboxState.visiblePhotos.findIndex(p => p.id === photo.id);
+
+    openLightbox(indexInVisible);
+  });
+
+  const openLightbox = (index) => {
+    lightboxState.currentIndex = index;
+    updateLightboxUI();
+
+    lightbox.classList.add("active");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  };
+
+  const updateLightboxUI = () => {
+    const photo = lightboxState.visiblePhotos[lightboxState.currentIndex];
+    if (!photo) return;
+
+    lightboxImg.style.opacity = "0";
+    setTimeout(() => {
+      lightboxImg.src = photo.src;
+      lightboxImg.alt = photo.alt;
+      lightboxTitle.textContent = photo.title;
+      lightboxCategory.textContent = photo.category;
+      lightboxLocation.textContent = photo.location;
+      lightboxCurrent.textContent = lightboxState.currentIndex + 1;
+      lightboxImg.style.opacity = "1";
+    }, 200);
+  };
+
+  const closeLightbox = () => {
+    lightbox.classList.remove("active");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  const navigateLightbox = (direction) => {
+    lightboxState.currentIndex += direction;
+    if (lightboxState.currentIndex < 0) lightboxState.currentIndex = lightboxState.visiblePhotos.length - 1;
+    if (lightboxState.currentIndex >= lightboxState.visiblePhotos.length) lightboxState.currentIndex = 0;
+    updateLightboxUI();
+  };
+
+  // 3. Lightbox Controls
+  document.querySelector(".lightbox-close")?.addEventListener("click", closeLightbox);
+  document.querySelector(".lightbox-backdrop")?.addEventListener("click", closeLightbox);
+  document.querySelector(".lightbox-prev")?.addEventListener("click", () => navigateLightbox(-1));
+  document.querySelector(".lightbox-next")?.addEventListener("click", () => navigateLightbox(1));
+
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("active")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") navigateLightbox(-1);
+    if (e.key === "ArrowRight") navigateLightbox(1);
+  });
 };

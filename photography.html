@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Photography | Tanvir Rahman</title>
+    <meta name="description"
+        content="Photography portfolio by Tanvir Rahman. Capturing quiet moments through a minimalist lens.">
     <link rel="stylesheet" href="src/css/style.css" />
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
@@ -17,6 +19,13 @@
     </div>
 
     <header class="header"></header>
+
+    <!-- Ambient Glow Effects -->
+    <div class="ambient-glow photo-ambient">
+        <div class="glow-1"></div>
+        <div class="glow-2"></div>
+        <div class="glow-3"></div>
+    </div>
 
     <div class="grid-background">
         <div class="grid-line"></div>
@@ -31,49 +40,91 @@
 
     <main class="page-container photography-page reveal">
         <div class="container">
-            <header class="page-header">
-                <h1 class="section-title">photography.</h1>
-                <p class="section-desc">Capturing quiet moments through a minimalist lens. A collection of light,
-                    texture,
-                    and geometry.</p>
+            <header class="page-header photo-hero">
+                <div class="photo-hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>8 Photographs</span>
+                </div>
+                <h1 class="section-title photo-title">photography.</h1>
+                <p class="section-desc photo-desc">
+                    Capturing quiet moments through a minimalist lens.
+                    A collection of <em>light</em>, <em>texture</em>, and <em>geometry</em>.
+                </p>
+
+                <!-- Category Filter Pills -->
+                <div class="photo-filters">
+                    <button class="filter-pill active" data-filter="all">All</button>
+                    <button class="filter-pill" data-filter="architecture">Architecture</button>
+                    <button class="filter-pill" data-filter="portrait">Portrait</button>
+                    <button class="filter-pill" data-filter="nature">Nature</button>
+                    <button class="filter-pill" data-filter="street">Street</button>
+                </div>
             </header>
 
-            <div class="photo-grid">
-                <div class="photo-item reveal">
-                    <img src="assets/photography/arch.png" alt="Architecture Photography" />
-                    <div class="photo-info">
-                        <span class="photo-category">Architecture</span>
-                        <h3 class="photo-title">Geometric Silence</h3>
-                    </div>
+            <!-- Masonry Gallery Grid -->
+            <div class="gallery-masonry" id="gallery">
+                <!-- Dynamically populated by model -> controller -> view -->
+                <div class="loading-indicator">Loading vision...</div>
+            </div>
+
+            <!-- Gallery Stats -->
+            <div class="gallery-stats reveal">
+                <div class="stat-item">
+                    <span class="stat-number">-</span>
+                    <span class="stat-label">Photographs</span>
                 </div>
-                <div class="photo-item reveal">
-                    <img src="assets/photography/portrait.png" alt="Portrait Photography" />
-                    <div class="photo-info">
-                        <span class="photo-category">Portrait</span>
-                        <h3 class="photo-title">Inner Monologue</h3>
-                    </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">-</span>
+                    <span class="stat-label">Categories</span>
                 </div>
-                <div class="photo-item reveal">
-                    <img src="assets/photography/nature.png" alt="Nature Photography" />
-                    <div class="photo-info">
-                        <span class="photo-category">Nature</span>
-                        <h3 class="photo-title">Ethereal Whispers</h3>
-                    </div>
-                </div>
-                <div class="photo-item reveal">
-                    <img src="assets/photography/street.png" alt="Street Photography" />
-                    <div class="photo-info">
-                        <span class="photo-category">Street</span>
-                        <h3 class="photo-title">Midnight Echoes</h3>
-                    </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Stories</span>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close lightbox">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6" />
+                </svg>
+            </button>
+            <button class="lightbox-nav lightbox-next" aria-label="Next image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6" />
+                </svg>
+            </button>
+            <div class="lightbox-image-container">
+                <img src="" alt="" class="lightbox-image" id="lightbox-img" />
+            </div>
+            <div class="lightbox-info">
+                <span class="lightbox-category"></span>
+                <h2 class="lightbox-title"></h2>
+                <p class="lightbox-location"></p>
+                <div class="lightbox-counter">
+                    <span id="lightbox-current">1</span> / <span id="lightbox-total">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer" id="contact"></footer>
 
     <script type="module" src="src/js/main.js"></script>
+
 </body>
 
 </html>

@@ -60,19 +60,24 @@ export const initEffects = () => {
     });
   };
 
-  const revealObserver = new IntersectionObserver(revealCallback, {
+  _revealObserver = new IntersectionObserver(revealCallback, {
     threshold: 0.1, // Reduced for better triggering on large sections
   });
 
-  window.revealObserver = revealObserver; // Expose to global for dynamic elements
-
   document.querySelectorAll(".reveal").forEach((el) => {
-    revealObserver.observe(el);
+    _revealObserver.observe(el);
   });
 };
 
+// Module-level observer reference (no global pollution)
+let _revealObserver = null;
+
+/**
+ * Observe a new element for reveal animation.
+ * Must call initEffects() first.
+ */
 export const observeReveal = (el) => {
-  if (window.revealObserver) {
-    window.revealObserver.observe(el);
+  if (_revealObserver) {
+    _revealObserver.observe(el);
   }
 };
