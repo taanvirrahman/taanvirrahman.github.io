@@ -1,5 +1,19 @@
 export let elements = {};
 
+// Configure marked with highlight.js
+if (typeof marked !== "undefined" && typeof hljs !== "undefined") {
+  marked.setOptions({
+    highlight: function (code, lang) {
+      if (lang && hljs.getLanguage(lang)) {
+        return hljs.highlight(code, { language: lang }).value;
+      }
+      return hljs.highlightAuto(code).value;
+    },
+    breaks: true,
+  });
+}
+
+
 export const refreshElements = () => {
   elements.sayHiBtn = document.getElementById("say-hi-btn");
   elements.messageContainer = document.getElementById("message-container");
@@ -19,6 +33,7 @@ export const refreshElements = () => {
   elements.certificationsGrid = document.querySelector(".certifications-grid");
   elements.themeToggle = document.getElementById("theme-toggle");
   elements.researchList = document.getElementById("research-list");
+  elements.educationList = document.getElementById("education-list");
 };
 
 // Initial run
@@ -70,6 +85,12 @@ export const showBlogPost = (content) => {
   elements.markdownContainer.style.opacity = "0";
   elements.markdownContainer.style.transform = "translateY(20px)";
   elements.markdownContainer.innerHTML = marked.parse(content);
+
+  // Apply highlighting
+  elements.markdownContainer.querySelectorAll("pre code").forEach((block) => {
+    hljs.highlightElement(block);
+  });
+
 
   // Re-scroll to top of content
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -232,7 +253,18 @@ export const renderSkills = (skills) => {
 
 export const applyTheme = (theme) => {
   document.documentElement.setAttribute("data-theme", theme);
+
+  // Update hljs theme dynamically
+  const hljsThemeLink = document.getElementById("hljs-theme");
+  if (hljsThemeLink) {
+    const themePath =
+      theme === "light"
+        ? "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+        : "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css";
+    hljsThemeLink.setAttribute("href", themePath);
+  }
 };
+
 
 export const renderCertifications = (certifications) => {
   if (!elements.certificationsGrid || !certifications) return;
@@ -242,7 +274,6 @@ export const renderCertifications = (certifications) => {
       (cert) => `
     <div class="cert-card reveal" tabindex="0" role="button">
       <div class="cert-header">
-        <div class="cert-icon">${cert.icon}</div>
         <div class="cert-meta">
           <h3 class="cert-name">${cert.name}</h3>
           <span class="cert-issuer">${cert.issuer}</span>
@@ -290,6 +321,32 @@ export const renderResearchList = (papers) => {
           .join("")}
       </div>
     </article>
+  `,
+    )
+    .join("");
+};
+
+export const renderEducation = (education) => {
+  if (!elements.educationList || !education) return;
+
+  elements.educationList.innerHTML = education
+    .map(
+      (edu, index) => `
+    <div class="education-item reveal" style="transition-delay: ${index * 100}ms">
+      <div class="edu-header">
+        <h3 class="edu-degree">${edu.degree}</h3>
+        <span class="edu-period">${edu.period}</span>
+      </div>
+      <div class="edu-institution">${edu.institution}</div>
+      <div class="edu-location">
+        <svg class="edu-loc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        ${edu.location}
+      </div>
+      <p class="edu-desc">${edu.description}</p>
+    </div>
   `,
     )
     .join("");

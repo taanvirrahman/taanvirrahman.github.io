@@ -51,6 +51,7 @@ export const init = async () => {
       view.renderProjects(config.projects);
       view.renderSkills(config.skills);
       view.renderCertifications(config.certifications);
+      view.renderEducation(config.education);
 
       // Re-observe new elements
       document.querySelectorAll(".reveal").forEach((el) => {

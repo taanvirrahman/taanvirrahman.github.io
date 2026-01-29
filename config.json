@@ -54,22 +54,42 @@
             "name": "AWS Certified Cloud Practitioner",
             "issuer": "Amazon Web Services",
             "date": "2025",
-            "icon": "☁️",
             "url": "#"
         },
         {
             "name": "Meta Front-End Developer Professional Certificate",
             "issuer": "Meta",
             "date": "2024",
-            "icon": "⚛️",
             "url": "#"
         },
         {
             "name": "Google UX Design Professional Certificate",
             "issuer": "Google",
             "date": "2024",
-            "icon": "🎨",
             "url": "#"
+        }
+    ],
+    "education": [
+        {
+            "degree": "B.Sc. in Computer Science",
+            "institution": "American International University-Bangladesh",
+            "location": "Dhaka, Bangladesh",
+            "period": "2023 - present",
+            "description": "Undergraduate major in Software Engineering."
+        },
+        {
+            "degree": "Higher Secondary Certificate",
+            "institution": "Royal Media College",
+            "location": "Mymensingh, Bangladesh",
+            "period": "2019 - 2021",
+            "description": "Science group."
+        },
+        {
+            "degree": "Secondary School Certificate",
+            "institution": "Kendua Joyhari Spry Govt. High School",
+            "location": "Netrokona, Bangladesh",
+            "period": "2014 - 2019",
+            "description": "Science group."
         }
     ]
 }
