@@ -29,7 +29,7 @@ const components = {
       <div class="container">
         
         <div class="footer-top-centered">
-          <h2 class="footer-cta-text">Let's build something<br>meaningful together.</h2>
+          <h2 class="footer-cta-text">Let's build something meaningful together.</h2>
           <a href="mailto:tanvir.rahman@aiub.edu" class="footer-mail-link">
             <span class="mail-prefix">Drop a line →</span>
             <span class="underline">mailtanvirrahman@gmail.com</span>
