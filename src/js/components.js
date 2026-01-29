@@ -52,7 +52,7 @@ const components = {
         <div class="footer-split-grid">
           
           <div class="footer-col">
-            <h3 class="footer-brand-large">TAN VIR<span class="sup">®</span></h3>
+            <h3 class="footer-brand-large">TANVIR<span class="sup">®</span></h3>
             <div class="footer-address">
               <p>Software Engineer Aspiring</p>
               <p>Dhaka</p>
