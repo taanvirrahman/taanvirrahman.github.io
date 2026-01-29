@@ -1,111 +1,125 @@
-/* Hero Section */
+/* Clean Hero Section */
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 8rem 0 6rem;
+    padding: 0;
     position: relative;
+    overflow: hidden;
+    background: var(--bg-main);
+}
+
+.hero-bg-container {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    filter: saturate(0.8) contrast(1.1);
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right,
+            rgba(var(--bg-main-rgb), 0.95) 20%,
+            rgba(var(--bg-main-rgb), 0.7) 50%,
+            rgba(var(--bg-main-rgb), 0.4) 100%);
+    z-index: 1;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 10;
+    display: block;
+    width: 100%;
+}
+
+.hero-content {
+    max-width: 600px;
 }
 
 .hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 5px 14px 5px 5px;
-    background: var(--bg-secondary);
+    gap: 12px;
+    padding: 6px 16px 6px 6px;
+    background: rgba(var(--bg-secondary-rgb), 0.5);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--border-main);
     border-radius: 99px;
     margin-bottom: 2.5rem;
     text-decoration: none;
-    transition: all 0.25s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-badge:hover {
-    background: var(--bg-tertiary);
+    background: var(--bg-secondary);
     border-color: var(--border-secondary);
+    transform: translateY(-2px);
 }
 
 .badge-label {
     background: var(--grad-primary);
     color: var(--white);
-    font-size: 0.6875rem;
-    font-weight: 600;
-    padding: 4px 10px;
+    font-size: 0.625rem;
+    font-weight: 700;
+    padding: 4px 12px;
     border-radius: 99px;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+    letter-spacing: 0.1em;
 }
 
 .badge-text {
-    color: var(--neutral-300);
+    color: var(--neutral-400);
     font-size: 0.8125rem;
-    font-weight: 400;
-}
-
-.badge-arrow {
-    color: var(--neutral-500);
-    font-size: 0.75rem;
-    transition: all 0.2s ease;
-}
-
-.hero-badge:hover .badge-arrow {
-    transform: translateX(2px);
-    color: var(--neutral-300);
+    font-weight: 500;
 }
 
 .hero-title {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    font-weight: 600;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.03em;
+    font-size: clamp(3.5rem, 10vw, 6.5rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.05em;
     color: var(--text-primary);
+    margin-bottom: 2rem;
 }
 
 .hero-description {
     font-size: 1.125rem;
     line-height: 1.7;
-    max-width: 480px;
-    margin-bottom: 2.5rem;
+    max-width: 450px;
+    margin-bottom: 3rem;
     color: var(--neutral-400);
-    font-weight: 400;
-}
-
-.text-link {
-    color: var(--neutral-200);
-    text-decoration: none;
-    border-bottom: 1px solid var(--neutral-600);
-    transition: all 0.2s ease;
-}
-
-.text-link:hover {
-    border-bottom-color: var(--white);
-    color: var(--white);
 }
 
 .hero-button {
     display: inline-flex;
     align-items: center;
-    padding: 0.75rem 1.5rem;
+    padding: 0.875rem 2rem;
     background: var(--text-primary);
     border-radius: 99px;
     color: var(--bg-main);
     text-decoration: none;
     font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 32px var(--border-main);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
 .hero-actions {
     margin-top: 1rem;
     position: relative;
-    min-height: 50px;
+    min-height: 60px;
     display: flex;
     align-items: center;
 }
@@ -121,6 +135,45 @@
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     max-width: 500px;
     width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .hero-container {
+        text-align: center;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-bg-container {
+        opacity: 0.35;
+    }
+
+    .hero-overlay {
+        background: radial-gradient(circle at center,
+                rgba(var(--bg-main-rgb), 0.8) 0%,
+                rgba(var(--bg-main-rgb), 0.95) 100%);
+    }
+
+    .hero-title {
+        font-size: clamp(3rem, 12vw, 4rem);
+    }
+
+    .hero-description {
+        font-size: 1rem;
+        max-width: 100%;
+    }
 }
 
 .message-container:focus-within {
@@ -621,58 +674,84 @@
     background: radial-gradient(circle at 80% 60%, rgba(244, 63, 94, 0.03), transparent 50%);
 }
 
+.photo-ambient::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 40%;
+    height: 100vh;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+    transform: rotate(-15deg);
+    pointer-events: none;
+    z-index: 1;
+}
+
 .photo-hero {
     text-align: center;
-    max-width: 800px;
-    margin: 0 auto 3rem;
+    max-width: 900px;
+    margin: 0 auto 5rem;
+    padding-top: 4rem;
+    position: relative;
+    z-index: 10;
 }
 
 .photo-hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    background: var(--bg-secondary);
+    gap: 10px;
+    padding: 6px 16px;
+    background: rgba(var(--bg-secondary-rgb), 0.5);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--border-main);
     border-radius: 99px;
-    font-size: 0.625rem;
-    color: var(--neutral-500);
-    margin-bottom: 1.5rem;
+    font-size: 0.6875rem;
+    color: var(--neutral-400);
+    margin-bottom: 3rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-
-.badge-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--accent-emerald);
-    border-radius: 50%;
-    animation: pulse-dot 2s infinite;
-}
-
-@keyframes pulse-dot {
-
-    0%,
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 0.5;
-        transform: scale(1.2);
-    }
+    letter-spacing: 0.15em;
+    font-weight: 500;
 }
 
 .photo-title {
-    font-size: clamp(3rem, 10vw, 5rem);
-    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    line-height: 1;
+}
+
+.title-main {
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    color: var(--text-primary);
+}
+
+.title-sub {
+    font-family: "Instrument Serif", serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-style: italic;
+    color: var(--neutral-500);
+    margin-top: -1.5rem;
+    margin-left: 4rem;
+    opacity: 0.8;
+}
+
+.title-sub i {
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    color: var(--neutral-600);
+    margin-right: 0.5rem;
 }
 
 .photo-desc {
     font-size: 1.25rem;
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 550px;
+    margin: 0 auto 4rem;
+    line-height: 1.6;
+    color: var(--neutral-500);
 }
 
 .photo-desc em {
@@ -681,32 +760,34 @@
     color: var(--text-primary);
 }
 
-/* Category Filter Pills */
+/* Editorial Filter Pills */
 .photo-filters {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.75rem;
-    margin-top: 3rem;
+    gap: 0.5rem;
+    margin-top: 2rem;
 }
 
 .filter-pill {
-    padding: 0.625rem 1.25rem;
-    background: var(--bg-secondary);
+    padding: 0.5rem 1rem;
+    background: rgba(var(--bg-secondary-rgb), 0.4);
     border: 1px solid var(--border-main);
     border-radius: 99px;
-    color: var(--neutral-400);
-    font-size: 0.8125rem;
+    color: var(--neutral-500);
+    font-size: 0.75rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     font-family: inherit;
+    letter-spacing: 0.02em;
 }
 
 .filter-pill:hover {
-    background: var(--bg-tertiary);
+    background: rgba(var(--bg-tertiary-rgb), 0.8);
     color: var(--text-primary);
     border-color: var(--border-secondary);
+    transform: translateY(-1px);
 }
 
 .filter-pill.active {

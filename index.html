@@ -36,32 +36,35 @@
   </div>
 
   <section class="hero reveal" id="hero">
-    <div class="container">
-      <a href="#" id="latest-note-badge" class="hero-badge hidden">
-        <span class="badge-label">New</span>
-        <span class="badge-text">Loading...</span>
-        <span class="badge-arrow">→</span>
-      </a>
-      <h1 class="hero-title reveal">
-        hi.<br />
-        i'm<br />
-        tanvir rahman.
-      </h1>
+    <div class="hero-bg-container">
+      <img src="src/assets/images/herobg.jpg" alt="" class="hero-bg-img" />
+      <div class="hero-overlay"></div>
+    </div>
 
-      <p class="hero-description reveal">
-        I’m an undergrad computer science student at
-        <a href="https://www.aiub.edu.bd" target="_blank" class="text-link">@AIUB</a>. 
-        My passion is to create a fully immersive experience for users.
-        I'm currently learning backend engineering with Golang.
-      </p>
+    <div class="container hero-container">
+      <div class="hero-content">
+        <a href="#" id="latest-note-badge" class="hero-badge hidden">
+          <span class="badge-label">News</span>
+          <span class="badge-text">Loading...</span>
+          <span class="badge-arrow">→</span>
+        </a>
 
-      <div class="hero-actions reveal">
-        <a href="#" class="hero-button" id="say-hi-btn"> → say hi </a>
+        <h1 class="hero-title reveal">
+          tanvir.
+        </h1>
 
-        <div class="message-container hidden" id="message-container">
-          <button class="back-btn" id="back-btn">←</button>
-          <input type="text" id="message-input" placeholder="write something..." autocomplete="off" />
-          <button class="send-btn hidden" id="send-btn">send</button>
+        <p class="hero-description reveal">
+          Computer Science Undergrad @AIUB. Focus on backend systems, concurrency, and minimalist design.
+        </p>
+
+        <div class="hero-actions reveal">
+          <a href="#" class="hero-button" id="say-hi-btn"> → say hi </a>
+
+          <div class="message-container hidden" id="message-container">
+            <button class="back-btn" id="back-btn">←</button>
+            <input type="text" id="message-input" placeholder="write something..." autocomplete="off" />
+            <button class="send-btn hidden" id="send-btn">send</button>
+          </div>
         </div>
       </div>
     </div>
