@@ -312,10 +312,10 @@
     background: var(--bg-secondary);
     border: 1px solid var(--border-main);
     border-radius: 24px;
-    padding: 2rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    min-height: 280px;
+    min-height: 240px;
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
@@ -445,19 +445,23 @@
 
 /* Global Page Layout */
 .page-container {
-    padding: 12rem 0 8rem;
+    padding: 5rem 0 4rem;
 }
 
 .page-header {
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
     max-width: 600px;
 }
 
+.page-header .section-title {
+    margin-bottom: 0.75rem;
+}
+
 .section-desc {
-    font-size: 1.125rem;
+    font-size: 1.05rem;
     color: var(--text-tertiary);
-    line-height: 1.6;
-    margin-top: 1rem;
+    line-height: 1.5;
+    margin-top: 0.5rem;
 }
 
 /* Blog/Notes */
@@ -560,7 +564,7 @@
 
 .blog-item {
     border-bottom: 1px solid var(--border-main);
-    padding: 3rem 0;
+    padding: 1.5rem 0;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
 }
@@ -574,7 +578,7 @@
     gap: 1.5rem;
     font-size: 0.75rem;
     color: var(--text-tertiary);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -582,7 +586,7 @@
 .blog-title {
     font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
     letter-spacing: -0.02em;
 }
 
@@ -619,8 +623,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 4rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid var(--border-main);
 }
 
@@ -749,8 +753,8 @@
 .photo-hero {
     text-align: center;
     max-width: 900px;
-    margin: 0 auto 5rem;
-    padding-top: 4rem;
+    margin: 1.5rem auto 2.5rem;
+    padding-top: 2rem;
     position: relative;
     z-index: 10;
 }
@@ -758,25 +762,48 @@
 .photo-hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 6px 16px;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
     background: rgba(var(--bg-secondary-rgb), 0.5);
     backdrop-filter: blur(10px);
     border: 1px solid var(--border-main);
-    border-radius: 99px;
-    font-size: 0.6875rem;
-    color: var(--text-secondary);
-    margin-bottom: 3rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-weight: 500;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-indigo);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--accent-indigo);
+    animation: pulse-indigo 2s infinite;
+}
+
+@keyframes pulse-indigo {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .photo-title {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 0.75rem;
     line-height: 1;
 }
 
@@ -789,12 +816,13 @@
 
 .title-sub {
     font-family: "Instrument Serif", serif;
-    font-size: clamp(2rem, 6vw, 4rem);
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
     font-style: italic;
     color: var(--text-tertiary);
-    margin-top: -1.5rem;
-    margin-left: 4rem;
-    opacity: 0.8;
+    margin-top: -1rem;
+    margin-left: clamp(2rem, 10vw, 6rem);
+    opacity: 0.9;
+    letter-spacing: -0.02em;
 }
 
 .title-sub i {
@@ -806,9 +834,9 @@
 }
 
 .photo-desc {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     max-width: 550px;
-    margin: 0 auto 4rem;
+    margin: 0 auto 2.5rem;
     line-height: 1.6;
     color: var(--text-tertiary);
 }
@@ -1315,7 +1343,7 @@
 
 .research-item {
     border-bottom: 1px solid var(--border-main);
-    padding: 4rem 0;
+    padding: 2.5rem 0;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1328,7 +1356,7 @@
     gap: 1.5rem;
     font-size: 0.75rem;
     color: var(--accent-indigo);
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-weight: 600;
@@ -1337,7 +1365,7 @@
 .research-title {
     font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     letter-spacing: -0.02em;
     color: var(--text-primary);
     line-height: 1.2;
@@ -1346,7 +1374,7 @@
 .research-authors {
     font-size: 0.9375rem;
     color: var(--text-secondary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     font-style: italic;
 }
 
@@ -1354,7 +1382,7 @@
     font-size: 1rem;
     color: var(--text-tertiary);
     line-height: 1.7;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
     max-width: 700px;
 }
 
@@ -1362,7 +1390,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
 }
 
 .research-tag {
@@ -1406,7 +1434,7 @@
     max-width: 800px;
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 1.5rem;
 }
 
 .education-item {
@@ -1441,7 +1469,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 .edu-degree {
@@ -1461,7 +1489,7 @@
 .edu-institution {
     font-size: 1rem;
     color: var(--text-secondary);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.4rem;
     font-weight: 500;
 }
 

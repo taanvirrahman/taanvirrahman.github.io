@@ -2,8 +2,8 @@
     /* Spacing */
     --gutter: 6%;
     --max-width: 896px;
-    --section-padding: 4rem;
-    --section-gap: 4rem;
+    --section-padding: 2.5rem;
+    --section-gap: 2.5rem;
 
     /* Base Palette (Dark-first, as per current design) */
     --neutral-950: #0a0a0a;

@@ -38,7 +38,6 @@ export const refreshElements = () => {
   elements.latestNotesGrid = document.querySelector(".latest-notes-grid");
   elements.photoGallery = document.getElementById("gallery");
   elements.photoStats = document.querySelector(".gallery-stats");
-  elements.photoBadge = document.querySelector(".photo-hero-badge span:last-child");
   elements.lightboxTotal = document.getElementById("lightbox-total");
 };
 
@@ -419,7 +418,6 @@ export const renderPhotographyGallery = (photos) => {
     .join("");
 
   // Update stats
-  if (elements.photoBadge) elements.photoBadge.textContent = `${photos.length} Photographs`;
   if (elements.lightboxTotal) elements.lightboxTotal.textContent = photos.length;
 
   const statNumbers = document.querySelectorAll(".stat-number");
