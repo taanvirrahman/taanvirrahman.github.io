@@ -12,6 +12,7 @@ window.addEventListener("load", () => {
 
     if (!splash) {
       document.body.classList.add("loaded");
+      window.dispatchEvent(new CustomEvent("page-reveal"));
       return;
     }
 

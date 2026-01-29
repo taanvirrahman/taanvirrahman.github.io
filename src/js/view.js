@@ -16,6 +16,7 @@ if (typeof marked !== "undefined" && typeof hljs !== "undefined") {
 
 export const refreshElements = () => {
   elements.sayHiBtn = document.getElementById("say-hi-btn");
+  elements.resumeBtn = document.getElementById("resume-btn");
   elements.messageContainer = document.getElementById("message-container");
   elements.backBtn = document.getElementById("back-btn");
   elements.messageInput = document.getElementById("message-input");
@@ -141,6 +142,7 @@ export const hideBlogPost = () => {
 
 export const showMessageInput = () => {
   elements.sayHiBtn.classList.add("hidden");
+  if (elements.resumeBtn) elements.resumeBtn.classList.add("hidden");
   elements.messageContainer.classList.remove("hidden");
   elements.messageInput.focus();
 };
@@ -148,6 +150,7 @@ export const showMessageInput = () => {
 export const hideMessageInput = () => {
   elements.messageContainer.classList.add("hidden");
   elements.sayHiBtn.classList.remove("hidden");
+  if (elements.resumeBtn) elements.resumeBtn.classList.remove("hidden");
   elements.messageInput.value = "";
   elements.sendBtn.classList.add("hidden");
 };

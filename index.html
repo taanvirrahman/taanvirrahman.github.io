@@ -4,11 +4,96 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tanvir Rahman</title>
-  <link rel="stylesheet" href="src/css/style.css" />
+  <title>Tanvir Rahman | Software Engineer & CS Student</title>
+  <meta name="description"
+    content="Tanvir Rahman - Computer Science Undergrad at AIUB. Focused on backend systems, concurrency, and minimalist design. View projects, research, and notes." />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <!-- Preload critical assets -->
+  <link rel="preload" href="src/assets/images/herobg.jpg" as="image" fetchpriority="high" />
+
+  <!-- Preconnect to external origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+
+  <!-- Fonts with display swap for better LCP -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
     rel="stylesheet" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="src/css/style.css" />
+
+  <style>
+    /* Critical CSS: Instant Splash Screen & Theme-Aware Background */
+    :root {
+      --bg-main: #0a0a0a;
+      --text-primary: #ffffff;
+    }
+
+    :root[data-theme="light"] {
+      --bg-main: #fbfbfd;
+      --text-primary: #111112;
+    }
+
+    body {
+      background: var(--bg-main);
+      margin: 0;
+      overflow: hidden;
+      transition: background-color 0s;
+    }
+
+    .splash-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-main);
+    }
+
+    .splash-curtain {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-main);
+      z-index: -1;
+    }
+
+    .splash-text {
+      font-size: clamp(2.5rem, 10vw, 5rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards 0.2s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      window.splashStartTime = Date.now();
+    })();
+  </script>
+
+  <!-- Defer non-critical scripts -->
   <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -57,16 +142,17 @@
     <div class="grid-line"></div>
   </div>
 
-  <section class="hero reveal" id="hero">
+  <section class="hero reveal" id="hero" aria-label="Hero section">
     <div class="hero-bg-container">
-      <img src="src/assets/images/herobg.jpg" alt="" class="hero-bg-img" />
+      <img src="src/assets/images/herobg.jpg" alt="Abstract background" class="hero-bg-img" fetchpriority="high"
+        decoding="async" width="1920" height="1080" />
       <div class="hero-overlay"></div>
     </div>
 
     <div class="container hero-container">
       <div class="hero-content">
         <a href="#" id="latest-note-badge" class="hero-badge hidden">
-          <span class="badge-label">News</span>
+          <span class="badge-label">New</span>
           <span class="badge-text">Loading...</span>
           <span class="badge-arrow">→</span>
         </a>
@@ -81,6 +167,7 @@
 
         <div class="hero-actions reveal">
           <a href="#" class="hero-button" id="say-hi-btn"> → say hi </a>
+          <a href="assets/resume.pdf" class="hero-button hero-button-outline" download id="resume-btn">↓ resume</a>
 
           <div class="message-container hidden" id="message-container">
             <button class="back-btn" id="back-btn">←</button>
