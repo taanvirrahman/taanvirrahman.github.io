@@ -99,6 +99,7 @@ export const init = async () => {
       view.renderSkills(config.skills);
       view.renderCertifications(config.certifications);
       view.renderEducation(config.education);
+      view.renderAbout(config.about);
 
       // Re-observe new elements
       document.querySelectorAll(".reveal").forEach((el) => {

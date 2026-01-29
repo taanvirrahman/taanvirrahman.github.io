@@ -39,6 +39,8 @@ export const refreshElements = () => {
   elements.photoGallery = document.getElementById("gallery");
   elements.photoStats = document.querySelector(".gallery-stats");
   elements.lightboxTotal = document.getElementById("lightbox-total");
+  elements.aboutLead = document.getElementById("about-lead");
+  elements.aboutBio = document.getElementById("about-bio");
 };
 
 // Initial run
@@ -252,9 +254,20 @@ export const renderSkills = (skills) => {
 
   elements.skillsGrid.innerHTML = skills
     .map(
-      (skill) => `
-    <div class="skill-item reveal" tabindex="0">
-      ${skill}
+      (group) => `
+    <div class="skills-category reveal">
+      <h3 class="skills-cat-title">${group.category}</h3>
+      <div class="skills-items">
+        ${group.items
+          .map(
+            (item) => `
+          <div class="skill-item" tabindex="0">
+            ${item}
+          </div>
+        `,
+          )
+          .join("")}
+      </div>
     </div>
   `,
     )
@@ -425,5 +438,13 @@ export const renderPhotographyGallery = (photos) => {
     statNumbers[0].textContent = photos.length;
     const categories = new Set(photos.map(p => p.category)).size;
     statNumbers[1].textContent = categories;
+  }
+};
+
+export const renderAbout = (about) => {
+  if (!about) return;
+  if (elements.aboutLead) elements.aboutLead.innerText = about.lead;
+  if (elements.aboutBio) {
+    elements.aboutBio.innerHTML = `<p>${about.bio}</p>`;
   }
 };

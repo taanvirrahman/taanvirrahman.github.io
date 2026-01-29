@@ -39,15 +39,62 @@
             "link": "View project →",
             "url": "#",
             "size": "wide"
+        },
+        {
+            "id": "bank-management-system",
+            "title": "Bank Management System",
+            "desc": "Architected a robust banking solution with normalized MySQL schemas, automated business triggers, and specialized C# transaction modules.",
+            "tag": "C# / MySQL",
+            "icon": "🏛️",
+            "link": "View system →",
+            "url": "#",
+            "size": "wide"
         }
     ],
     "skills": [
-        "Frontend Development (React, Vue)",
-        "Backend Systems (Node.js, Python)",
-        "Artificial Intelligence & Machine Learning",
-        "UI/UX Design & Typography",
-        "Generative Art (GLSL, P5.js)",
-        "Software Engineering Principles"
+        {
+            "category": "Programming Languages",
+            "items": [
+                "C/C++",
+                "Java",
+                "Python",
+                "C#",
+                "Golang"
+            ]
+        },
+        {
+            "category": "Web Development",
+            "items": [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "PHP"
+            ]
+        },
+        {
+            "category": "Databases",
+            "items": [
+                "MySQL",
+                "PostgreSQL"
+            ]
+        },
+        {
+            "category": "Tools & Technologies",
+            "items": [
+                "Git",
+                "Linux",
+                "Agile Methodologies"
+            ]
+        },
+        {
+            "category": "Core Competencies",
+            "items": [
+                "Data Structures",
+                "Algorithms",
+                "Object-Oriented Programming",
+                "Software Development"
+            ]
+        }
     ],
     "certifications": [
         {
@@ -66,6 +113,24 @@
             "name": "Google UX Design Professional Certificate",
             "issuer": "Google",
             "date": "2024",
+            "url": "#"
+        },
+        {
+            "name": "Introduction to Generative AI",
+            "issuer": "Google Cloud",
+            "date": "2024",
+            "url": "#"
+        },
+        {
+            "name": "NASA Open Science",
+            "issuer": "NASA",
+            "date": "2024",
+            "url": "#"
+        },
+        {
+            "name": "IT Essentials",
+            "issuer": "Cisco",
+            "date": "2023",
             "url": "#"
         }
     ],
@@ -91,5 +156,9 @@
             "period": "2014 - 2019",
             "description": "Science group."
         }
-    ]
+    ],
+    "about": {
+        "lead": "Building efficient backend systems with a focus on concurrency and minimalist logic.",
+        "bio": "I architect scalable solutions using Go and Java, driven by a passion for clean systems and visual aesthetics. Beyond the terminal, I explore the world through minimalist design and photography."
+    }
 }
