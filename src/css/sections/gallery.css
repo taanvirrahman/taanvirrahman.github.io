@@ -1,6 +1,7 @@
 /* Photography - Premium Gallery */
 .photography-page {
     min-height: 100vh;
+    padding-top: 100px;
 }
 
 .photo-ambient .glow-1 {

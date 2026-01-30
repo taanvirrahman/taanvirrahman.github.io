@@ -1,6 +1,7 @@
 /* Blog/Notes */
 .notes-page {
     min-height: 60vh;
+    padding-top: 100px;
 }
 
 .blog-list {

@@ -1,4 +1,8 @@
 /* Research Section */
+.research-page {
+    padding-top: 100px;
+}
+
 .research-list {
     max-width: 800px;
 }
