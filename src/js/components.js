@@ -11,6 +11,7 @@ const components = {
         <ul class="nav-list" role="list">
           <li><a href="research.html" class="nav-link">research</a></li>
           <li><a href="notes.html" class="nav-link">notes</a></li>
+          <li><a href="resources.html" class="nav-link">resources</a></li>
           <li><a href="photography.html" class="nav-link">photography</a></li>
           <li><a href="#contact" class="nav-link">contact</a></li>
         </ul>
@@ -30,6 +31,7 @@ const components = {
         <a href="index.html" class="mobile-nav-link">home</a>
         <a href="research.html" class="mobile-nav-link">research</a>
         <a href="notes.html" class="mobile-nav-link">notes</a>
+        <a href="resources.html" class="mobile-nav-link">resources</a>
         <a href="photography.html" class="mobile-nav-link">photography</a>
         <a href="#contact" class="mobile-nav-link">contact</a>
       </div>
@@ -76,13 +78,14 @@ const components = {
           <div class="footer-nav-links" role="navigation" aria-label="Footer Navigation">
             <a href="index.html" class="footer-nav-link">Home</a>
             <a href="notes.html" class="footer-nav-link">Notes</a>
+            <a href="resources.html" class="footer-nav-link">Resources</a>
             <a href="research.html" class="footer-nav-link">Research</a>
           </div>
         </div>
  
         <div class="footer-pills" role="list" aria-label="Social Links">
           <a href="https://github.com/taanvirrahman" target="_blank" rel="noopener noreferrer" class="social-pill pill-1">GitHub</a>
-          <a href="https://x.com/tanvir_tweet" target="_blank" rel="noopener noreferrer" class="social-pill pill-2">Twitter</a>
+          <a href="https://x.com/tanvir_tweet" target="_blank" rel="noopener noreferrer" class="social-pill pill-2">X</a>
           <a href="https://www.linkedin.com/in/muhammud-tanvir-rahman/" target="_blank" rel="noopener noreferrer" class="social-pill pill-3">LinkedIn</a>
         </div>
  

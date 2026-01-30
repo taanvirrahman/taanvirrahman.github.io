@@ -1,0 +1,13 @@
+[
+    {
+        "id": "best-vscode-extensions",
+        "title": "Essential VS Code Extensions for 2026",
+        "date": "Jan 20, 2026",
+        "thumbnail": "src/assets/images/resources/vscode-extensions.png",
+        "tags": [
+            "DevTools",
+            "Productivity"
+        ],
+        "file": "content/resources/vscode-extensions.md"
+    }
+]

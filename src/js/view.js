@@ -26,9 +26,18 @@ export const refreshElements = () => {
   elements.closeBlog = document.getElementById("close-blog");
   elements.copyLinkBtn = document.getElementById("copy-link");
   elements.markdownContainer = document.getElementById("markdown-container");
+
+  // Resources Elements
+  elements.resourceList = document.getElementById("resource-list");
+  elements.resourceContent = document.getElementById("resource-content");
+  elements.closeResource = document.getElementById("close-resource");
+  elements.copyLinkResource = document.getElementById("copy-link-resource");
+  elements.markdownContainerResource = document.getElementById("markdown-container-resource");
+
   elements.subscribeForm = document.querySelector(".footer-form");
   elements.subscribeBtn = document.querySelector(".footer-submit");
   elements.latestNoteBadge = document.getElementById("latest-note-badge");
+  elements.latestResearchBadge = document.getElementById("latest-research-badge");
   elements.bentoGrid = document.querySelector(".bento-grid");
   elements.skillsGrid = document.querySelector(".skills-grid");
   elements.certificationsGrid = document.querySelector(".certifications-grid");
@@ -79,8 +88,18 @@ export const renderLatestNoteBadge = (note) => {
   const badgeText = elements.latestNoteBadge.querySelector(".badge-text");
   if (badgeText) badgeText.innerText = note.title;
 
-  elements.latestNoteBadge.href = `#${note.id}`;
+  elements.latestNoteBadge.href = `notes.html#${note.id}`;
   elements.latestNoteBadge.classList.remove("hidden");
+};
+
+export const renderLatestResearchBadge = (paper) => {
+  if (!elements.latestResearchBadge || !paper) return;
+
+  const badgeText = elements.latestResearchBadge.querySelector(".badge-text");
+  if (badgeText) badgeText.innerText = paper.title;
+
+  elements.latestResearchBadge.href = paper.links?.PDF || paper.links?.Code || "research.html";
+  elements.latestResearchBadge.classList.remove("hidden");
 };
 
 export const showBlogPost = (content) => {
@@ -292,7 +311,9 @@ export const applyTheme = (theme) => {
 export const renderCertifications = (certifications) => {
   if (!elements.certificationsGrid || !certifications) return;
 
-  elements.certificationsGrid.className = 'certifications-list'; // Change class from grid to list
+  // Ensure we keep the grid class and don't overwrite it with list
+  elements.certificationsGrid.className = 'certifications-list';
+
   elements.certificationsGrid.innerHTML = certifications
     .map(
       (cert, index) => `
@@ -374,17 +395,6 @@ export const renderEducation = (education) => {
     .join("");
 };
 
-const getGradient = (index) => {
-  const gradients = [
-    "linear-gradient(135deg, #1e3a8a, #3b82f6)", // Deep Blue
-    "linear-gradient(135deg, #881337, #f43f5e)", // Rose
-    "linear-gradient(135deg, #064e3b, #10b981)", // Emerald
-    "linear-gradient(135deg, #4c1d95, #8b5cf6)", // Violet
-    "linear-gradient(135deg, #78350f, #f59e0b)", // Amber
-  ];
-  return gradients[index % gradients.length];
-};
-
 export const renderLatestNotes = (posts) => {
   if (!elements.latestNotesGrid || !posts) return;
 
@@ -396,12 +406,12 @@ export const renderLatestNotes = (posts) => {
   elements.latestNotesGrid.innerHTML = posts
     .map(
       (post, index) => `
-    <a href="notes.html#${post.id}" class="note-card reveal" style="background: ${getGradient(index)}; transition-delay: ${index * 100}ms">
+    <a href="notes.html#${post.id}" class="note-card reveal" style="transition-delay: ${index * 100}ms">
         <div class="note-card-content">
             <h3 class="note-card-title">${post.title}</h3>
             <span class="note-card-date">${post.date}</span>
         </div>
-        <div class="note-card-overlay"></div>
+        <svg class="note-card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
     </a>
   `,
     )
@@ -440,6 +450,106 @@ export const renderPhotographyGallery = (photos) => {
     statNumbers[1].textContent = categories;
   }
 };
+
+export const renderResourceList = (resources) => {
+  if (!elements.resourceList) return;
+
+  if (resources.length === 0) {
+    elements.resourceList.innerHTML =
+      '<p class="loading-indicator">No resources found.</p>';
+    return;
+  }
+
+  elements.resourceList.innerHTML = resources
+    .map(
+      (resource, index) => `
+    <article class="blog-item resource-item reveal" style="transition-delay: ${index * 100}ms" onclick="document.querySelector('[data-resource-id=\\'${resource.id}\\']').click()">
+      ${resource.thumbnail ? `
+      <div class="resource-thumbnail">
+          <img src="${resource.thumbnail}" alt="${resource.title}" loading="lazy" />
+      </div>` : ""}
+      <div class="resource-content">
+          <div class="blog-tags">
+            ${resource.tags.slice(0, 2).map((tag) => `<span class="blog-tag">${tag}</span>`).join("")}
+          </div>
+          <h3 class="blog-title"><a href="#${resource.id}" data-resource-id="${resource.id}" class="resource-link">${resource.title}</a></h3>
+          <div class="blog-meta">
+            <span class="blog-date">${resource.date}</span>
+            <span class="resource-arrow">→</span>
+          </div>
+      </div>
+    </article>
+  `,
+    )
+    .join("");
+};
+
+export const showResource = (resource) => {
+  if (!elements.resourceList) return;
+  elements.resourceList.classList.add("hidden");
+  elements.resourceContent.classList.remove("hidden");
+
+  // Manual animation setup - prevent usage of .reveal on dynamic content without observers
+  elements.markdownContainerResource.style.opacity = "0";
+  elements.markdownContainerResource.style.transform = "translateY(20px)";
+
+  const headerHTML = `
+    <header class="resource-detail-header">
+      <h1 class="resource-detail-title">${resource.title}</h1>
+      <div class="resource-detail-meta">
+        <span class="resource-detail-date">${resource.date}</span>
+        <span class="meta-separator">/</span>
+        <div class="resource-share-inline">
+            <span class="share-label">Share:</span>
+            <button class="share-icon-btn copy-url-btn" aria-label="Copy Link" title="Copy Link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            </button>
+            <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(resource.title)}&url=${encodeURIComponent(window.location.href)}" target="_blank" class="share-icon-btn" aria-label="Share on X" title="Share on X">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg>
+            </a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}" target="_blank" class="share-icon-btn" aria-label="Share on LinkedIn" title="Share on LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+        </div>
+      </div>
+    </header>
+    ${resource.thumbnail ? `
+    <div class="resource-detail-image">
+      <img src="${resource.thumbnail}" alt="${resource.title}" />
+    </div>` : ""}
+  `;
+
+  elements.markdownContainerResource.innerHTML = headerHTML + marked.parse(resource.content);
+
+  elements.markdownContainerResource.querySelectorAll("pre code").forEach((block) => {
+    hljs.highlightElement(block);
+  });
+
+  // Setup copy listener
+  const copyBtn = elements.markdownContainerResource.querySelector(".copy-url-btn");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", () => {
+      navigator.clipboard.writeText(window.location.href);
+      copyBtn.style.color = "var(--text-primary)";
+      setTimeout(() => copyBtn.style.color = "", 1000);
+    });
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  setTimeout(() => {
+    elements.markdownContainerResource.style.opacity = "1";
+    elements.markdownContainerResource.style.transform = "translateY(0)";
+    elements.markdownContainerResource.style.transition =
+      "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
+  }, 100);
+};
+
+export const hideResource = () => {
+  if (elements.resourceContent) elements.resourceContent.classList.add("hidden");
+  if (elements.resourceList) elements.resourceList.classList.remove("hidden");
+};
+
 
 export const renderAbout = (about) => {
   if (!about) return;

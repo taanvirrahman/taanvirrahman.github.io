@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resources | Tanvir Rahman</title>
+    <meta name="description" content="Curated tools, libraries, and learning resources for developers." />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="src/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+        id="hljs-theme" />
+
+    <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+
+<body>
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="progress-bar"></div>
+    </div>
+    <header class="header"></header>
+
+    <div class="grid-background">
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+        <div class="grid-line"></div>
+    </div>
+
+    <main class="page-container resources-page reveal">
+        <div class="container">
+            <header class="page-header">
+                <h1 class="section-title">resources.</h1>
+                <p class="section-desc">Curated tools, libraries, and guides I vouch for.</p>
+            </header>
+            <div class="blog-list" id="resource-list">
+                <div class="loading-indicator">Loading resources...</div>
+            </div>
+
+            <div id="resource-content" class="blog-content-view hidden reveal">
+                <div class="blog-actions reveal">
+                    <button id="close-resource" class="back-btn text-btn">
+                        ← back to resources
+                    </button>
+                    <button id="copy-link-resource" class="back-btn text-btn">share</button>
+                </div>
+                <div id="markdown-container-resource" class="markdown-body"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" id="contact"></footer>
+
+    <script type="module" src="src/js/main.js"></script>
+</body>
+
+</html>

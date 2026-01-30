@@ -77,17 +77,21 @@ export const init = async () => {
   }
 
   // Feature: Latest Note Badge (Hero)
+  // Feature: Latest Note Badge (Hero)
   if (view.elements.latestNoteBadge) {
     const posts = await model.fetchBlogPosts();
     if (posts.length > 0) {
       const sortedPosts = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
-      const latestPost = sortedPosts[0];
-      view.renderLatestNoteBadge(latestPost);
+      view.renderLatestNoteBadge(sortedPosts[0]);
+    }
+  }
 
-      view.elements.latestNoteBadge.addEventListener("click", (e) => {
-        e.preventDefault();
-        window.location.href = `notes.html#${latestPost.id}`;
-      });
+  // Feature: Latest Research Badge (Hero)
+  if (view.elements.latestResearchBadge) {
+    const papers = await model.fetchResearchPapers();
+    if (papers.length > 0) {
+      // Assuming papers are ordered, or we pick the first one
+      view.renderLatestResearchBadge(papers[0]);
     }
   }
 
@@ -287,6 +291,65 @@ export const init = async () => {
         view.elements.subscribeBtn.disabled = false;
       }, 2000);
     });
+
+  }
+
+  // Resources interactions - Cloned from Blog logic
+  if (view.elements.resourceList) {
+    try {
+      console.log("Fetching resources...");
+      const resources = await model.fetchResources();
+      console.log(`Fetched ${resources.length} resources`);
+      view.renderResourceList(resources);
+
+      const resourceItems = document.querySelectorAll(".blog-item.reveal");
+      resourceItems.forEach((el) => {
+        observeReveal(el);
+      });
+    } catch (error) {
+      console.error("Failed to initialize resource list:", error);
+    }
+
+    const handleResourceRouting = async () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash) {
+        const resources = await model.fetchResources();
+        const resource = await model.fetchResource(hash);
+        if (resource) {
+          view.showResource(resource);
+        } else {
+          window.location.hash = "";
+        }
+      } else {
+        view.hideResource();
+      }
+    };
+
+    window.addEventListener("hashchange", handleResourceRouting);
+    handleResourceRouting();
+
+    view.elements.resourceList.addEventListener("click", (e) => {
+      const link = e.target.closest("a");
+      if (!link) return;
+
+      const resourceId = link.dataset.resourceId;
+      if (resourceId) {
+        e.preventDefault();
+        window.location.hash = resourceId;
+      }
+    });
+
+    if (view.elements.closeResource) {
+      view.elements.closeResource.addEventListener("click", () => {
+        window.location.hash = "";
+      });
+    }
+
+    if (view.elements.copyLinkResource) {
+      view.elements.copyLinkResource.addEventListener("click", () => {
+        view.copyToClipboard(window.location.href);
+      });
+    }
   }
 
   // Feature: Photography Gallery

@@ -19,7 +19,7 @@
 
   <!-- Fonts with display swap for better LCP -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
 
   <!-- Main stylesheet -->
@@ -151,11 +151,18 @@
 
     <div class="container hero-container">
       <div class="hero-content">
-        <a href="#" id="latest-note-badge" class="hero-badge hidden">
-          <span class="badge-label">New</span>
-          <span class="badge-text">Loading...</span>
-          <span class="badge-arrow">→</span>
-        </a>
+        <div class="hero-badges">
+          <a href="#" id="latest-note-badge" class="hero-badge hidden">
+            <span class="badge-label">Note</span>
+            <span class="badge-text">Loading...</span>
+            <span class="badge-arrow">→</span>
+          </a>
+          <a href="research.html" id="latest-research-badge" class="hero-badge hidden">
+            <span class="badge-label" style="background: var(--accent-indigo);">Research</span>
+            <span class="badge-text">Loading...</span>
+            <span class="badge-arrow">→</span>
+          </a>
+        </div>
 
         <h1 class="hero-title reveal">
           tanvir.
@@ -215,7 +222,7 @@
     </div>
   </section>
 
-  <section id="education" class="research-section reveal">
+  <section id="education" class="education-section reveal">
     <div class="container">
       <h2 class="section-title reveal">education.</h2>
       <div class="education-list" id="education-list">
@@ -232,6 +239,56 @@
       </div>
     </div>
   </section>
+
+
+
+  <!-- Latest Notes Preview -->
+  <section class="latest-notes-section">
+    <div class="container">
+      <div class="latest-notes-header">
+        <h2 class="section-title-small">latest notes.</h2>
+        <a href="notes.html" class="view-all-link">view all →</a>
+      </div>
+      <div class="latest-notes-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-nav lightbox-prev">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </div>
+    <div class="lightbox-nav lightbox-next">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </div>
+    <div class="lightbox-close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </div>
+
+    <div class="lightbox-content">
+      <div class="lightbox-image-container">
+        <img id="lightbox-img" class="lightbox-image" src="" alt="" />
+      </div>
+      <div class="lightbox-info">
+        <span class="lightbox-category">Category</span>
+        <h3 class="lightbox-title">Photo Title</h3>
+        <p class="lightbox-location">Location</p>
+        <div class="lightbox-counter">
+          <span id="lightbox-current">1</span> / <span id="lightbox-total">10</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer class="footer" id="contact"></footer>
 

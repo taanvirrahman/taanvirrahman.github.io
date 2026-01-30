@@ -9,6 +9,7 @@ const _state = {
   message: "",
   blogPosts: [],
   researchPapers: [],
+  resources: [],
   currentPost: null,
   config: null,
   photos: [],
@@ -129,6 +130,38 @@ export const fetchResearchPapers = async () => {
   } catch (error) {
     console.error("Error fetching research papers:", error);
     return [];
+  }
+};
+
+export const fetchResources = async () => {
+  if (_state.resources.length > 0) return _state.resources;
+  try {
+    const response = await fetch("content/resources/resources.json");
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const data = await response.json();
+    _state.resources = data;
+    return _state.resources;
+  } catch (error) {
+    console.error("Error fetching resources list:", error);
+    return [];
+  }
+};
+
+export const fetchResource = async (resourceId) => {
+  if (_state.cache.has(resourceId)) return _state.cache.get(resourceId);
+
+  const resource = _state.resources.find((r) => r.id === resourceId);
+  if (!resource) return null;
+
+  try {
+    const response = await fetch(resource.file);
+    const content = await response.text();
+    const result = { ...resource, content };
+    _state.cache.set(resourceId, result);
+    return result;
+  } catch (error) {
+    console.error("Error fetching resource content:", error);
+    return null;
   }
 };
 
