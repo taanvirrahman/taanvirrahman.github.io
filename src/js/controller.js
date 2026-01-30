@@ -329,10 +329,27 @@ export const init = async () => {
     handleResourceRouting();
 
     view.elements.resourceList.addEventListener("click", (e) => {
+      const item = e.target.closest(".resource-item");
       const link = e.target.closest("a");
-      if (!link) return;
 
-      const resourceId = link.dataset.resourceId;
+      if (!item && !link) return;
+
+      const resourceId = item ? item.dataset.resourceId : (link ? link.dataset.resourceId : null);
+
+      if (resourceId) {
+        e.preventDefault();
+        window.location.hash = resourceId;
+      }
+    });
+
+    // Keyboard accessibility for resource items
+    view.elements.resourceList.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+
+      const item = e.target.closest(".resource-item");
+      if (!item) return;
+
+      const resourceId = item.dataset.resourceId;
       if (resourceId) {
         e.preventDefault();
         window.location.hash = resourceId;

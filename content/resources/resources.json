@@ -1,13 +1,50 @@
 [
     {
         "id": "best-vscode-extensions",
-        "title": "Essential VS Code Extensions for 2026",
+        "title": "Essential VS Code Extensions",
         "date": "Jan 20, 2026",
         "thumbnail": "src/assets/images/resources/vscode-extensions.png",
         "tags": [
             "DevTools",
             "Productivity"
         ],
-        "file": "content/resources/vscode-extensions.md"
+        "file": "content/resources/vscode-extensions.md",
+        "size": "long"
+    },
+    {
+        "id": "productivity-stack-2026",
+        "title": "My 2026 Productivity Stack",
+        "date": "Jan 28, 2026",
+        "thumbnail": "src/assets/images/resources/productivity-stack.png",
+        "tags": [
+            "Workflow",
+            "Apps"
+        ],
+        "file": "content/resources/productivity-stack.md",
+        "size": "normal"
+    },
+    {
+        "id": "coding-fonts",
+        "title": "Top 5 Aesthetic Fonts",
+        "date": "Feb 01, 2026",
+        "thumbnail": "src/assets/images/resources/coding-fonts.png",
+        "tags": [
+            "Design",
+            "Setup"
+        ],
+        "file": "content/resources/coding-fonts.md",
+        "size": "normal"
+    },
+    {
+        "id": "system-design-resources",
+        "title": "System Design Guide",
+        "date": "Feb 05, 2026",
+        "thumbnail": "src/assets/images/resources/system-design.png",
+        "tags": [
+            "Backend",
+            "Architecture"
+        ],
+        "file": "content/resources/system-design.md",
+        "size": "wide"
     }
 ]

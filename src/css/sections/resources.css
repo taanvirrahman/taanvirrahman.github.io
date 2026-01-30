@@ -3,13 +3,45 @@
     min-height: 80vh;
 }
 
+/* Hero Section Refinement */
+.resources-page .page-header {
+    text-align: center;
+    padding: 6rem 1rem 4rem 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.resources-page .section-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(3.5rem, 8vw, 5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.resources-page .section-desc {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* Grid Layout */
 #resource-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 3rem 2rem;
+    gap: 4rem 2.5rem;
     padding-top: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    padding-bottom: 6rem;
+    grid-auto-flow: dense;
+    /* Crucial for Bento packing */
 }
 
 .resource-item {
@@ -22,7 +54,19 @@
     border-radius: 20px;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     height: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+    /* Remove margin as gap handles it */
+}
+
+/* Bento Sizes */
+.resource-wide,
+.resource-long {
+    grid-column: span 2;
+}
+
+.resource-large {
+    grid-column: span 2;
+    grid-row: span 2;
 }
 
 .resource-item:hover {
@@ -40,6 +84,18 @@
     background: var(--bg-secondary);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Aspect Ratio Adjustments for Bento */
+.resource-wide .resource-thumbnail,
+.resource-long .resource-thumbnail {
+    aspect-ratio: 2/1;
+    /* Slightly taller than cinematic for better visibility */
+}
+
+.resource-large .resource-thumbnail {
+    aspect-ratio: 16/9;
+    /* Large maintains standard or goes square-ish if needed */
 }
 
 .resource-thumbnail img {
@@ -141,6 +197,19 @@
         gap: 3rem;
     }
 
+    .resource-wide,
+    .resource-long,
+    .resource-large {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .resource-wide .resource-thumbnail,
+    .resource-long .resource-thumbnail {
+        aspect-ratio: 16/9;
+        /* Reset to standard on mobile */
+    }
+
     .resource-thumbnail {
         border-radius: 12px;
     }
@@ -228,13 +297,15 @@
     margin: 0 auto 4rem auto;
     border-radius: 24px;
     overflow: hidden;
-    aspect-ratio: 16/9;
+    height: auto;
+    background: var(--bg-secondary);
 }
 
 .resource-detail-image img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
+    object-fit: contain;
 }
 
 /* Overriding markdown body for this specific view if needed */

@@ -463,7 +463,7 @@ export const renderResourceList = (resources) => {
   elements.resourceList.innerHTML = resources
     .map(
       (resource, index) => `
-    <article class="blog-item resource-item reveal" style="transition-delay: ${index * 100}ms" onclick="document.querySelector('[data-resource-id=\\'${resource.id}\\']').click()">
+    <article class="blog-item resource-item ${resource.size ? 'resource-' + resource.size : ''} reveal" style="transition-delay: ${index * 100}ms" data-resource-id="${resource.id}" role="button" tabindex="0">
       ${resource.thumbnail ? `
       <div class="resource-thumbnail">
           <img src="${resource.thumbnail}" alt="${resource.title}" loading="lazy" />
@@ -472,7 +472,7 @@ export const renderResourceList = (resources) => {
           <div class="blog-tags">
             ${resource.tags.slice(0, 2).map((tag) => `<span class="blog-tag">${tag}</span>`).join("")}
           </div>
-          <h3 class="blog-title"><a href="#${resource.id}" data-resource-id="${resource.id}" class="resource-link">${resource.title}</a></h3>
+          <h3 class="blog-title"><a href="#${resource.id}" class="resource-link" tabindex="-1">${resource.title}</a></h3>
           <div class="blog-meta">
             <span class="blog-date">${resource.date}</span>
             <span class="resource-arrow">→</span>
