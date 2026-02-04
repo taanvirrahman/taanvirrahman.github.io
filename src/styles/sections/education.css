@@ -12,46 +12,25 @@
 }
 
 /* Vertical Timeline Line */
+/* Vertical Timeline Line Removed */
 .education-list::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--accent-indigo), transparent);
-    opacity: 0.3;
+    display: none;
 }
 
 .education-item {
     position: relative;
-    padding-left: 2.5rem;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-main);
+    transition: all 0.2s ease;
 }
 
-/* Timeline Dot */
+/* Timeline Dot Removed */
 .education-item::before {
-    content: '';
-    position: absolute;
-    left: -5px;
-    top: 0.5rem;
-    width: 12px;
-    height: 12px;
-    background: var(--bg-main);
-    border: 2px solid var(--accent-indigo);
-    border-radius: 50%;
-    z-index: 2;
-    transition: all 0.3s ease;
-}
-
-.education-item:hover::before {
-    background: var(--accent-indigo);
-    box-shadow: 0 0 15px var(--accent-indigo);
-    transform: scale(1.5);
+    display: none;
 }
 
 .education-item:hover {
-    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.01);
 }
 
 .edu-header {
@@ -64,28 +43,30 @@
 }
 
 .edu-degree {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 600;
     color: var(--text-primary);
-    letter-spacing: -0.02em;
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .edu-period {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8125rem;
-    color: var(--accent-indigo);
-    background: rgba(99, 102, 241, 0.1);
-    padding: 0.25rem 0.75rem;
-    border-radius: 99px;
-    font-weight: 500;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-weight: 400;
 }
 
 .edu-institution {
-    font-size: 1.125rem;
+    font-family: var(--font-sans);
+    font-size: 1rem;
     color: var(--text-secondary);
     margin-bottom: 0.5rem;
-    font-weight: 500;
+    text-transform: none;
+    letter-spacing: normal;
 }
 
 .edu-location {
@@ -104,6 +85,7 @@
 }
 
 .edu-desc {
+    font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.6;
     color: var(--text-secondary);

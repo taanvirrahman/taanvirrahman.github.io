@@ -46,56 +46,72 @@ const components = {
   `,
 
   footer: `
-    <div class="footer-brutalist" role="contentinfo">
-      <div class="footer-overlay"></div>
-      <div class="container">
+    <div class="relative overflow-hidden text-white border-t-0 mt-0" role="contentinfo" 
+         style="background-color: var(--bg-secondary); background-image: url('src/assets/images/footerbg.jpg'); background-size: 100% auto; background-repeat: no-repeat; background-position: top center;">
+      
+      <!-- Overlay -->
+      <div class="absolute inset-0 z-[1] pointer-events-none" 
+           style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.95));">
+      </div>
+
+      <div class="container relative z-[2] pt-10 pb-8 mx-auto px-[var(--gutter)] w-full max-w-[var(--max-width)]">
         
-        <div class="footer-top-centered">
-          <h2 class="footer-cta-text">Let's build something meaningful together.</h2>
-          <a href="mailto:tanvir.rahman@aiub.edu" class="footer-mail-link" aria-label="Send an email to Tanvir Rahman">
-            <span class="mail-prefix">Drop a line →</span>
-            <span class="underline">mailtanvirrahman@gmail.com</span>
+        <!-- Top CTA -->
+        <div class="flex flex-col items-center gap-8 text-center max-w-3xl mx-auto mb-8">
+          <h2 class="font-serif text-[clamp(1.75rem,5vw,2.5rem)] leading-[1.1] font-medium tracking-tight text-white">Let's build something meaningful together.</h2>
+          <a href="mailto:tanvir.rahman@aiub.edu" class="group inline-flex flex-col items-center gap-2 text-xl text-white/90 transition-transform duration-300 hover:-translate-y-0.5 no-underline" aria-label="Send an email to Tanvir Rahman">
+            <span class="text-xs uppercase tracking-widest opacity-60">Drop a line →</span>
+            <span class="font-mono border-b border-[var(--border-secondary)] pb-[2px] transition-colors group-hover:border-[var(--accent-indigo)]">mailtanvirrahman@gmail.com</span>
           </a>
         </div>
  
-        <div class="footer-split-grid">
+        <!-- Split Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-y border-[var(--border-main)] py-6 mb-6">
           
-          <div class="footer-col">
-            <h3 class="footer-brand-large">TANVIR<span class="sup">®</span></h3>
-            <div class="footer-address">
+          <!-- Left Column -->
+          <div class="flex flex-col gap-6 text-left items-start">
+            <h3 class="text-[2.5rem] font-extrabold tracking-tighter leading-[0.8] text-white/10 opacity-80 select-none relative" style="-webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);">
+              TANVIR<span class="text-[1.5rem] align-super ml-1 text-white/60 tracking-normal" style="-webkit-text-stroke: 0;">®</span>
+            </h3>
+            <div class="font-mono text-sm text-white/60 leading-relaxed">
               <p>Software Engineer Aspiring</p>
               <p>Dhaka</p>
             </div>
-            <a href="https://maps.google.com/?q=Dhaka" target="_blank" rel="noopener noreferrer" class="footer-small-link">View on Map →</a>
+            <a href="https://maps.google.com/?q=Dhaka" target="_blank" rel="noopener noreferrer" class="text-[0.95rem] font-semibold uppercase tracking-wider text-white/95 border-b border-transparent transition-colors hover:text-[var(--accent-indigo)] hover:border-[var(--accent-indigo)] w-fit">View on Map →</a>
           </div>
  
-          <div class="footer-col">
-            <h3 class="footer-brand-large">OPEN TO<span class="sup">work</span></h3>
-            <div class="footer-address">
+          <!-- Right Column -->
+          <div class="flex flex-col gap-6 text-left items-start md:items-end md:text-right">
+            <h3 class="text-[2.5rem] font-extrabold tracking-tighter leading-[0.8] text-white/10 opacity-80 select-none relative" style="-webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);">
+              OPEN TO<span class="text-[1.5rem] align-super ml-1 text-white/60 tracking-normal" style="-webkit-text-stroke: 0;">work</span>
+            </h3>
+            <div class="font-mono text-sm text-white/60 leading-relaxed">
               <p>Freelance & Collaboration</p>
               <p>Remote / Worldwide</p>
             </div>
-            <a href="notes.html" class="footer-small-link">Read Notes →</a>
-            <button type="button" class="newsletter-trigger footer-small-link text-left">Subscribe →</button>
+            <a href="notes.html" class="text-[0.95rem] font-semibold uppercase tracking-wider text-white/95 border-b border-transparent transition-colors hover:text-[var(--accent-indigo)] hover:border-[var(--accent-indigo)] w-fit">Read Notes →</a>
+            <button type="button" class="newsletter-trigger text-[0.95rem] font-semibold uppercase tracking-wider text-white/95 border-b border-transparent transition-colors hover:text-[var(--accent-indigo)] hover:border-[var(--accent-indigo)] w-fit bg-transparent border-0 p-0 cursor-pointer">Subscribe →</button>
           </div>
  
         </div>
  
-        <div class="footer-bottom-bar">
-          <p class="footer-copy">© ${new Date().getFullYear()} Tanvir Rahman</p>
-          <div class="footer-nav-links" role="navigation" aria-label="Footer Navigation">
-            <a href="index.html" class="footer-nav-link">Home</a>
-            <a href="notes.html" class="footer-nav-link">Notes</a>
-            <a href="resources.html" class="footer-nav-link">Resources</a>
-            <a href="research.html" class="footer-nav-link">Research</a>
-            <a href="store.html" class="footer-nav-link">Store</a>
+        <!-- Bottom Bar -->
+        <div class="flex flex-wrap justify-between items-end gap-8 mb-4">
+          <p class="text-sm text-white/60 font-mono">© ${new Date().getFullYear()} Tanvir Rahman</p>
+          <div class="flex flex-wrap gap-8" role="navigation" aria-label="Footer Navigation">
+            <a href="index.html" class="text-base text-white/85 uppercase tracking-wider font-medium relative hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-[width] after:duration-300 hover:after:w-full">Home</a>
+            <a href="notes.html" class="text-base text-white/85 uppercase tracking-wider font-medium relative hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-[width] after:duration-300 hover:after:w-full">Notes</a>
+            <a href="resources.html" class="text-base text-white/85 uppercase tracking-wider font-medium relative hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-[width] after:duration-300 hover:after:w-full">Resources</a>
+            <a href="research.html" class="text-base text-white/85 uppercase tracking-wider font-medium relative hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-[width] after:duration-300 hover:after:w-full">Research</a>
+            <a href="store.html" class="text-base text-white/85 uppercase tracking-wider font-medium relative hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-[width] after:duration-300 hover:after:w-full">Store</a>
           </div>
         </div>
  
-        <div class="footer-pills" role="list" aria-label="Social Links">
-          <a href="https://github.com/taanvirrahman" target="_blank" rel="noopener noreferrer" class="social-pill pill-1">GitHub</a>
-          <a href="https://x.com/tanvir_tweet" target="_blank" rel="noopener noreferrer" class="social-pill pill-2">X</a>
-          <a href="https://www.linkedin.com/in/muhammud-tanvir-rahman/" target="_blank" rel="noopener noreferrer" class="social-pill pill-3">LinkedIn</a>
+        <!-- Social Pills -->
+        <div class="flex flex-wrap gap-3" role="list" aria-label="Social Links">
+          <a href="https://github.com/taanvirrahman" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 border border-[var(--border-main)] rounded-full text-sm text-white/90 bg-[rgba(var(--bg-secondary-rgb),0.5)] transition-all hover:bg-white hover:text-[var(--bg-main)] hover:-translate-y-0.5 hover:shadow-lg">GitHub</a>
+          <a href="https://x.com/tanvir_tweet" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 border border-[var(--border-main)] rounded-full text-sm text-white/90 bg-[rgba(var(--bg-secondary-rgb),0.5)] transition-all hover:bg-white hover:text-[var(--bg-main)] hover:-translate-y-0.5 hover:shadow-lg">X</a>
+          <a href="https://www.linkedin.com/in/muhammud-tanvir-rahman/" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 border border-[var(--border-main)] rounded-full text-sm text-white/90 bg-[rgba(var(--bg-secondary-rgb),0.5)] transition-all hover:bg-white hover:text-[var(--bg-main)] hover:-translate-y-0.5 hover:shadow-lg">LinkedIn</a>
         </div>
  
       </div>

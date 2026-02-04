@@ -417,15 +417,22 @@ export const renderLatestNotes = (posts) => {
     return;
   }
 
-  elements.latestNotesGrid.innerHTML = posts
+  // Show only 3 latest
+  const latestPosts = posts.slice(0, 3);
+
+  elements.latestNotesGrid.innerHTML = latestPosts
     .map(
       (post, index) => `
     <a href="notes.html#${post.id}" class="note-card reveal" style="transition-delay: ${index * 100}ms">
-        <div class="note-card-content">
-            <h3 class="note-card-title">${post.title}</h3>
-            <span class="note-card-date">${post.date}</span>
+        <div class="note-card-meta">
+            <span class="note-tag">${post.tags && post.tags[0] ? post.tags[0] : 'Note'}</span>
+            <span class="note-date">${post.date}</span>
         </div>
-        <svg class="note-card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        <h3 class="note-card-title">${post.title}</h3>
+        <div class="note-card-footer">
+            Read Note
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </div>
     </a>
   `,
     )

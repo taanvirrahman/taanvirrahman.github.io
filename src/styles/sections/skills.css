@@ -5,83 +5,51 @@
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--inner-gap) 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 3rem 2rem;
 }
 
 .skills-category {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
+    align-items: flex-start;
 }
 
 .skills-cat-title {
-    font-size: 0.875rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
     font-weight: 600;
     margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.skills-cat-title::before {
-    content: '';
-    display: block;
-    width: 6px;
-    height: 6px;
-    background: var(--accent-indigo);
-    border-radius: 50%;
-    opacity: 0.8;
-    box-shadow: 0 0 8px var(--accent-indigo);
+    font-style: normal;
 }
 
 .skills-items {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.875rem;
+    gap: 0.5rem;
+    justify-content: flex-start;
 }
 
 .skill-item {
-    font-size: 0.875rem;
-    padding: 0.7rem 1.25rem;
-    /* More opaque background for better text contrast */
-    background: rgba(var(--bg-secondary-rgb), 0.75);
-    backdrop-filter: blur(12px);
+    font-size: 0.85rem;
+    padding: 0.4rem 0.85rem;
+    background: var(--bg-secondary);
     border: 1px solid var(--border-main);
-    border-radius: 99px;
-    /* Pill shape */
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    /* Primary text color for maximum readability */
-    color: var(--text-primary);
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    position: relative;
-    overflow: hidden;
+    border-radius: 4px;
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    transition: all 0.2s;
     cursor: default;
 }
 
-.skill-item::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-}
-
-.skill-item:hover::before {
-    transform: translateX(100%);
-}
-
 .skill-item:hover {
-    background: var(--bg-tertiary);
-    border-color: var(--accent-indigo);
+    border-color: var(--text-primary);
     color: var(--text-primary);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
+    background: var(--bg-tertiary);
 }
 
 /* Add specialized colors for hover states based on category if possible, 
