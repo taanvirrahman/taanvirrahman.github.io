@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Store | Tanvir Rahman</title>
+    <meta name="description" content="Premium digital products and educational resources." />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="src/css/style.css" />
+    <style>
+        .store-hero {
+            padding: 140px 0 60px;
+            text-align: center;
+        }
+
+        .store-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .store-hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+            padding-bottom: 120px;
+        }
+
+        .product-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-main);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-indigo);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            background: var(--bg-tertiary);
+            position: relative;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--accent-indigo);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .card-content {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .card-category {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            padding-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-price {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .price-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .view-btn {
+            background: var(--text-primary);
+            color: var(--bg-main);
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: opacity 0.2s ease;
+        }
+
+        .product-card:hover .view-btn {
+            background: var(--accent-indigo);
+            color: #fff;
+        }
+
+        /* Coming Soon State Control */
+        .store-hero,
+        .product-grid {
+            display: none !important;
+        }
+
+        .coming-soon-wrapper {
+            min-height: 85vh;
+            display: flex;
+            align-items: flex-start;
+            /* Change from center to flex-start and add padding */
+            justify-content: center;
+            padding: 160px 20px 40px;
+            /* Increased top padding from 40px to 160px */
+        }
+
+        .coming-soon-content {
+            text-align: center;
+            max-width: 600px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .coming-soon-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            background: linear-gradient(to right, var(--text-primary), var(--accent-indigo));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .coming-soon-text {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .coming-soon-timer {
+            display: inline-flex;
+            gap: 12px;
+            padding: 12px 24px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-main);
+            border-radius: 100px;
+            color: var(--accent-indigo);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            box-shadow: var(--card-shadow);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header"></header>
+
+    <main class="container">
+        <section class="store-hero">
+            <h1>Digital Store</h1>
+            <p>Premium tools, resources, and access to accelerate your professional growth.</p>
+        </section>
+
+        <section class="coming-soon-wrapper">
+            <div class="coming-soon-content">
+                <h2 class="coming-soon-title">Store Launching Soon</h2>
+                <p class="coming-soon-text">
+                    I'm building a curated space for premium digital assets, professional tools, and exclusive
+                    resources. Stay tuned for the grand opening.
+                </p>
+                <div class="coming-soon-timer">
+                    System Initialization: 92% Complete
+                </div>
+            </div>
+        </section>
+
+        <div id="product-list" class="product-grid">
+            <!-- Products will be loaded here -->
+            <div class="skeleton-grid">
+                <!-- Loading state -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer"></footer>
+
+    <script type="module" src="src/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('data/store.json');
+                const store = await response.json();
+                const products = store.products;
+                const productList = document.getElementById('product-list');
+
+                // Clear loading state
+                productList.innerHTML = '';
+
+                products.forEach(product => {
+                    const card = document.createElement('a');
+                    card.href = `digital-product.html?id=${product.id}`;
+                    card.className = 'product-card';
+
+                    card.innerHTML = `
+                        <div class="card-image">
+                            <div class="card-badge">${product.badge || 'New'}</div>
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-category">${product.category}</span>
+                            <h2 class="card-title">${product.name}</h2>
+                            <p class="card-desc">${product.description}</p>
+                            <div class="card-footer">
+                                <div class="card-price">
+                                    <span class="price-label">Lifetime Access</span>
+                                    <span class="price-value">${product.currency}${product.price}</span>
+                                </div>
+                                <span class="view-btn">View Details</span>
+                            </div>
+                        </div>
+                    `;
+                    productList.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>

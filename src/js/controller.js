@@ -381,6 +381,20 @@ export const init = async () => {
 
     initPhotographyListeners(photos);
   }
+
+  // Feature: Product Purchase Logging
+  window.addEventListener("initiate-purchase", async (e) => {
+    const { product, type, email, paymentMethod, senderNumber, transactionId } = e.detail;
+    await model.submitToSheet({
+      type: "Product Purchase",
+      product: product || "Unknown Product",
+      purchaseType: type,
+      email: email,
+      paymentMethod,
+      senderNumber,
+      transactionId
+    });
+  });
 };
 
 /**

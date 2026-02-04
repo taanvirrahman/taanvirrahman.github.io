@@ -1,0 +1,22 @@
+{
+    "products": [
+        {
+            "id": "coursera-plus",
+            "name": "Coursera Plus",
+            "price": 499,
+            "originalPrice": 15000,
+            "currency": "৳",
+            "category": "Education",
+            "description": "Unlock 7,000+ courses and professional certificates.",
+            "badge": "Featured",
+            "image": "src/assets/images/coursera_plus_dashboard.png"
+        }
+    ],
+    "payment": {
+        "bkash": "01965615809",
+        "nagad": "01965615809"
+    },
+    "contact": {
+        "whatsapp": "8801581210690"
+    }
+}

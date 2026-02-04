@@ -18,6 +18,7 @@ const components = {
           <li><a href="notes.html" class="nav-link">notes</a></li>
           <li><a href="resources.html" class="nav-link">resources</a></li>
           <li><a href="photography.html" class="nav-link">photography</a></li>
+          <li><a href="store.html" class="nav-link">store</a></li>
           <li><a href="#contact" class="nav-link">contact</a></li>
         </ul>
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark and light theme" title="Toggle theme">
@@ -38,6 +39,7 @@ const components = {
         <a href="notes.html" class="mobile-nav-link">notes</a>
         <a href="resources.html" class="mobile-nav-link">resources</a>
         <a href="photography.html" class="mobile-nav-link">photography</a>
+        <a href="store.html" class="mobile-nav-link">store</a>
         <a href="#contact" class="mobile-nav-link">contact</a>
       </div>
     </div>
@@ -85,6 +87,7 @@ const components = {
             <a href="notes.html" class="footer-nav-link">Notes</a>
             <a href="resources.html" class="footer-nav-link">Resources</a>
             <a href="research.html" class="footer-nav-link">Research</a>
+            <a href="store.html" class="footer-nav-link">Store</a>
           </div>
         </div>
  
@@ -137,16 +140,6 @@ const initMobileMenu = () => {
     link.addEventListener('click', () => toggleMenu(true));
   });
 
-  // Set active state for mobile nav links
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-  mobileLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    const hrefBase = href ? href.split('#')[0] : '';
-    if (hrefBase === currentPath || (currentPath === 'index.html' && href === 'index.html')) {
-      link.classList.add('active');
-    }
-  });
-
   // Close on ESC key
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
@@ -157,14 +150,32 @@ const initMobileMenu = () => {
 
 const setActiveNavLink = () => {
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-  const navLinks = document.querySelectorAll('.nav-link');
+  const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
 
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
+    if (!href) return;
+
     const hrefBase = href.split('#')[0];
-    if (hrefBase === currentPath || (currentPath === 'index.html' && (href === '#' || href === 'index.html'))) {
+    let isActive = false;
+
+    // Home logic
+    if (hrefBase === 'index.html' || hrefBase === '') {
+      isActive = (currentPath === 'index.html' || currentPath === '');
+    } else if (hrefBase === 'store.html') {
+      // Product section logic
+      isActive = (currentPath === 'store.html' || currentPath === 'digital-product.html');
+    } else {
+      // Default exact match
+      isActive = (hrefBase === currentPath);
+    }
+
+    if (isActive) {
       link.classList.add('active');
       link.setAttribute('aria-current', 'page');
+    } else {
+      link.classList.remove('active');
+      link.removeAttribute('aria-current');
     }
   });
 };
