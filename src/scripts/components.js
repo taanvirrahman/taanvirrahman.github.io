@@ -76,6 +76,7 @@ const components = {
               <p>Remote / Worldwide</p>
             </div>
             <a href="notes.html" class="footer-small-link">Read Notes →</a>
+            <button type="button" class="newsletter-trigger footer-small-link text-left">Subscribe →</button>
           </div>
  
         </div>

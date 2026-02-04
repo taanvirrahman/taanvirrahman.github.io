@@ -8,6 +8,7 @@
             "DevTools",
             "Productivity"
         ],
+        "snippet": "A curated list of extensions that supercharge my daily workflow, from intelligent debugging to aesthetic syntax highlighting.",
         "file": "content/resources/vscode-extensions.md",
         "size": "long"
     },
@@ -20,6 +21,7 @@
             "Workflow",
             "Apps"
         ],
+        "snippet": "The software and hardware tools I use to stay organized and efficient. Includes calendar management, task tracking, and note-taking systems.",
         "file": "content/resources/productivity-stack.md",
         "size": "normal"
     },
@@ -32,6 +34,7 @@
             "Design",
             "Setup"
         ],
+        "snippet": "Typography matters in code. I explore five monospaced fonts that offer excellent readability and ligature support.",
         "file": "content/resources/coding-fonts.md",
         "size": "normal"
     },
@@ -44,6 +47,7 @@
             "Backend",
             "Architecture"
         ],
+        "snippet": "A comprehensive collection of guides, papers, and case studies for mastering large-scale distributed system architecture.",
         "file": "content/resources/system-design.md",
         "size": "wide"
     }

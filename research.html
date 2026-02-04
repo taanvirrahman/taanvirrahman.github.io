@@ -15,7 +15,36 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="src/css/style.css" />
+    <link rel="stylesheet" href="src/styles/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: ['selector', '[data-theme="dark"]'],
+            theme: {
+                extend: {
+                    colors: {
+                        main: 'var(--bg-main)',
+                        secondary: 'var(--bg-secondary)',
+                        tertiary: 'var(--bg-tertiary)',
+                        primary: 'var(--text-primary)',
+                        accent: {
+                            blue: 'var(--accent-blue)',
+                            emerald: 'var(--accent-emerald)',
+                            indigo: 'var(--accent-indigo)',
+                            rose: 'var(--accent-rose)',
+                            amber: 'var(--accent-amber)',
+                            violet: 'var(--accent-violet)',
+                        }
+                    },
+                    fontFamily: {
+                        sans: 'var(--font-sans)',
+                        mono: 'var(--font-mono)',
+                        serif: 'var(--font-serif)',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -56,7 +85,7 @@
 
     <footer class="footer" id="contact"></footer>
 
-    <script type="module" src="src/js/main.js"></script>
+    <script type="module" src="src/scripts/main.js"></script>
 </body>
 
 </html>

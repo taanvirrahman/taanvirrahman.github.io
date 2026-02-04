@@ -17,7 +17,37 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="src/css/style.css" />
+  <link rel="stylesheet" href="src/styles/style.css" />
+  <link rel="stylesheet" href="src/styles/sections/notes.css" />
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          colors: {
+            main: 'var(--bg-main)',
+            secondary: 'var(--bg-secondary)',
+            tertiary: 'var(--bg-tertiary)',
+            primary: 'var(--text-primary)',
+            accent: {
+              blue: 'var(--accent-blue)',
+              emerald: 'var(--accent-emerald)',
+              indigo: 'var(--accent-indigo)',
+              rose: 'var(--accent-rose)',
+              amber: 'var(--accent-amber)',
+              violet: 'var(--accent-violet)',
+            }
+          },
+          fontFamily: {
+            sans: 'var(--font-sans)',
+            mono: 'var(--font-mono)',
+            serif: 'var(--font-serif)',
+          }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
     id="hljs-theme" />
 
@@ -42,31 +72,90 @@
     <div class="grid-line"></div>
   </div>
 
-  <main class="page-container notes-page reveal">
-    <div class="container">
-      <header class="page-header">
-        <h1 class="section-title">notes.</h1>
-        <p class="section-desc">Thoughts on AI, design, and building things with intention.</p>
-      </header>
-      <div class="blog-list" id="blog-list">
-        <div class="loading-indicator">Loading notes...</div>
+  <main class="min-h-screen pt-[var(--section-padding)] transition-colors duration-500"
+    style="background-color: var(--resource-bg)">
+    <div class="container mx-auto px-4 max-w-[1280px]">
+      <div id="notes-listing-view">
+        <header class="mb-12">
+          <h1 class="text-[64px] md:text-[80px] font-black tracking-tight leading-none mb-8"
+            style="color: var(--resource-accent)">
+            notes.</h1>
+          <p class="text-xl max-w-2xl font-light leading-relaxed mb-6" style="color: var(--resource-text-snippet)">
+            Exploring the intersection of <span class="italic font-serif">architecture</span>, minimalist design, and
+            the
+            technical nuances of building scalable systems.
+          </p>
+
+          <!-- Headlines Only Toggle -->
+          <div class="flex items-center gap-3 mb-8">
+            <span class="text-[11px] font-medium tracking-[0.2em] uppercase"
+              style="font-variant: small-caps; color: var(--resource-text-meta)">headlines only</span>
+            <button id="headlines-toggle" class="relative w-11 h-6 rounded-full transition-colors focus:outline-none"
+              style="background-color: var(--toggle-bg-off)" role="switch" aria-checked="false">
+              <div
+                class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-200 transform">
+              </div>
+            </button>
+          </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12 pb-20 notes-page-grid">
+          <!-- Main Notes Feed -->
+          <div id="blog-list" class="flex flex-col border-t" style="border-color: var(--resource-border)">
+            <div class="py-20 text-center font-mono tracking-widest uppercase text-xs"
+              style="color: var(--resource-text-meta)">
+              Fetching Notes...</div>
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="flex flex-col gap-8">
+            <!-- Community Card -->
+            <div class="border-2 p-8 rounded-sm sidebar-card-ad">
+              <div class="flex items-start gap-2 mb-6">
+                <div class="text-white p-1 text-[10px] font-black leading-none"
+                  style="background-color: var(--sidebar-ad-border)">READ</div>
+                <div class="text-[14px] font-black tracking-tighter leading-none pt-0.5 uppercase">
+                  Newsletter
+                </div>
+              </div>
+              <div class="text-[14px] font-bold mb-1">Weekly Insights <span class="mx-2 opacity-30">|</span> Tech &
+                Design</div>
+              <p class="text-[13px] leading-relaxed mb-8" style="color: var(--sidebar-ad-text)">
+                Deep dives into software architecture, productivity systems, and the philosophy of building products
+                people love.
+              </p>
+              <button type="button"
+                class="newsletter-trigger w-full py-4 text-white rounded-full font-bold text-[13px] flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
+                style="background-color: var(--sidebar-ad-border)">
+                SUBSCRIBE <span class="text-lg">›</span>
+              </button>
+            </div>
+          </aside>
+        </div>
       </div>
 
-      <div id="blog-content" class="blog-content-view hidden reveal">
-        <div class="blog-actions reveal">
-          <button id="close-blog" class="back-btn text-btn">
-            ← back to notes
+      <div id="blog-content" class="hidden max-w-4xl mx-auto pb-20">
+        <div class="flex items-center justify-between mb-12 py-4 border-b" style="border-color: var(--resource-border)">
+          <button id="close-blog"
+            class="group flex items-center gap-2 text-sm font-bold transition-opacity hover:opacity-70"
+            style="color: var(--resource-text-snippet)">
+            <span class="group-hover:-translate-x-1 transition-transform">←</span> <span
+              class="uppercase tracking-widest font-black">back to notes</span>
           </button>
-          <button id="copy-link" class="back-btn text-btn">share</button>
+          <button id="copy-link"
+            class="text-[11px] font-black hover:text-black transition-opacity hover:opacity-70 uppercase tracking-[0.2em]"
+            style="color: var(--resource-accent)">share
+            link</button>
         </div>
-        <div id="markdown-container" class="markdown-body"></div>
+        <!-- Markdown content will be injected here -->
+        <div id="markdown-container" class="prose prose-indigo dark:prose-invert max-w-none"></div>
       </div>
     </div>
   </main>
 
   <footer class="footer" id="contact"></footer>
 
-  <script type="module" src="src/js/main.js"></script>
+  <script type="module" src="src/scripts/notesMain.js"></script>
 </body>
 
 </html>

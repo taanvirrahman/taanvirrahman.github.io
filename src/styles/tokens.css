@@ -1,9 +1,11 @@
 :root {
-    /* Spacing */
-    --gutter: 6%;
-    --max-width: 896px;
-    --section-padding: 2.5rem;
-    --section-gap: 2.5rem;
+    /* Spacing & Rhythm */
+    --gutter: 6vw;
+    --max-width: 1200px;
+    --section-padding: 8rem;
+    --section-gap: 6rem;
+    --inner-gap: 3rem;
+    --card-padding: 2rem;
 
     /* Base Palette (Dark-first, as per current design) */
     --neutral-950: #0a0a0a;
@@ -42,6 +44,7 @@
     --accent-rose: #f43f5e;
     --accent-amber: #f59e0b;
     --accent-violet: #8b5cf6;
+    --accent-indigo-muted: rgba(99, 102, 241, 0.2);
 
     /* Gradients */
     --grad-primary: linear-gradient(135deg, var(--accent-indigo), var(--accent-blue));
@@ -62,50 +65,62 @@
 }
 
 [data-theme="light"] {
-    --bg-main: #fbfbfd;
-    /* Apple Light style */
+    --bg-main: #f9f9fb;
     --bg-secondary: #ffffff;
-    --bg-tertiary: #f5f5f7;
+    --bg-tertiary: #f1f1f4;
 
-    --bg-main-rgb: 251, 251, 253;
+    --bg-main-rgb: 249, 249, 251;
     --bg-secondary-rgb: 255, 255, 255;
-    --bg-tertiary-rgb: 245, 245, 247;
+    --bg-tertiary-rgb: 241, 241, 244;
 
-    --text-primary: #111112;
-    --text-secondary: #3b3b3d;
-    --text-tertiary: #515154;
-    --text-muted: #666668;
+    --text-primary: #050505;
+    --text-secondary: #2d2d30;
+    --text-tertiary: #4a4a4e;
+    --text-muted: #71717a;
 
-    --border-main: #d2d2d7;
-    --border-secondary: #e5e5e5;
+    --text-primary-rgb: 5, 5, 5;
+    --text-secondary-rgb: 45, 45, 48;
+
+    --border-main: #e2e2e6;
+    --border-secondary: #d4d4d8;
+
+    /* Refined Accents for Light Mode - Slightly Darker for better contrast */
+    --accent-indigo: #4338ca;
+    --accent-violet: #6d28d9;
+    --accent-indigo-muted: rgba(67, 56, 202, 0.1);
 
     /* Gradients (Light mode) */
-    --grad-surface: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0) 100%);
+    --grad-surface: linear-gradient(180deg, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0) 100%);
 
-    /* High contrast text on accent backgrounds should stay white */
-    --white: #ffffff;
-
-    /* Fix neutral scale for light mode to match dark mode semantics (Low=Dark, High=Light) */
-    --neutral-100: #111112;
-    --neutral-200: #2c2c2e;
-    --neutral-300: #3b3b3d;
-    --neutral-400: #515154;
-    --neutral-500: #666668;
-    --neutral-600: #a3a3a3;
-    --neutral-700: #d2d2d7;
-    --neutral-800: #e5e5e5;
-    --neutral-900: #f5f5f7;
+    /* Fix neutral scale for light mode */
+    --neutral-100: #050505;
+    --neutral-200: #18181b;
+    --neutral-300: #27272a;
+    --neutral-400: #3f3f46;
+    --neutral-500: #52525b;
+    --neutral-600: #71717a;
+    --neutral-700: #a1a1aa;
+    --neutral-800: #d4d4d8;
+    --neutral-900: #f4f4f5;
     --neutral-950: #ffffff;
 
     /* Shadows (Light mode) */
-    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 0 15px rgba(0, 0, 0, 0.02);
-    --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 20px rgba(99, 102, 241, 0.1);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 0 15px rgba(0, 0, 0, 0.01);
+    --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.06), 0 0 20px rgba(67, 56, 202, 0.08);
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --section-padding: 6rem;
+        --section-gap: 5rem;
+    }
 }
 
 @media (max-width: 768px) {
     :root {
         --gutter: 5%;
-        --section-padding: 3rem;
-        --section-gap: 3rem;
+        --section-padding: 5rem;
+        --section-gap: 4rem;
+        --inner-gap: 2rem;
     }
 }

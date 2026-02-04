@@ -1,0 +1,145 @@
+/* Resources - News Wire Style (TechCrunch Inspired) */
+
+:root {
+    /* Default (Dark Mode) - Mapping to existing system tokens */
+    --resource-bg: var(--bg-main);
+    --resource-card-bg: transparent;
+    --resource-card-hover: var(--bg-secondary);
+    --resource-text-headline: var(--text-primary);
+    --resource-text-snippet: var(--text-secondary);
+    --resource-text-meta: var(--text-muted);
+    --resource-border: var(--border-main);
+    --resource-accent: var(--accent-indigo);
+    /* Lighter green for dark mode */
+    --resource-thumb-bg: var(--bg-tertiary);
+
+    --sidebar-ad-bg: var(--bg-secondary);
+    --sidebar-ad-border: var(--resource-accent);
+    --sidebar-ad-text: var(--text-secondary);
+
+    --toggle-bg-off: var(--neutral-700);
+}
+
+[data-theme="light"] {
+    /* Mapped to Light Mode Global Tokens */
+    --resource-bg: var(--bg-main);
+    --resource-card-bg: transparent;
+    --resource-card-hover: var(--bg-tertiary);
+    --resource-text-headline: var(--text-primary);
+    --resource-text-snippet: var(--text-secondary);
+    --resource-text-meta: var(--text-muted);
+    --resource-border: var(--border-main);
+    --resource-accent: var(--accent-indigo);
+    --resource-thumb-bg: var(--bg-tertiary);
+
+    --sidebar-ad-bg: var(--bg-secondary);
+    --sidebar-ad-border: var(--resource-accent);
+    --sidebar-ad-text: var(--text-secondary);
+
+    --toggle-bg-off: var(--neutral-300);
+}
+
+/* Layout & Containers */
+.resources-page-grid {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 3rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Headlines Toggle - Minimal Pill */
+#headlines-toggle {
+    transition: background-color 0.2s ease;
+}
+
+#headlines-toggle div {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* News List Items */
+.resource-item {
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    border-bottom: 1px solid var(--resource-border);
+}
+
+.resource-item:hover {
+    background-color: var(--resource-card-hover);
+    cursor: pointer;
+}
+
+.resource-item .resource-headline {
+    color: var(--resource-text-headline);
+    transition: color 0.2s ease;
+}
+
+.resource-item:hover .resource-headline {
+    text-decoration: underline;
+    color: var(--resource-accent);
+}
+
+.resource-thumbnail-container {
+    background-color: var(--resource-thumb-bg);
+    border-radius: 2px;
+}
+
+.resource-thumbnail-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Sidebar Elements */
+.sidebar-card-ad {
+    background: var(--sidebar-ad-bg);
+    border: 2px solid var(--sidebar-ad-border);
+    padding: 2rem;
+    position: sticky;
+    top: 100px;
+    color: var(--sidebar-ad-text);
+}
+
+.sidebar-card-popular {
+    background: var(--accent-indigo);
+    color: var(--white);
+    padding: 2.5rem;
+    position: relative;
+    /* Force specific look for popular card as it is a brand element */
+}
+
+/* Typography Overrides for News Feel */
+.resource-headline {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    /* Serif looks better with less weight */
+    letter-spacing: -0.01em;
+}
+
+/* Utility for Toggle */
+.hidden {
+    display: none !important;
+}
+
+/* Responsiveness */
+@media (max-width: 900px) {
+    .resources-page-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .sidebar-card-ad {
+        position: static;
+    }
+}
+
+@media (max-width: 640px) {
+    .resource-item {
+        flex-direction: column;
+    }
+
+    .resource-thumbnail-container {
+        width: 100%;
+        height: 200px;
+    }
+}

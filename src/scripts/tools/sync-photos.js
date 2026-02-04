@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const PHOTO_DIR = path.join(__dirname, '../assets/photography');
-const JSON_FILE = path.join(PHOTO_DIR, 'images.json');
+const PHOTO_DIR = path.join(__dirname, '../../assets/images/photography');
+const JSON_FILE = path.join(__dirname, '../../data/images.json');
 
 // Supported extensions
 const EXTENSIONS = ['.png', '.jpg', '.jpeg', '.webp'];
@@ -36,7 +36,7 @@ function syncPhotos() {
             title: filename.split('.')[0].replace(/[_-]/g, ' '),
             category: "street", // default
             location: "📍 Unknown Location",
-            src: `assets/photography/${filename}`,
+            src: `src/assets/images/photography/${filename}`,
             alt: `Photography - ${filename}`,
             size: "standard"
         };

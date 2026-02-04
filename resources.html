@@ -16,7 +16,36 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="src/css/style.css" />
+    <link rel="stylesheet" href="src/styles/style.css" />
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+        tailwind.config = {
+            darkMode: ['selector', '[data-theme="dark"]'],
+            theme: {
+                extend: {
+                    colors: {
+                        main: 'var(--bg-main)',
+                        secondary: 'var(--bg-secondary)',
+                        tertiary: 'var(--bg-tertiary)',
+                        primary: 'var(--text-primary)',
+                        accent: {
+                            blue: 'var(--accent-blue)',
+                            emerald: 'var(--accent-emerald)',
+                            indigo: 'var(--accent-indigo)',
+                            rose: 'var(--accent-rose)',
+                            amber: 'var(--accent-amber)',
+                            violet: 'var(--accent-violet)',
+                        }
+                    },
+                    fontFamily: {
+                        sans: 'var(--font-sans)',
+                        mono: 'var(--font-mono)',
+                        serif: 'var(--font-serif)',
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
         id="hljs-theme" />
 
@@ -41,31 +70,117 @@
         <div class="grid-line"></div>
     </div>
 
-    <main class="page-container resources-page reveal">
-        <div class="container">
-            <header class="page-header">
-                <h1 class="section-title">resources.</h1>
-                <p class="section-desc">Curated tools, libraries, and guides I vouch for.</p>
-            </header>
-            <div class="blog-list" id="resource-list">
-                <div class="loading-indicator">Loading resources...</div>
+    <main class="min-h-screen pt-[var(--section-padding)] transaction-colors duration-500"
+        style="background-color: var(--resource-bg)">
+        <div class="container mx-auto px-4 max-w-[1280px]">
+            <div id="resources-listing-view">
+                <header class="mb-12">
+                    <h1 class="text-[64px] md:text-[80px] font-black tracking-tight leading-none mb-8"
+                        style="color: var(--resource-accent)">
+                        resource.</h1>
+
+                    <!-- Headlines Only Toggle -->
+                    <div class="flex items-center gap-3 mb-8">
+                        <span class="text-[11px] font-medium tracking-[0.2em] uppercase"
+                            style="font-variant: small-caps; color: var(--resource-text-meta)">headlines only</span>
+                        <button id="headlines-toggle"
+                            class="relative w-11 h-6 bg-[#ddd] rounded-full transition-colors focus:outline-none"
+                            role="switch" aria-checked="false">
+                            <div
+                                class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-200 transform">
+                            </div>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12 pb-20 resources-page-grid">
+                    <!-- Main News Feed -->
+                    <div id="resource-list" class="flex flex-col border-t" style="border-color: var(--resource-border)">
+                        <div class="py-20 text-center font-mono tracking-widest uppercase text-xs"
+                            style="color: var(--resource-text-meta)">
+                            Fetching Intelligence...</div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <aside class="flex flex-col gap-8">
+                        <!-- Community Card (Discord) -->
+                        <div class="border-2 p-8 rounded-sm sidebar-card-ad">
+                            <div class="flex items-start gap-2 mb-6">
+                                <div class="text-white p-1 text-[10px] font-black leading-none"
+                                    style="background-color: var(--sidebar-ad-border)">JOIN</div>
+                                <div class="text-[14px] font-black tracking-tighter leading-none pt-0.5 uppercase">
+                                    Community
+                                </div>
+                            </div>
+                            <div class="text-[14px] font-bold mb-1">Collaborate <span class="mx-2 opacity-30">|</span>
+                                Build
+                                Together</div>
+                            <p class="text-[13px] leading-relaxed mb-8" style="color: var(--sidebar-ad-text)">Join our
+                                Discord server to connect
+                                with
+                                other builders, designers, and engineers. Get early access to my latest resources and
+                                share
+                                what you're working on.<br><br>Network with a focused group of creative minds pushing
+                                the
+                                boundaries of tech.</p>
+                            <button type="button"
+                                class="newsletter-trigger w-full py-4 text-white rounded-full font-bold text-[13px] flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
+                                style="background-color: var(--sidebar-ad-border)">
+                                JOIN DISCORD <span class="text-lg">›</span>
+                            </button>
+                        </div>
+
+                        <!-- Most Popular Card -->
+                        <div class="bg-[#523be4] p-10 rounded-sm relative text-white overflow-hidden">
+                            <h3 class="text-[42px] font-bold tracking-tighter leading-none mb-10">Most<br>Popular</h3>
+                            <div
+                                class="absolute top-8 right-8 w-16 h-16 bg-[#e9fc44] flex items-center justify-center rounded-sm">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                                    class="text-black transform -rotate-45">
+                                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="3"
+                                        stroke-linecap="square" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <ul id="popular-resource-list" class="flex flex-col gap-6">
+                                <li class="pt-6 border-t border-white/20 flex gap-4">
+                                    <div class="w-2 h-2 bg-white mt-2 shrink-0"></div>
+                                    <a href="#" class="text-[16px] font-bold leading-tight hover:text-white/80">Fintech
+                                        CEO and Forbes 30 Under 30 alum has been charged for alleged fraud</a>
+                                </li>
+                                <li class="pt-6 border-t border-white/20 flex gap-4">
+                                    <div class="w-2 h-2 bg-white mt-2 shrink-0"></div>
+                                    <a href="#"
+                                        class="text-[16px] font-bold leading-tight hover:text-white/80">Notepad++
+                                        says Chinese government hackers hijacked its software updates for months</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
             </div>
 
-            <div id="resource-content" class="blog-content-view hidden reveal">
-                <div class="blog-actions reveal">
-                    <button id="close-resource" class="back-btn text-btn">
-                        ← back to resources
+            <div id="resource-content" class="hidden max-w-4xl mx-auto pb-20">
+                <div class="flex items-center justify-between mb-12 py-4 border-b"
+                    style="border-color: var(--resource-border)">
+                    <button id="close-resource"
+                        class="group flex items-center gap-2 text-sm font-bold transition-opacity hover:opacity-70"
+                        style="color: var(--resource-text-snippet)">
+                        <span class="group-hover:-translate-x-1 transition-transform">←</span> <span
+                            class="uppercase tracking-widest font-black">back to resources</span>
                     </button>
-                    <button id="copy-link-resource" class="back-btn text-btn">share</button>
+                    <button id="copy-link-resource"
+                        class="text-[11px] font-black transition-opacity hover:opacity-70 uppercase tracking-[0.2em]"
+                        style="color: var(--resource-accent)">share
+                        link</button>
                 </div>
-                <div id="markdown-container-resource" class="markdown-body"></div>
+                <div id="markdown-container-resource" class="prose prose-green dark:prose-invert max-w-none"></div>
             </div>
         </div>
     </main>
 
     <footer class="footer" id="contact"></footer>
 
-    <script type="module" src="src/js/main.js"></script>
+    <script type="module" src="src/scripts/resourcesMain.js"></script>
 </body>
 
 </html>

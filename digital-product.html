@@ -14,7 +14,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="src/css/style.css" />
+    <link rel="stylesheet" href="src/styles/style.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
@@ -251,11 +251,11 @@
 
     <footer class="footer" id="contact"></footer>
 
-    <script type="module" src="src/js/main.js"></script>
+    <script type="module" src="src/scripts/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             // Load store configuration
-            const response = await fetch('data/store.json');
+            const response = await fetch('src/data/store.json');
             const store = await response.json();
 
             // Get product ID from URL

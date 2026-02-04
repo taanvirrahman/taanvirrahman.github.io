@@ -12,6 +12,7 @@ const _state = {
   resources: [],
   currentPost: null,
   config: null,
+  projects: [],
   photos: [],
   cache: new Map(),
   theme: localStorage.getItem("theme") || "dark",
@@ -83,7 +84,7 @@ export const markAsSent = () => {
 export const fetchBlogPosts = async () => {
   if (_state.blogPosts.length > 0) return _state.blogPosts;
   try {
-    const response = await fetch("data/notes.json");
+    const response = await fetch("src/data/notes.json");
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
     _state.blogPosts = data;
@@ -122,7 +123,7 @@ export const fetchBlogPost = async (postId) => {
 export const fetchResearchPapers = async () => {
   if (_state.researchPapers.length > 0) return _state.researchPapers;
   try {
-    const response = await fetch("data/papers.json");
+    const response = await fetch("src/data/papers.json");
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
     _state.researchPapers = data;
@@ -136,7 +137,7 @@ export const fetchResearchPapers = async () => {
 export const fetchResources = async () => {
   if (_state.resources.length > 0) return _state.resources;
   try {
-    const response = await fetch("data/resources.json");
+    const response = await fetch("src/data/resources.json");
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
     _state.resources = data;
@@ -168,7 +169,7 @@ export const fetchResource = async (resourceId) => {
 export const fetchConfig = async () => {
   if (_state.config) return _state.config;
   try {
-    const response = await fetch("data/config.json");
+    const response = await fetch("src/data/config.json");
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     _state.config = await response.json();
     return _state.config;
@@ -181,13 +182,26 @@ export const fetchConfig = async () => {
 export const fetchPhotos = async () => {
   if (_state.photos.length > 0) return _state.photos;
   try {
-    const response = await fetch("data/images.json");
+    const response = await fetch("src/data/images.json");
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
     _state.photos = data;
     return _state.photos;
   } catch (error) {
     console.error("Error fetching photos:", error);
+    return [];
+  }
+};
+export const fetchProjects = async () => {
+  if (_state.projects.length > 0) return _state.projects;
+  try {
+    const response = await fetch("src/data/projects.json");
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const data = await response.json();
+    _state.projects = data;
+    return _state.projects;
+  } catch (error) {
+    console.error("Error fetching projects:", error);
     return [];
   }
 };

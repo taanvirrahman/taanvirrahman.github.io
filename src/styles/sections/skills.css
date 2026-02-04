@@ -6,7 +6,7 @@
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 4rem 2rem;
+    gap: var(--inner-gap) 2rem;
 }
 
 .skills-category {

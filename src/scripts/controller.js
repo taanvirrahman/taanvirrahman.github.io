@@ -7,27 +7,7 @@ import { initComponents } from "./components.js";
  * Setup click delegation for bento cards.
  * Follows MVC: Controller handles events, delegates to View actions.
  */
-const initBentoListeners = () => {
-  document.querySelectorAll(".bento-card").forEach((card) => {
-    card.addEventListener("click", (e) => {
-      if (!e.target.closest("a")) {
-        const link = card.querySelector(".bento-link");
-        if (link) link.click();
-      }
-    });
-
-    // Keyboard accessibility for bento cards
-    card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        if (!e.target.closest("a")) {
-          e.preventDefault();
-          const link = card.querySelector(".bento-link");
-          if (link) link.click();
-        }
-      }
-    });
-  });
-};
+// Click listeners removed as projects are now native links
 
 /**
  * Setup click delegation for certification cards.
@@ -97,9 +77,13 @@ export const init = async () => {
 
   // Load config-based content (homepage only)
   if (view.elements.bentoGrid) {
-    const config = await model.fetchConfig();
+    const [config, projects] = await Promise.all([
+      model.fetchConfig(),
+      model.fetchProjects()
+    ]);
+
     if (config) {
-      view.renderProjects(config.projects);
+      view.renderProjects(projects);
       view.renderSkills(config.skills);
       view.renderCertifications(config.certifications);
       view.renderEducation(config.education);
@@ -111,7 +95,6 @@ export const init = async () => {
       });
 
       // Setup listeners for dynamic content
-      initBentoListeners();
       initCertListeners();
     }
   }
@@ -294,80 +277,7 @@ export const init = async () => {
 
   }
 
-  // Resources interactions - Cloned from Blog logic
-  if (view.elements.resourceList) {
-    try {
-      console.log("Fetching resources...");
-      const resources = await model.fetchResources();
-      console.log(`Fetched ${resources.length} resources`);
-      view.renderResourceList(resources);
-
-      const resourceItems = document.querySelectorAll(".blog-item.reveal");
-      resourceItems.forEach((el) => {
-        observeReveal(el);
-      });
-    } catch (error) {
-      console.error("Failed to initialize resource list:", error);
-    }
-
-    const handleResourceRouting = async () => {
-      const hash = window.location.hash.replace("#", "");
-      if (hash) {
-        const resources = await model.fetchResources();
-        const resource = await model.fetchResource(hash);
-        if (resource) {
-          view.showResource(resource);
-        } else {
-          window.location.hash = "";
-        }
-      } else {
-        view.hideResource();
-      }
-    };
-
-    window.addEventListener("hashchange", handleResourceRouting);
-    handleResourceRouting();
-
-    view.elements.resourceList.addEventListener("click", (e) => {
-      const item = e.target.closest(".resource-item");
-      const link = e.target.closest("a");
-
-      if (!item && !link) return;
-
-      const resourceId = item ? item.dataset.resourceId : (link ? link.dataset.resourceId : null);
-
-      if (resourceId) {
-        e.preventDefault();
-        window.location.hash = resourceId;
-      }
-    });
-
-    // Keyboard accessibility for resource items
-    view.elements.resourceList.addEventListener("keydown", (e) => {
-      if (e.key !== "Enter" && e.key !== " ") return;
-
-      const item = e.target.closest(".resource-item");
-      if (!item) return;
-
-      const resourceId = item.dataset.resourceId;
-      if (resourceId) {
-        e.preventDefault();
-        window.location.hash = resourceId;
-      }
-    });
-
-    if (view.elements.closeResource) {
-      view.elements.closeResource.addEventListener("click", () => {
-        window.location.hash = "";
-      });
-    }
-
-    if (view.elements.copyLinkResource) {
-      view.elements.copyLinkResource.addEventListener("click", () => {
-        view.copyToClipboard(window.location.href);
-      });
-    }
-  }
+  // Resources logic moved to resourcesController.js
 
   // Feature: Photography Gallery
   if (view.elements.photoGallery) {

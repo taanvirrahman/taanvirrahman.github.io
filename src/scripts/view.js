@@ -27,12 +27,7 @@ export const refreshElements = () => {
   elements.copyLinkBtn = document.getElementById("copy-link");
   elements.markdownContainer = document.getElementById("markdown-container");
 
-  // Resources Elements
-  elements.resourceList = document.getElementById("resource-list");
-  elements.resourceContent = document.getElementById("resource-content");
-  elements.closeResource = document.getElementById("close-resource");
-  elements.copyLinkResource = document.getElementById("copy-link-resource");
-  elements.markdownContainerResource = document.getElementById("markdown-container-resource");
+  // Resources Elements (Moved to resourcesView.js)
 
   elements.subscribeForm = document.querySelector(".footer-form");
   elements.subscribeBtn = document.querySelector(".footer-submit");
@@ -256,16 +251,35 @@ export const renderProjects = (projects) => {
   elements.bentoGrid.innerHTML = projects
     .map(
       (project) => `
-    <div class="bento-card ${project.size === "large" ? "bento-large" : project.size === "wide" ? "bento-wide" : ""} reveal" tabindex="0" role="button">
-      <div class="bento-icon">${project.icon}</div>
-      <span class="bento-tag">${project.tag}</span>
-      <h3 class="bento-title">${project.title}</h3>
-      <p class="bento-desc">${project.desc}</p>
-      <a href="${project.url}" class="bento-link">${project.link}</a>
-    </div>
+    <a href="${project.url}" class="bento-card ${project.size === "large" ? "bento-large" : project.size === "wide" ? "bento-wide" : "bento-normal"} github-project reveal" tabindex="0">
+      <div class="bento-content">
+        <div class="bento-icon">${project.icon}</div>
+        <span class="bento-tag">${project.tag}</span>
+        <h3 class="bento-title">${project.title}</h3>
+        <p class="bento-desc">${project.desc}</p>
+        <span class="bento-link">${project.link}</span>
+      </div>
+      <div class="bento-visual">
+         <div style="width: 10rem; height: 10rem; opacity: 0.04; position: absolute; bottom: -20px; right: -20px; transform: rotate(-10deg); color: var(--accent-indigo); pointer-events: none;">
+            ${project.icon}
+         </div>
+      </div>
+    </a>
   `,
     )
     .join("");
+
+  // Add Interactive Tilt/Glow Logic
+  const cards = document.querySelectorAll(".bento-card");
+  cards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty("--mouse-x", `${x}%`);
+      card.style.setProperty("--mouse-y", `${y}%`);
+    });
+  });
 };
 
 export const renderSkills = (skills) => {
@@ -432,6 +446,9 @@ export const renderPhotographyGallery = (photos) => {
                     <span class="gallery-category">${photo.category}</span>
                     <h3 class="gallery-title">${photo.title}</h3>
                     <p class="gallery-location">${photo.location}</p>
+                    <div class="gallery-preview-hint" style="margin-top: 1rem; font-size: 0.65rem; color: var(--accent-indigo); text-transform: uppercase; letter-spacing: 0.25em; font-weight: 800; opacity: 0.9;">
+                        Explore Vision →
+                    </div>
                 </div>
             </div>
         </div>
@@ -451,104 +468,7 @@ export const renderPhotographyGallery = (photos) => {
   }
 };
 
-export const renderResourceList = (resources) => {
-  if (!elements.resourceList) return;
-
-  if (resources.length === 0) {
-    elements.resourceList.innerHTML =
-      '<p class="loading-indicator">No resources found.</p>';
-    return;
-  }
-
-  elements.resourceList.innerHTML = resources
-    .map(
-      (resource, index) => `
-    <article class="blog-item resource-item ${resource.size ? 'resource-' + resource.size : ''} reveal" style="transition-delay: ${index * 100}ms" data-resource-id="${resource.id}" role="button" tabindex="0">
-      ${resource.thumbnail ? `
-      <div class="resource-thumbnail">
-          <img src="${resource.thumbnail}" alt="${resource.title}" loading="lazy" />
-      </div>` : ""}
-      <div class="resource-content">
-          <div class="blog-tags">
-            ${resource.tags.slice(0, 2).map((tag) => `<span class="blog-tag">${tag}</span>`).join("")}
-          </div>
-          <h3 class="blog-title"><a href="#${resource.id}" class="resource-link" tabindex="-1">${resource.title}</a></h3>
-          <div class="blog-meta">
-            <span class="blog-date">${resource.date}</span>
-            <span class="resource-arrow">→</span>
-          </div>
-      </div>
-    </article>
-  `,
-    )
-    .join("");
-};
-
-export const showResource = (resource) => {
-  if (!elements.resourceList) return;
-  elements.resourceList.classList.add("hidden");
-  elements.resourceContent.classList.remove("hidden");
-
-  // Manual animation setup - prevent usage of .reveal on dynamic content without observers
-  elements.markdownContainerResource.style.opacity = "0";
-  elements.markdownContainerResource.style.transform = "translateY(20px)";
-
-  const headerHTML = `
-    <header class="resource-detail-header">
-      <h1 class="resource-detail-title">${resource.title}</h1>
-      <div class="resource-detail-meta">
-        <span class="resource-detail-date">${resource.date}</span>
-        <span class="meta-separator">/</span>
-        <div class="resource-share-inline">
-            <span class="share-label">Share:</span>
-            <button class="share-icon-btn copy-url-btn" aria-label="Copy Link" title="Copy Link">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-            </button>
-            <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(resource.title)}&url=${encodeURIComponent(window.location.href)}" target="_blank" class="share-icon-btn" aria-label="Share on X" title="Share on X">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg>
-            </a>
-            <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}" target="_blank" class="share-icon-btn" aria-label="Share on LinkedIn" title="Share on LinkedIn">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-            </a>
-        </div>
-      </div>
-    </header>
-    ${resource.thumbnail ? `
-    <div class="resource-detail-image">
-      <img src="${resource.thumbnail}" alt="${resource.title}" />
-    </div>` : ""}
-  `;
-
-  elements.markdownContainerResource.innerHTML = headerHTML + marked.parse(resource.content);
-
-  elements.markdownContainerResource.querySelectorAll("pre code").forEach((block) => {
-    hljs.highlightElement(block);
-  });
-
-  // Setup copy listener
-  const copyBtn = elements.markdownContainerResource.querySelector(".copy-url-btn");
-  if (copyBtn) {
-    copyBtn.addEventListener("click", () => {
-      navigator.clipboard.writeText(window.location.href);
-      copyBtn.style.color = "var(--text-primary)";
-      setTimeout(() => copyBtn.style.color = "", 1000);
-    });
-  }
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
-
-  setTimeout(() => {
-    elements.markdownContainerResource.style.opacity = "1";
-    elements.markdownContainerResource.style.transform = "translateY(0)";
-    elements.markdownContainerResource.style.transition =
-      "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
-  }, 100);
-};
-
-export const hideResource = () => {
-  if (elements.resourceContent) elements.resourceContent.classList.add("hidden");
-  if (elements.resourceList) elements.resourceList.classList.remove("hidden");
-};
+// Resources logic moved to resourcesView.js
 
 
 export const renderAbout = (about) => {
