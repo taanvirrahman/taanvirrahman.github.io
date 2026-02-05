@@ -1,4 +1,6 @@
-export let elements = {};
+import { templates } from "./components.js";
+
+export const elements = {};
 
 // Configure marked with highlight.js
 if (typeof marked !== "undefined" && typeof hljs !== "undefined") {
@@ -249,28 +251,11 @@ export const renderProjects = (projects) => {
   if (!elements.bentoGrid || !projects) return;
 
   elements.bentoGrid.innerHTML = projects
-    .map(
-      (project) => `
-    <a href="${project.url}" class="bento-card ${project.size === "large" ? "bento-large" : project.size === "wide" ? "bento-wide" : "bento-normal"} github-project reveal" tabindex="0">
-      <div class="bento-content">
-        <div class="bento-icon">${project.icon}</div>
-        <span class="bento-tag">${project.tag}</span>
-        <h3 class="bento-title">${project.title}</h3>
-        <p class="bento-desc">${project.desc}</p>
-        <span class="bento-link">${project.link}</span>
-      </div>
-      <div class="bento-visual">
-         <div style="width: 10rem; height: 10rem; opacity: 0.04; position: absolute; bottom: -20px; right: -20px; transform: rotate(-10deg); color: var(--accent-indigo); pointer-events: none;">
-            ${project.icon}
-         </div>
-      </div>
-    </a>
-  `,
-    )
+    .map((project) => templates.card(project, 'project'))
     .join("");
 
   // Add Interactive Tilt/Glow Logic
-  const cards = document.querySelectorAll(".bento-card");
+  const cards = document.querySelectorAll(".bento-card[data-tilt]");
   cards.forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
@@ -286,24 +271,7 @@ export const renderSkills = (skills) => {
   if (!elements.skillsGrid || !skills) return;
 
   elements.skillsGrid.innerHTML = skills
-    .map(
-      (group) => `
-    <div class="skills-category reveal">
-      <h3 class="skills-cat-title">${group.category}</h3>
-      <div class="skills-items">
-        ${group.items
-          .map(
-            (item) => `
-          <div class="skill-item" tabindex="0">
-            ${item}
-          </div>
-        `,
-          )
-          .join("")}
-      </div>
-    </div>
-  `,
-    )
+    .map((group) => templates.skillGroup(group))
     .join("");
 };
 
@@ -331,20 +299,7 @@ export const renderCertifications = (certifications) => {
   }
 
   elements.certificationsGrid.innerHTML = certifications
-    .map(
-      (cert, index) => `
-    <div class="cert-item reveal" style="transition-delay: ${index * 100}ms" tabindex="0" data-url="${cert.url}" role="button">
-      <div class="cert-details">
-        <h3 class="cert-name">${cert.name}</h3>
-        <span class="cert-issuer">${cert.issuer}</span>
-      </div>
-      <div class="cert-meta">
-        <span class="cert-date">${cert.date}</span>
-        <svg class="cert-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-      </div>
-    </div>
-  `,
-    )
+    .map((cert, index) => templates.certification(cert, index))
     .join("");
 };
 
@@ -423,21 +378,7 @@ export const renderLatestNotes = (posts) => {
   const latestPosts = posts.slice(0, 3);
 
   elements.latestNotesGrid.innerHTML = latestPosts
-    .map(
-      (post, index) => `
-    <a href="notes.html#${post.id}" class="note-card reveal" style="transition-delay: ${index * 100}ms">
-        <div class="note-card-meta">
-            <span class="note-tag">${post.tags && post.tags[0] ? post.tags[0] : 'Note'}</span>
-            <span class="note-date">${post.date}</span>
-        </div>
-        <h3 class="note-card-title">${post.title}</h3>
-        <div class="note-card-footer">
-            Read Note
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </div>
-    </a>
-  `,
-    )
+    .map((post) => templates.card(post, 'note'))
     .join("");
 };
 
@@ -504,30 +445,8 @@ export const renderAbout = (aboutData) => {
   const factsGrid = document.getElementById("quick-facts-grid");
 
   if (factsGrid && aboutData.quickFacts) {
-
-
-    const iconMap = {
-      map: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
-      grad: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
-      code: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
-      bolt: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
-    };
-
-    factsGrid.innerHTML = aboutData.quickFacts.map((fact, index) => {
-      const isStatus = fact.id === 'status';
-      const accentColor = isStatus ? 'text-accent-emerald' : 'text-accent-indigo';
-      const badgeClass = isStatus ? 'text-accent-emerald uppercase tracking-tight' : 'text-primary';
-      const borderHover = isStatus ? 'hover:border-accent-rose/30' : 'hover:border-accent-indigo/30';
-
-      return `
-            <div class="group bg-secondary/50 p-10 rounded-[2.5rem] border border-main ${borderHover} hover:bg-secondary transition-all duration-500 reveal" style="transition-delay: ${index * 100}ms">
-                <div class="mb-6 transform transition-transform group-hover:-rotate-12 ${accentColor}">
-                    ${iconMap[fact.icon] || ''}
-                </div>
-                <h3 class="text-xs font-black text-primary/40 uppercase tracking-widest mb-2">${fact.label}</h3>
-                <p class="text-lg font-bold ${badgeClass}">${fact.value}</p>
-            </div>
-          `;
-    }).join("");
+    factsGrid.innerHTML = aboutData.quickFacts
+      .map((fact, index) => templates.fact(fact, index))
+      .join("");
   }
 };

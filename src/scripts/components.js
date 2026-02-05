@@ -5,7 +5,188 @@
 
 const ICONS = {
   sun: `<svg class="sun-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
-  moon: `<svg class="moon-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`
+  moon: `<svg class="moon-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
+  map: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+  grad: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
+  code: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+  bolt: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
+};
+
+/**
+ * Reusable UI Templates
+ * Centralized components to ensure visual consistency across all pages.
+ */
+export const templates = {
+  /**
+   * Status/Category Badge
+   */
+  badge: (label, type = 'default', extraClass = '') => {
+    const types = {
+      default: 'bg-tertiary/20 border-main text-secondary/60',
+      success: 'bg-accent-emerald/10 border-accent-emerald/20 text-accent-emerald',
+      accent: 'bg-accent-indigo/10 border-accent-indigo/20 text-accent-indigo',
+      note: 'bg-accent-rose/10 border-accent-rose/20 text-accent-rose',
+    };
+
+    const themeClass = types[type] || types.default;
+    const pulse = type === 'success' ? `
+      <span class="relative flex h-2 w-2 mr-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-emerald/40 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-emerald"></span>
+      </span>` : '';
+
+    return `
+      <div class="inline-flex items-center px-3 py-1 rounded-full border backdrop-blur-md text-[9px] font-bold uppercase tracking-[0.2em] ${themeClass} ${extraClass}">
+        ${pulse}${label}
+      </div>
+    `;
+  },
+
+  /**
+   * Quick Fact / Stat Card
+   */
+  fact: (fact, index = 0) => {
+    const isStatus = fact.id === 'status';
+    const accentColor = isStatus ? 'text-accent-emerald' : 'text-accent-indigo';
+    const badgeClass = isStatus ? 'text-accent-emerald uppercase tracking-tight' : 'text-primary';
+    const borderHover = isStatus ? 'hover:border-accent-rose/30' : 'hover:border-accent-indigo/30';
+
+    return `
+            <div class="group bg-secondary/50 p-10 rounded-[2.5rem] border border-main ${borderHover} hover:bg-secondary transition-all duration-500 reveal" style="transition-delay: ${index * 100}ms">
+                <div class="mb-6 transform transition-transform group-hover:-rotate-12 ${accentColor}">
+                    ${ICONS[fact.icon] || ''}
+                </div>
+                <h3 class="text-xs font-black text-primary/40 uppercase tracking-widest mb-2">${fact.label}</h3>
+                <p class="text-lg font-bold ${badgeClass}">${fact.value}</p>
+            </div>
+          `;
+  },
+
+  /**
+   * Skill Category Group
+   */
+  skillGroup: (group) => {
+    return `
+    <div class="skills-category reveal">
+      <h3 class="skills-cat-title">${group.category}</h3>
+      <div class="skills-items">
+        ${group.items
+        .map((item) => `<div class="skill-item" tabindex="0">${item}</div>`)
+        .join("")}
+      </div>
+    </div>
+  `;
+  },
+
+  /**
+   * Certification Item
+   */
+  certification: (cert, index = 0) => {
+    return `
+    <div class="cert-item reveal" style="transition-delay: ${index * 100}ms" tabindex="0" data-url="${cert.url}" role="button">
+      <div class="cert-details">
+        <h3 class="cert-name">${cert.name}</h3>
+        <span class="cert-issuer">${cert.issuer}</span>
+      </div>
+      <div class="cert-meta">
+        <span class="cert-date">${cert.date}</span>
+        <svg class="cert-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+      </div>
+    </div>
+  `;
+  },
+
+  /**
+   * Polymorphic Card Component
+   * Supports Bento (Project), Note, and Resource layouts.
+   */
+  card: (data, layout = 'note') => {
+    const { id, title, desc, tag, date, url, icon, thumbnail, readingTime, size } = data;
+
+    // 1. PROJECT (BENTO) LAYOUT
+    if (layout === 'project') {
+      const sizeClass = size === "large" ? "bento-large" : size === "wide" ? "bento-wide" : "bento-normal";
+      return `
+        <a href="${url}" class="bento-card ${sizeClass} github-project reveal group" data-tilt>
+          <div class="bento-content">
+            <div class="bento-icon text-accent-indigo mb-4">${icon}</div>
+            <span class="text-[9px] font-bold uppercase tracking-[0.3em] text-secondary/40 mb-2 block">${tag}</span>
+            <h3 class="text-xl font-bold tracking-tight text-primary mb-2 group-hover:text-accent-indigo transition-colors">${title}</h3>
+            <p class="text-sm font-light text-secondary/70 leading-relaxed mb-6">${desc}</p>
+            <span class="inline-flex items-center text-[9px] font-black uppercase tracking-[0.4em] text-accent-indigo">
+              View Project <span class="ml-2 transition-transform group-hover:translate-x-1">→</span>
+            </span>
+          </div>
+          <div class="bento-visual">
+             <div class="absolute bottom-[-10%] right-[-10%] w-32 h-32 opacity-[0.03] rotate-[-12deg] group-hover:rotate-0 group-hover:opacity-[0.07] transition-all duration-700 pointer-events-none text-accent-indigo">
+                ${icon}
+             </div>
+          </div>
+        </a>
+      `;
+    }
+
+    // 2. NOTE (GRID) LAYOUT
+    if (layout === 'note') {
+      return `
+        <a href="notes.html#${id}" class="group relative p-8 bg-secondary/20 border border-main/10 rounded-3xl hover:bg-secondary/40 hover:border-accent-rose/20 transition-all duration-500 reveal">
+          <div class="flex justify-between items-start mb-6">
+            <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-accent-rose/60">${tag || 'Note'}</span>
+            <span class="text-[9px] font-bold uppercase tracking-[0.3em] text-secondary/30">${date}</span>
+          </div>
+          <h3 class="text-xl md:text-2xl font-serif italic text-primary group-hover:text-accent-rose transition-colors mb-8">${title}</h3>
+          <div class="flex items-center text-[10px] font-black uppercase tracking-[0.4em] text-primary/40 group-hover:text-primary transition-colors">
+            Read Entry <span class="ml-2 transition-transform group-hover:translate-x-1">→</span>
+          </div>
+        </a>
+      `;
+    }
+
+    // 3. RESOURCE (LIST) LAYOUT
+    if (layout === 'resource') {
+      return `
+        <article class="resource-item group flex flex-col md:flex-row gap-8 py-8 border-b border-main/10 hover:bg-secondary/5 transition-all duration-300 transform reveal" data-resource-id="${id}" role="button" tabindex="0">
+          ${thumbnail ? `
+          <div class="shrink-0 w-full md:w-48 h-32 overflow-hidden rounded-2xl bg-tertiary/10">
+              <img src="${thumbnail}" alt="${title}" class="w-full h-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-110" loading="lazy" />
+          </div>` : ""}
+          <div class="flex-1 flex flex-col justify-center">
+              <div class="mb-2">
+                <span class="text-[9px] font-black uppercase tracking-[0.4em] text-accent-indigo/60">${tag || 'Resource'}</span>
+              </div>
+              <h3 class="text-2xl font-bold tracking-tight text-primary mb-3 group-hover:text-accent-indigo transition-colors">${title}</h3>
+              <p class="text-sm font-light text-secondary/60 leading-relaxed mb-4 max-w-2xl">${desc || readingTime || 'Technical study and resource documentation.'}</p>
+              <div class="flex items-center gap-4 text-[9px] font-bold uppercase tracking-[0.3em] text-secondary/30">
+                <span class="text-primary/40 italic font-serif">by Tanvir Rahman</span>
+                <span>•</span>
+                <span>${date}</span>
+              </div>
+          </div>
+        </article>
+      `;
+    }
+
+  },
+
+  /**
+   * Loading Skeleton Component
+   */
+  skeleton: (type = 'list') => {
+    if (type === 'article') {
+      return `
+        <div class="animate-pulse space-y-8 max-w-3xl mx-auto">
+          <div class="h-12 bg-secondary/40 rounded-xl w-3/4"></div>
+          <div class="space-y-3">
+             <div class="h-4 bg-secondary/20 rounded w-full"></div>
+             <div class="h-4 bg-secondary/20 rounded w-5/6"></div>
+             <div class="h-4 bg-secondary/20 rounded w-4/6"></div>
+          </div>
+          <div class="h-64 bg-secondary/20 rounded-3xl w-full"></div>
+        </div>
+      `;
+    }
+    return `<div class="animate-pulse bg-secondary/20 rounded-2xl h-32 w-full"></div>`;
+  }
 };
 
 const components = {
@@ -15,12 +196,11 @@ const components = {
       <div class="nav-right">
         <ul class="nav-list" role="list">
           <li><a href="about.html" class="nav-link">about</a></li>
-          <li><a href="projects.html" class="nav-link">work</a></li>
+          <li><a href="projects.html" class="nav-link">projects</a></li>
           <li><a href="notes.html" class="nav-link">notes</a></li>
           <li><a href="resources.html" class="nav-link">resources</a></li>
           <li><a href="photography.html" class="nav-link">photography</a></li>
-          <li><a href="store.html" class="nav-link">store</a></li>
-          <li><a href="#contact" class="nav-link">contact</a></li>
+          <li><a href="/contact.html" class="nav-link">contact</a></li>
         </ul>
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark and light theme" title="Toggle theme">
           ${ICONS.sun}
@@ -37,12 +217,11 @@ const components = {
       <div class="mobile-nav-content" role="list">
         <a href="index.html" class="mobile-nav-link">home</a>
         <a href="about.html" class="mobile-nav-link">about</a>
-        <a href="projects.html" class="mobile-nav-link">work</a>
+        <a href="projects.html" class="mobile-nav-link">projects</a>
         <a href="notes.html" class="mobile-nav-link">notes</a>
         <a href="resources.html" class="mobile-nav-link">resources</a>
         <a href="photography.html" class="mobile-nav-link">photography</a>
-        <a href="store.html" class="mobile-nav-link">store</a>
-        <a href="#contact" class="mobile-nav-link">contact</a>
+        <a href="/contact.html" class="mobile-nav-link">contact</a>
       </div>
     </div>
   `,
@@ -97,9 +276,24 @@ const components = {
             <div class="space-y-6">
               <h4 class="text-[9px] font-bold uppercase tracking-[0.5em] text-secondary/30">Social</h4>
               <ul class="flex flex-col gap-4 text-[11px] font-bold uppercase tracking-[0.15em] text-secondary/80">
-                <li><a href="https://github.com/taanvirrahman" class="hover:text-primary transition-all">GitHub</a></li>
-                <li><a href="https://x.com/tanvir_tweet" class="hover:text-primary transition-all">Twitter</a></li>
-              <li><a href="https://www.linkedin.com/in/muhammud-tanvir-rahman/" class="hover:text-primary transition-all">LinkedIn</a></li>
+                <li>
+                  <a href="https://github.com/taanvirrahman" class="group flex items-center gap-2 hover:text-primary transition-all">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    <span>GitHub</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://x.com/tanvir_tweet" class="group flex items-center gap-2 hover:text-primary transition-all">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+                    <span>Twitter</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.linkedin.com/in/muhammud-tanvir-rahman/" class="group flex items-center gap-2 hover:text-primary transition-all">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    <span>LinkedIn</span>
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -108,7 +302,6 @@ const components = {
               <ul class="flex flex-col gap-4 text-[11px] font-bold uppercase tracking-[0.15em] text-secondary/80">
                 <li><a href="photography.html" class="hover:text-primary transition-all">Photography</a></li>
                 <li><a href="resources.html" class="hover:text-primary transition-all">Resources</a></li>
-                <li><button class="newsletter-trigger hover:text-primary transition-all text-left uppercase">Newsletter</button></li>
               </ul>
             </div>
           </div>
@@ -193,9 +386,6 @@ const setActiveNavLink = () => {
     // Home logic
     if (hrefBase === 'index.html' || hrefBase === '') {
       isActive = (currentPath === 'index.html' || currentPath === '');
-    } else if (hrefBase === 'store.html') {
-      // Product section logic
-      isActive = (currentPath === 'store.html' || currentPath === 'digital-product.html');
     } else {
       // Default exact match
       isActive = (hrefBase === currentPath);

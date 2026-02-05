@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Tanvir Rahman</title>
+    <meta name="description" content="Get in touch for collaborations, projects, or just to say hi." />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="src/styles/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="src/scripts/tailwind-config.js"></script>
+</head>
+
+<body>
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="progress-bar"></div>
+    </div>
+
+    <header class="header"></header>
+
+    <main class="min-h-screen pt-32 pb-32 bg-main flex flex-col justify-center relative overflow-hidden">
+        <!-- Subtle Ambient Glow -->
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent-indigo/5 rounded-full blur-[140px] pointer-events-none -z-10 animate-pulse-slow">
+        </div>
+
+        <div class="container mx-auto px-6 max-w-2xl relative z-10">
+
+            <header class="text-center mb-16 opacity-0 animate-[fadeIn_0.8s_ease-out_forwards]">
+                <h1 class="font-serif italic text-7xl md:text-9xl text-primary mb-8 tracking-tighter leading-tight">
+                    hello<span class="text-accent-indigo">.</span>
+                </h1>
+                <p class="text-secondary/70 text-lg md:text-xl font-light max-w-lg mx-auto leading-relaxed">
+                    Have an idea or project? Let's collaborate.
+                    <br class="hidden md:block" />
+                    Send an email to
+                    <button onclick="copyEmail(this)"
+                        class="group inline-flex items-center gap-2 text-primary font-medium border-b border-primary/10 hover:border-accent-indigo transition-all cursor-pointer">
+                        <span>mailtanvirrahman@gmail.com</span>
+                        <span
+                            class="opacity-0 group-hover:opacity-100 transition-opacity text-xs text-accent-indigo font-bold tracking-wider">[COPY]</span>
+                    </button>
+                </p>
+            </header>
+
+            <form id="contact-form" class="space-y-4 opacity-0 animate-[fadeIn_0.8s_ease-out_0.2s_forwards]">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="relative group">
+                        <input type="text" name="name" placeholder="Name" required
+                            class="w-full bg-secondary/10 border-none rounded-2xl px-6 py-5 text-sm text-primary placeholder-secondary/30 outline-none focus:bg-secondary/20 transition-all focus:ring-1 focus:ring-accent-indigo/30">
+                    </div>
+                    <div class="relative group">
+                        <input type="email" name="email" placeholder="Email" required
+                            class="w-full bg-secondary/10 border-none rounded-2xl px-6 py-5 text-sm text-primary placeholder-secondary/30 outline-none focus:bg-secondary/20 transition-all focus:ring-1 focus:ring-accent-indigo/30">
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <input type="text" name="subject" placeholder="Subject"
+                        class="w-full bg-secondary/10 border-none rounded-2xl px-6 py-5 text-sm text-primary placeholder-secondary/30 outline-none focus:bg-secondary/20 transition-all focus:ring-1 focus:ring-accent-indigo/30">
+                </div>
+
+                <div class="relative group">
+                    <textarea name="message" rows="5" placeholder="Tell me about your project..." required
+                        class="w-full bg-secondary/10 border-none rounded-2xl px-6 py-5 text-sm text-primary placeholder-secondary/30 outline-none focus:bg-secondary/20 transition-all resize-none focus:ring-1 focus:ring-accent-indigo/30"></textarea>
+                </div>
+
+                <div class="pt-6">
+                    <button type="submit" id="submit-btn"
+                        class="w-full bg-primary text-main font-bold py-5 rounded-2xl hover:bg-accent-indigo hover:text-white hover:shadow-2xl hover:shadow-accent-indigo/20 transition-all duration-300 transform active:scale-[0.98] flex items-center justify-center gap-3">
+                        <span>Send Message</span>
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13" />
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                    </button>
+                    <p class="text-center text-[10px] text-secondary/30 uppercase tracking-widest mt-4">Powered by
+                        EmailJS</p>
+                </div>
+            </form>
+
+            <div
+                class="mt-20 pt-12 border-t border-main/5 flex justify-center gap-8 opacity-50 hover:opacity-100 transition-opacity duration-500 delay-500 animate-[fadeIn_0.8s_ease-out_0.4s_forwards]">
+                <a href="https://www.linkedin.com/in/muhammud-tanvir-rahman/" target="_blank"
+                    class="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                        <rect x="2" y="9" width="4" height="12" />
+                        <circle cx="4" cy="4" r="2" />
+                    </svg>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://x.com/tanvir_tweet" target="_blank"
+                    class="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                        <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+                    </svg>
+                    <span>Twitter</span>
+                </a>
+                <a href="https://github.com/taanvirrahman" target="_blank"
+                    class="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                    </svg>
+                    <span>GitHub</span>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer"></footer>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init("OIKJBp9Q7YvvHQEfb");
+        })();
+    </script>
+
+    <script type="module" src="src/scripts/main.js"></script>
+    <script>
+        function copyEmail(btn) {
+            navigator.clipboard.writeText('mailtanvirrahman@gmail.com');
+            const original = btn.innerHTML;
+            btn.innerHTML = '<span class="text-accent-indigo">Copied to clipboard!</span>';
+            setTimeout(() => {
+                btn.innerHTML = original;
+            }, 2000);
+        }
+
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const originalContent = btn.innerHTML;
+
+            // 1. Loading State
+            btn.innerHTML = '<span>Sending Message...</span>';
+            btn.classList.add('opacity-70', 'cursor-not-allowed');
+            btn.disabled = true;
+
+            // 2. EmailJS Configuration
+            const serviceID = 'service_uns6v2v';
+            const templateID = 'template_0aik0ct';
+
+            console.log('Attempting to send email with:', { serviceID, templateID });
+
+            // 3. Send Form
+            emailjs.sendForm(serviceID, templateID, this)
+                .then((response) => {
+                    console.log('SUCCESS!', response.status, response.text);
+                    // Success State
+                    btn.innerHTML = '<span class="text-white">Message Sent!</span>';
+                    btn.classList.remove('bg-primary', 'text-main');
+                    btn.classList.add('bg-accent-emerald', 'text-white');
+
+                    setTimeout(() => {
+                        // Reset Form
+                        e.target.reset();
+                        btn.innerHTML = originalContent;
+                        btn.classList.remove('opacity-70', 'cursor-not-allowed', 'bg-accent-emerald', 'text-white');
+                        btn.classList.add('bg-primary', 'text-main');
+                        btn.disabled = false;
+                    }, 3000);
+                }, (err) => {
+                    // Error State
+                    console.error('FAILED...', err);
+                    btn.innerHTML = '<span>Failed to Send</span>';
+                    btn.classList.remove('bg-primary', 'text-main');
+                    btn.classList.add('bg-accent-rose', 'text-white');
+
+                    // More detailed error message
+                    let errorMsg = "Failed to send message.\n\n";
+                    if (err.text) {
+                        errorMsg += "Error: " + err.text + "\n";
+                    }
+                    if (err.status) {
+                        errorMsg += "Status: " + err.status + "\n";
+                    }
+                    errorMsg += "\nPlease check:\n";
+                    errorMsg += "1. Your EmailJS Public Key is correct\n";
+                    errorMsg += "2. Service ID: " + serviceID + "\n";
+                    errorMsg += "3. Template ID: " + templateID + "\n";
+                    errorMsg += "4. Template variables match form field names\n\n";
+                    errorMsg += "Or email me directly at mailtanvirrahman@gmail.com";
+
+                    alert(errorMsg);
+
+                    setTimeout(() => {
+                        btn.innerHTML = originalContent;
+                        btn.classList.remove('opacity-70', 'cursor-not-allowed', 'bg-accent-rose', 'text-white');
+                        btn.classList.add('bg-primary', 'text-main');
+                        btn.disabled = false;
+                    }, 3000);
+                });
+        });
+    </script>
+</body>
+
+</html>

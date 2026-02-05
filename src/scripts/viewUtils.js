@@ -1,3 +1,5 @@
+import { templates } from "./components.js";
+
 /**
  * Shared View Utilities
  * Common rendering and UI logic for Notes and Resources pages
@@ -14,34 +16,8 @@ export const renderItemList = (container, items, options = {}) => {
         return;
     }
 
-    const {
-        showThumbnails = false,
-        defaultSnippet = 'Exploring the boundaries of technical innovation and design excellence...'
-    } = options;
-
     container.innerHTML = items
-        .map((item) => `
-    <article class="resource-item group flex flex-col md:flex-row gap-6 py-6 border-b transition-all duration-300 transform" data-resource-id="${item.id}" role="button" tabindex="0" style="border-color: var(--resource-border)">
-      ${showThumbnails && item.thumbnail ? `
-      <div class="resource-thumbnail-container shrink-0 w-full md:w-[160px] h-[100px] overflow-hidden rounded-sm" style="background-color: var(--resource-thumb-bg)">
-          <img src="${item.thumbnail}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-      </div>` : ""}
-      <div class="flex-1 flex flex-col justify-center">
-          <div class="mb-1">
-            <span class="text-[11px] font-black uppercase tracking-widest" style="color: var(--resource-accent)">${item.tags[0] || 'Tech'}</span>
-          </div>
-          <h3 class="resource-headline text-[20px] md:text-[22px] font-bold leading-[1.25] mb-2 transition-colors decoration-1 underline-offset-4" style="color: var(--resource-text-headline)">${item.title}</h3>
-          <div class="resource-snippet text-[14px] leading-relaxed mb-2 transition-all duration-300" style="color: var(--resource-text-snippet)">
-            ${item.snippet || item.readingTime || defaultSnippet}
-          </div>
-          <div class="flex items-center gap-2 text-[12px] font-medium uppercase tracking-wider" style="color: var(--resource-text-meta)">
-            <span>Tanvir Rahman</span>
-            <span>•</span>
-            <span>${item.date}</span>
-          </div>
-      </div>
-    </article>
-  `)
+        .map((item) => templates.card(item, 'resource'))
         .join("");
 };
 
@@ -123,14 +99,14 @@ export const showItem = (item, elements, options = {}) => {
     // Build header HTML
     const headerHTML = `
     <header class="max-w-3xl mx-auto mb-10 text-left">
-      <div class="flex items-center gap-2 mb-4 text-[10px] font-black uppercase tracking-[0.2em]" style="color: var(--resource-accent)">
-        <span>${item.tags[0] || 'Resource'}</span>
-        <span class="opacity-20" style="color: var(--resource-text-headline)">|</span>
-        <span class="font-medium" style="color: var(--resource-text-meta)">${item.date}</span>
+      <div class="mb-6">
+        ${templates.badge(item.tags[0] || 'Resource', 'accent')}
       </div>
       <h1 class="text-3xl md:text-5xl font-black tracking-tighter mb-6 leading-tight" style="color: var(--resource-text-headline)">${item.title}</h1>
-      <div class="flex items-center text-[12px] font-medium" style="color: var(--resource-text-meta)">
-        <span class="opacity-70">Tanvir Rahman</span>
+      <div class="flex items-center text-[10px] font-bold uppercase tracking-[0.3em] opacity-40">
+        <span>by Tanvir Rahman</span>
+        <span class="mx-3">•</span>
+        <span>${item.date}</span>
       </div>
     </header>
     ${showThumbnail && item.thumbnail ? `
