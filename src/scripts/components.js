@@ -117,10 +117,11 @@ export const templates = {
 
     // 2. NOTE (GRID) LAYOUT
     if (layout === 'note') {
+      const displayTag = tag || (data.tags && data.tags[0]) || 'Note';
       return `
         <a href="notes.html#${id}" class="group relative p-8 bg-secondary/20 border border-main/10 rounded-3xl hover:bg-secondary/40 hover:border-accent-rose/20 transition-all duration-500 reveal">
           <div class="flex justify-between items-start mb-6">
-            <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-accent-rose/60">${tag || 'Note'}</span>
+            <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-accent-rose/60">${displayTag}</span>
             <span class="text-[9px] font-bold uppercase tracking-[0.3em] text-secondary/30">${date}</span>
           </div>
           <h3 class="text-xl md:text-2xl font-serif italic text-primary group-hover:text-accent-rose transition-colors mb-8">${title}</h3>

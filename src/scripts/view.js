@@ -32,6 +32,7 @@ export const refreshElements = () => {
   elements.recommendedList = document.getElementById("recommended-list");
   elements.educationList = document.getElementById("education-list");
   elements.latestNotesGrid = document.querySelector(".latest-notes-grid");
+  elements.blogList = document.getElementById("blog-list");
   elements.aboutLead = document.getElementById("about-lead");
   elements.aboutBio = document.getElementById("about-bio");
 };
@@ -283,6 +284,7 @@ export const renderEducation = (education) => {
     .join("");
 };
 
+
 export const renderLatestNotes = (posts) => {
   if (!elements.latestNotesGrid || !posts) return;
 
@@ -291,8 +293,25 @@ export const renderLatestNotes = (posts) => {
     return;
   }
 
-  // Controller already handles slicing
   elements.latestNotesGrid.innerHTML = posts
+    .map((post) => templates.card(post, 'note'))
+    .join("");
+
+  // Initialize Reveal for note cards
+  elements.latestNotesGrid.querySelectorAll(".reveal").forEach((el) => {
+    import("./effects.js").then(({ observeReveal }) => observeReveal(el));
+  });
+};
+
+export const renderBlogList = (posts) => {
+  if (!elements.blogList || !posts) return;
+
+  if (posts.length === 0) {
+    elements.blogList.innerHTML = '<p class="loading-indicator">No notes found.</p>';
+    return;
+  }
+
+  elements.blogList.innerHTML = posts
     .map((post) => templates.card(post, 'note'))
     .join("");
 };
@@ -325,4 +344,5 @@ export const renderAbout = (aboutData) => {
       .join("");
   }
 };
+
 

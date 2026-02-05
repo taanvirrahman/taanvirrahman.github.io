@@ -68,7 +68,7 @@ const initDynamicContent = async () => {
     const posts = await model.fetchBlogPosts();
     if (posts.length > 0) {
       const sortedPosts = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
-      view.renderLatestNotes(sortedPosts.slice(0, 4));
+      view.renderLatestNotes(sortedPosts.slice(0, 3));
     } else {
       view.renderLatestNotes([]);
     }

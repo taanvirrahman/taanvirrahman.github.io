@@ -64,8 +64,8 @@
 .nav-link {
     color: var(--text-tertiary);
     text-decoration: none;
-    font-size: var(--text-sm);
-    font-weight: var(--font-normal);
+    font-size: var(--text-base);
+    font-weight: var(--font-medium);
     letter-spacing: var(--tracking-normal);
     transition: var(--transition-fast);
 }

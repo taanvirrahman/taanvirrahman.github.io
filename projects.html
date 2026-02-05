@@ -24,15 +24,15 @@
     <!-- Section specific styling if any -->
     <style>
         .projects-hero {
-            padding: 120px 0 20px 0;
+            padding: 130px 0 0 0;
             min-height: auto;
             display: flex;
             align-items: center;
         }
 
-        /* Ensure bento grid looks good on standalone page */
         .projects-grid-container {
-            padding-bottom: var(--section-padding);
+            padding-top: 0;
+            padding-bottom: 40px;
         }
     </style>
 
@@ -51,15 +51,20 @@
     <section class="projects-hero bg-main reveal">
         <div class="container container-wide">
             <div class="max-w-5xl">
-                <p class="text-[10px] font-black text-accent-indigo uppercase tracking-[0.4em] mb-8">Portfolio</p>
-                <h1
-                    class="text-6xl md:text-8xl lg:text-[140px] font-extrabold tracking-tighter leading-[0.8] text-primary mb-12">
-                    curated <span class="font-serif italic font-light text-accent-indigo opacity-90">work</span>.
-                </h1>
-                <p class="text-xl md:text-3xl text-secondary max-w-3xl font-light leading-relaxed mb-0">
-                    A technical index of systems architecture, experimental tools, and production-grade software
-                    engineered with a focus on efficiency and minimalist design.
-                </p>
+                <div class="flex flex-col py-4">
+                    <p class="text-[10px] font-black text-accent-indigo uppercase tracking-[0.4em] mb-6">Projects Index
+                    </p>
+                    <h1
+                        class="text-6xl md:text-8xl lg:text-[112px] font-extrabold tracking-tighter leading-[0.85] text-primary mb-8">
+                        selected <span
+                            class="font-serif italic font-light text-accent-indigo opacity-90">projects</span>.
+                    </h1>
+                    <p class="text-xl md:text-3xl text-secondary max-w-3xl font-light leading-relaxed mb-0">
+                        A collection of systems, tools, and experiments I've built while learning software engineering
+                        and
+                        exploring technical internals.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -67,7 +72,7 @@
     <!-- Projects Grid Section -->
     <section class="projects-grid-container bg-main reveal">
         <div class="container container-wide">
-            <div class="flex items-center justify-between mb-8 border-b border-main pb-6">
+            <div class="flex items-center justify-between mb-8">
                 <div class="text-[11px] font-black uppercase tracking-widest text-secondary/40">
                     All Projects
                 </div>
@@ -79,15 +84,15 @@
                     <span>Rigor</span>
                 </div>
             </div>
-
-            <div class="bento-grid list-view" id="projects-bento-grid">
+            <!-- Dynamic Grid -->
+            <div id="projects-bento-grid" class="bento-grid list-view">
                 <div class="loading-indicator">Loading projects...</div>
             </div>
         </div>
     </section>
 
     <!-- Project CTA -->
-    <section class="py-32 bg-secondary/10 reveal">
+    <section class="py-16 bg-secondary/10 reveal">
         <div class="container text-center">
             <h2 class="text-4xl md:text-6xl font-serif italic text-primary mb-12">
                 Recruiting for Backend Roles?

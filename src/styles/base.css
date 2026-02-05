@@ -143,56 +143,64 @@ img {
     display: none !important;
 }
 
-/* --- BUTTONS (Clean & Simple) --- */
+/* --- BUTTONS (Premium Editorial Style) --- */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    padding: 1rem 2rem;
-    border-radius: 12px;
-    font-size: 0.875rem;
-    font-weight: 700;
+    gap: 0.625rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: var(--radius-lg);
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: var(--tracking-widest);
+    transition: var(--transition-smooth);
     cursor: pointer;
     text-decoration: none;
     border: 1px solid transparent;
+    white-space: nowrap;
+}
+
+.btn-sm {
+    padding: 0.625rem 1.25rem;
+    font-size: 10px;
+    border-radius: var(--radius-md);
 }
 
 .btn-primary {
-    background: var(--text-primary);
-    color: var(--bg-main);
+    background: var(--white);
+    color: var(--neutral-950);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary:hover {
-    background: var(--accent-indigo);
-    color: var(--white);
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(var(--bg-main-rgb), 0.2);
+    background: var(--white);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .btn-secondary {
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-    border-color: var(--border-main);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--white);
+    border-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .btn-secondary:hover {
-    background: var(--bg-tertiary);
-    border-color: var(--border-secondary);
-    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
 }
 
 .btn-success {
-    background: var(--accent-emerald) !important;
-    color: var(--white) !important;
+    background: var(--accent-emerald);
+    color: var(--white);
 }
 
 .btn-error {
-    background: var(--accent-rose) !important;
-    color: var(--white) !important;
+    background: var(--accent-rose);
+    color: var(--white);
 }
 
 /* Motion Accessibility */
