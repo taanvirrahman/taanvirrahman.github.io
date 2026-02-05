@@ -1,8 +1,6 @@
-/* Latest Notes Section */
 .latest-notes-section {
     padding: var(--section-gap) 0;
     position: relative;
-    border-top: 1px solid var(--border-main);
     background: linear-gradient(to bottom, var(--bg-main), var(--bg-secondary));
 }
 

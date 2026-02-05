@@ -22,13 +22,13 @@ export const initEffects = () => {
   const header = document.querySelector(".header");
   if (header) {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (globalThis.scrollY > 50) {
         header.classList.add("scrolled");
       } else {
         header.classList.remove("scrolled");
       }
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    globalThis.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // Initial check
   }
 
@@ -36,13 +36,13 @@ export const initEffects = () => {
   if (progressBar) {
     let ticking = false;
 
-    window.addEventListener(
+    globalThis.addEventListener(
       "scroll",
       () => {
         if (!ticking) {
-          window.requestAnimationFrame(() => {
+          globalThis.requestAnimationFrame(() => {
             const winScroll =
-              window.scrollY || document.documentElement.scrollTop;
+              globalThis.scrollY || document.documentElement.scrollTop;
             const height =
               document.documentElement.scrollHeight -
               document.documentElement.clientHeight;
@@ -81,7 +81,7 @@ export const initEffects = () => {
   if (document.body.classList.contains("loaded")) {
     startObserving();
   } else {
-    window.addEventListener("page-reveal", startObserving, { once: true });
+    globalThis.addEventListener("page-reveal", startObserving, { once: true });
   }
 };
 

@@ -19,8 +19,8 @@
 }
 
 .newsletter-modal {
-    background: var(--resource-bg);
-    border: 1px solid var(--resource-border);
+    background: var(--bg-main);
+    border: 1px solid var(--border-main);
     width: 90%;
     max-width: 480px;
     padding: 3rem;
@@ -42,12 +42,12 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--resource-text-meta);
+    color: var(--text-muted);
     transition: color 0.2s;
 }
 
 .newsletter-close:hover {
-    color: var(--resource-text-headline);
+    color: var(--text-primary);
 }
 
 .newsletter-icon {
@@ -59,19 +59,19 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 2rem;
-    color: var(--resource-accent);
+    color: var(--accent-indigo);
 }
 
 .newsletter-title {
     font-family: var(--font-serif);
     font-size: 2rem;
-    color: var(--resource-text-headline);
+    color: var(--text-primary);
     margin-bottom: 1rem;
     line-height: 1.1;
 }
 
 .newsletter-desc {
-    color: var(--resource-text-snippet);
+    color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 2rem;
@@ -85,10 +85,10 @@
 
 .newsletter-input {
     background: var(--bg-tertiary);
-    border: 1px solid var(--resource-border);
+    border: 1px solid var(--border-main);
     padding: 1rem 1.25rem;
     border-radius: 4px;
-    color: var(--resource-text-headline);
+    color: var(--text-primary);
     font-family: var(--font-sans);
     font-size: 1rem;
     transition: all 0.2s;
@@ -96,12 +96,12 @@
 
 .newsletter-input:focus {
     outline: none;
-    border-color: var(--resource-accent);
+    border-color: var(--accent-indigo);
     background: var(--bg-main);
 }
 
 .newsletter-submit {
-    background: var(--resource-accent);
+    background: var(--accent-indigo);
     color: #fff;
     border: none;
     padding: 1rem;

@@ -1,11 +1,11 @@
 :root {
     /* Spacing & Rhythm */
-    --gutter: 6vw;
-    --max-width: 1200px;
-    --section-padding: 5rem;
-    --section-gap: 4rem;
+    --gutter: 5vw;
+    --max-width: 1300px;
+    --section-padding: 7rem;
+    --section-gap: 5rem;
     --inner-gap: 3rem;
-    --card-padding: 2rem;
+    --card-padding: 2.5rem;
 
     /* Base Palette (Dark-first, as per current design) */
     --neutral-950: #0a0a0a;
@@ -56,7 +56,7 @@
 
     /* Typography */
     --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    --font-mono: "SF Mono", "Menlo", "Monaco", "Courier New", monospace;
+    --font-mono: "JetBrains Mono", "SF Mono", "Menlo", "Monaco", "Courier New", monospace;
     --font-serif: "Instrument Serif", "Georgia", serif;
 
     /* Shadows */

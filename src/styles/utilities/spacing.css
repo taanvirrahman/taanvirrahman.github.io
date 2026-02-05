@@ -1,0 +1,120 @@
+/* ========================================
+   SPACING UTILITIES - Consistent System
+   ======================================== */
+
+/* Container Utilities */
+.container {
+    max-width: var(--max-width);
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+}
+
+.container-wide {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+}
+
+.container-narrow {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+}
+
+/* Section Spacing - Consistent vertical rhythm */
+section {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1000px;
+}
+
+/* Section Modifiers */
+.section-sm {
+    padding-top: calc(var(--section-padding) * 0.6);
+    padding-bottom: calc(var(--section-padding) * 0.6);
+}
+
+.section-lg {
+    padding-top: calc(var(--section-padding) * 1.4);
+    padding-bottom: calc(var(--section-padding) * 1.4);
+}
+
+.section-xl {
+    padding-top: calc(var(--section-padding) * 1.8);
+    padding-bottom: calc(var(--section-padding) * 1.8);
+}
+
+/* Padding Utilities */
+.px-container {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+}
+
+.py-section {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+}
+
+/* Margin Utilities */
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.my-section {
+    margin-top: var(--section-gap);
+    margin-bottom: var(--section-gap);
+}
+
+/* Gap Utilities for Flex/Grid */
+.gap-section {
+    gap: var(--section-gap);
+}
+
+.gap-inner {
+    gap: var(--inner-gap);
+}
+
+.gap-card {
+    gap: var(--card-padding);
+}
+
+/* Responsive Spacing Overrides */
+@media (max-width: 1024px) {
+    :root {
+        --section-padding: 6rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-padding: 5rem;
+    }
+
+    .section-xl {
+        padding-top: calc(var(--section-padding) * 1.5);
+        padding-bottom: calc(var(--section-padding) * 1.5);
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --section-padding: 4rem;
+    }
+}
+
+/* Page Specific Overrides */
+.section-hero {
+    padding-top: calc(var(--section-padding) * 2);
+    padding-bottom: var(--section-padding);
+}
+
+@media (max-width: 768px) {
+    .section-hero {
+        padding-top: calc(var(--section-padding) * 1.5);
+    }
+}

@@ -27,34 +27,7 @@
 
   <!-- Tailwind Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: ['selector', '[data-theme="dark"]'],
-      theme: {
-        extend: {
-          colors: {
-            main: 'var(--bg-main)',
-            secondary: 'var(--bg-secondary)',
-            tertiary: 'var(--bg-tertiary)',
-            primary: 'var(--text-primary)',
-            accent: {
-              blue: 'var(--accent-blue)',
-              emerald: 'var(--accent-emerald)',
-              indigo: 'var(--accent-indigo)',
-              rose: 'var(--accent-rose)',
-              amber: 'var(--accent-amber)',
-              violet: 'var(--accent-violet)',
-            }
-          },
-          fontFamily: {
-            sans: 'var(--font-sans)',
-            mono: 'var(--font-mono)',
-            serif: 'var(--font-serif)',
-          }
-        }
-      }
-    }
-  </script>
+  <script src="src/scripts/tailwind-config.js"></script>
 
   <style>
     /* Critical CSS: Instant Splash Screen & Theme-Aware Background */
@@ -115,13 +88,13 @@
   </style>
 
   <script>
-      (function () {
-        const savedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', theme);
-        window.splashStartTime = Date.now();
-      })();
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = globalThis.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+      document.documentElement.dataset.theme = theme;
+      globalThis.splashStartTime = Date.now();
+    })();
   </script>
 
   <!-- Defer non-critical scripts -->
@@ -191,7 +164,7 @@
       <div class="absolute inset-0 bg-gradient-to-b from-main via-transparent to-main"></div>
     </div>
 
-    <div class="container relative z-10 px-6 mx-auto">
+    <div class="container relative z-10">
       <div class="max-w-7xl">
 
         <!-- Left Aligned Hero Content -->
@@ -272,58 +245,7 @@
     </div>
   </section>
 
-  <section id="about" class="about-section reveal">
-    <div class="container about-container">
-      <div class="about-content">
-        <h2 class="section-title">about me.</h2>
-        <p id="about-lead" class="about-lead">
-          CS Undergrad @ AIUB. Building efficient backend systems with a focus on concurrency and minimalist logic.
-        </p>
-        <div id="about-bio" class="about-bio">
-          <p>
-            I architect scalable solutions using Go and Java, driven by a passion for clean systems and visual
-            aesthetics. Beyond the terminal, I explore the world through minimalist design and photography.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects" class="projects-section reveal">
-    <div class="container">
-      <h2 class="section-title reveal">projects.</h2>
-      <div class="bento-grid">
-        <div class="loading-indicator">Loading projects...</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills" class="skills-section reveal">
-    <div class="container">
-      <h2 class="section-title reveal">skills.</h2>
-      <div class="skills-grid">
-        <div class="loading-indicator">Loading skills...</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="education" class="education-section reveal">
-    <div class="container">
-      <h2 class="section-title reveal">education.</h2>
-      <div class="education-list" id="education-list">
-        <div class="loading-indicator">Loading education...</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="certifications" class="certifications-section reveal">
-    <div class="container">
-      <h2 class="section-title reveal">certifications.</h2>
-      <div class="certifications-grid">
-        <div class="loading-indicator">Loading certifications...</div>
-      </div>
-    </div>
-  </section>
+  <!-- Content has been moved to dedicated pages (about.html and projects.html) -->
 
 
 

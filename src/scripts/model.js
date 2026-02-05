@@ -37,8 +37,8 @@ export const initModel = async () => {
     const res = await fetch("https://api.ipify.org?format=json");
     const data = await res.json();
     _state.clientIP = data.ip;
-  } catch (e) {
-    console.warn("Could not pre-fetch IP");
+  } catch (error) {
+    console.warn("Could not pre-fetch IP:", error);
   }
 };
 

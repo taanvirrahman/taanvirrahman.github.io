@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Work | Tanvir Rahman</title>
+    <meta name="description"
+        content="View a curated selection of software projects, experiments, and technical artifacts by Tanvir Rahman." />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <!-- Preconnect to external origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="src/styles/style.css" />
+
+    <!-- Section specific styling if any -->
+    <style>
+        .projects-hero {
+            padding: 120px 0 20px 0;
+            min-height: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Ensure bento grid looks good on standalone page */
+        .projects-grid-container {
+            padding-bottom: var(--section-padding);
+        }
+    </style>
+
+    <!-- Tailwind Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="src/scripts/tailwind-config.js"></script>
+</head>
+
+<body>
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="progress-bar"></div>
+    </div>
+    <header class="header"></header>
+
+    <!-- Projects Hero -->
+    <section class="projects-hero bg-main reveal">
+        <div class="container container-wide">
+            <div class="max-w-4xl">
+                <p class="text-[11px] font-bold text-accent-indigo uppercase tracking-[0.4em] mb-4">Portfolio</p>
+                <h1
+                    class="text-6xl md:text-8xl lg:text-[112px] font-extrabold tracking-tighter leading-[0.85] text-primary mb-6">
+                    curated <span class="font-serif italic font-light text-accent-indigo opacity-90">work</span>.
+                </h1>
+                <p class="text-xl md:text-2xl text-secondary max-w-2xl font-light leading-relaxed mb-0">
+                    A technical index of systems architecture, experimental tools, and production-grade software
+                    engineered with a focus on efficiency and minimalist design.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid Section -->
+    <section class="projects-grid-container bg-main reveal">
+        <div class="container container-wide">
+            <div class="flex items-center justify-between mb-8 border-b border-main pb-6">
+                <div class="text-[11px] font-black uppercase tracking-widest text-secondary/40">
+                    Technical Artifacts // All
+                </div>
+                <div class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-wider text-secondary/60">
+                    <span>Performance</span>
+                    <span>•</span>
+                    <span>Minimalism</span>
+                    <span>•</span>
+                    <span>Rigor</span>
+                </div>
+            </div>
+
+            <div class="bento-grid" id="projects-bento-grid">
+                <div class="loading-indicator">Initializing technical index...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project CTA -->
+    <section class="py-32 bg-secondary/10 reveal">
+        <div class="container text-center">
+            <h2 class="text-4xl md:text-6xl font-serif italic text-primary mb-12">
+                Have a complex problem to solve?
+            </h2>
+            <a href="mailto:mailtanvirrahman@gmail.com"
+                class="inline-flex items-center gap-4 px-12 py-6 bg-primary text-main font-black rounded-2xl hover:bg-accent-indigo transition-all duration-500">
+                Initiate Collaboration
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <path d="M5 12h14m-7-7 7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer"></footer>
+
+    <script type="module" src="src/scripts/projectsMain.js"></script>
+</body>
+
+</html>

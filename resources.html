@@ -18,34 +18,7 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="src/styles/style.css" />
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <script>
-        tailwind.config = {
-            darkMode: ['selector', '[data-theme="dark"]'],
-            theme: {
-                extend: {
-                    colors: {
-                        main: 'var(--bg-main)',
-                        secondary: 'var(--bg-secondary)',
-                        tertiary: 'var(--bg-tertiary)',
-                        primary: 'var(--text-primary)',
-                        accent: {
-                            blue: 'var(--accent-blue)',
-                            emerald: 'var(--accent-emerald)',
-                            indigo: 'var(--accent-indigo)',
-                            rose: 'var(--accent-rose)',
-                            amber: 'var(--accent-amber)',
-                            violet: 'var(--accent-violet)',
-                        }
-                    },
-                    fontFamily: {
-                        sans: 'var(--font-sans)',
-                        mono: 'var(--font-mono)',
-                        serif: 'var(--font-serif)',
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="src/scripts/tailwind-config.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
         id="hljs-theme" />
 
@@ -72,7 +45,7 @@
 
     <main class="min-h-screen pt-[var(--section-padding)] transaction-colors duration-500"
         style="background-color: var(--resource-bg)">
-        <div class="container mx-auto px-4 max-w-[1280px]">
+        <div class="container max-w-[1280px]">
             <div id="resources-listing-view">
                 <header class="mb-12">
                     <h1 class="text-[64px] md:text-[80px] font-black tracking-tight leading-none mb-8"

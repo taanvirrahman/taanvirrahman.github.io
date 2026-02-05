@@ -81,7 +81,7 @@ export const initNewsletter = () => {
 
         if (success) {
             btn.innerText = "Welcome!";
-            btn.style.backgroundColor = "var(--resource-accent)";
+            btn.style.backgroundColor = "var(--accent-emerald)";
             setTimeout(() => {
                 closeModal();
                 btn.innerText = originalText;
@@ -98,5 +98,5 @@ export const initNewsletter = () => {
     });
 
     // Expose global for manual triggering if needed
-    window.openNewsletter = openModal;
+    globalThis.openNewsletter = openModal;
 };

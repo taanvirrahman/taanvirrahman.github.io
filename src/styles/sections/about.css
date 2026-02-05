@@ -2,7 +2,6 @@
 
 /* --- Premium About Section (Editorial V2) --- */
 .about-section {
-    padding: var(--section-padding) 0;
     background: var(--bg-main);
     position: relative;
     overflow: hidden;

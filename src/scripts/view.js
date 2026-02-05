@@ -326,7 +326,9 @@ export const renderCertifications = (certifications) => {
   if (!elements.certificationsGrid || !certifications) return;
 
   // Ensure we keep the grid class and don't overwrite it with list
-  elements.certificationsGrid.className = 'certifications-list';
+  if (!elements.certificationsGrid.classList.contains('certifications-list')) {
+    elements.certificationsGrid.classList.add('certifications-list');
+  }
 
   elements.certificationsGrid.innerHTML = certifications
     .map(
@@ -478,10 +480,54 @@ export const renderPhotographyGallery = (photos) => {
 // Resources logic moved to resourcesView.js
 
 
-export const renderAbout = (about) => {
-  if (!about) return;
-  if (elements.aboutLead) elements.aboutLead.innerText = about.lead;
-  if (elements.aboutBio) {
-    elements.aboutBio.innerHTML = `<p>${about.bio}</p>`;
+export const renderAbout = (aboutData) => {
+
+  if (!aboutData) {
+    console.error("No about data provided");
+    return;
+  }
+
+  // 1. Render Hero Content
+  if (aboutData.hero) {
+    const hero = aboutData.hero;
+    const leadEl = document.getElementById("about-lead");
+    const bioEl = document.getElementById("about-bio");
+
+    if (leadEl) leadEl.innerHTML = hero.lead;
+    else console.warn("Element #about-lead not found");
+
+    if (bioEl) bioEl.innerHTML = `<p>${hero.bio}</p>`;
+    else console.warn("Element #about-bio not found");
+  }
+
+  // 2. Render Quick Facts Grid
+  const factsGrid = document.getElementById("quick-facts-grid");
+
+  if (factsGrid && aboutData.quickFacts) {
+
+
+    const iconMap = {
+      map: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+      grad: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
+      code: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+      bolt: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
+    };
+
+    factsGrid.innerHTML = aboutData.quickFacts.map((fact, index) => {
+      const isStatus = fact.id === 'status';
+      const accentColor = isStatus ? 'text-accent-emerald' : 'text-accent-indigo';
+      const badgeClass = isStatus ? 'text-accent-emerald uppercase tracking-tight' : 'text-primary';
+      const borderHover = isStatus ? 'hover:border-accent-rose/30' : 'hover:border-accent-indigo/30';
+
+      return `
+            <div class="group bg-secondary/50 p-10 rounded-[2.5rem] border border-main ${borderHover} hover:bg-secondary transition-all duration-500 reveal" style="transition-delay: ${index * 100}ms">
+                <div class="mb-6 transform transition-transform group-hover:-rotate-12 ${accentColor}">
+                    ${iconMap[fact.icon] || ''}
+                </div>
+                <h3 class="text-xs font-black text-primary/40 uppercase tracking-widest mb-2">${fact.label}</h3>
+                <p class="text-lg font-bold ${badgeClass}">${fact.value}</p>
+            </div>
+          `;
+    }).join("");
   }
 };

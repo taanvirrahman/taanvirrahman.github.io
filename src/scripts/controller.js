@@ -1,7 +1,6 @@
 import * as model from "./model.js";
 import * as view from "./view.js";
-import { initEffects, observeReveal } from "./effects.js";
-import { initComponents } from "./components.js";
+import { observeReveal } from "./effects.js";
 
 /**
  * Setup click delegation for bento cards.
@@ -18,7 +17,7 @@ const initCertListeners = () => {
     card.addEventListener("click", (e) => {
       const url = card.dataset.url;
       if (url) {
-        window.open(url, "_blank");
+        globalThis.open(url, "_blank");
       }
     });
     // Keyboard accessibility
@@ -27,7 +26,7 @@ const initCertListeners = () => {
         e.preventDefault();
         const url = card.dataset.url;
         if (url) {
-          window.open(url, "_blank");
+          globalThis.open(url, "_blank");
         }
       }
     });
@@ -35,28 +34,16 @@ const initCertListeners = () => {
 };
 
 export const init = async () => {
-  // Initialize model (pre-fetch IP, etc.)
-  model.initModel();
+  await initHeroBadges();
+  await initDynamicContent();
+  initContactInteractions();
+  initNewsletterInteraction();
+  initBlogRouting();
+  await initPhotography();
+  initProductPurchaseLogging();
+};
 
-  // Theme initialization - use getter
-  view.applyTheme(model.getTheme());
-
-  // Bootstrap global components & effects
-  initComponents();
-  view.refreshElements(); // Crucial: Update pointers after header/footer injection
-  initEffects();
-
-  // Theme Toggle Listener
-  if (view.elements.themeToggle) {
-    view.elements.themeToggle.addEventListener("click", () => {
-      const currentTheme = model.getTheme();
-      const newTheme = currentTheme === "dark" ? "light" : "dark";
-      model.setTheme(newTheme);
-      view.applyTheme(newTheme);
-    });
-  }
-
-  // Feature: Latest Note Badge (Hero)
+const initHeroBadges = async () => {
   // Feature: Latest Note Badge (Hero)
   if (view.elements.latestNoteBadge) {
     const posts = await model.fetchBlogPosts();
@@ -70,11 +57,12 @@ export const init = async () => {
   if (view.elements.latestResearchBadge) {
     const papers = await model.fetchResearchPapers();
     if (papers.length > 0) {
-      // Assuming papers are ordered, or we pick the first one
       view.renderLatestResearchBadge(papers[0]);
     }
   }
+};
 
+const initDynamicContent = async () => {
   // Load config-based content (homepage only)
   if (view.elements.bentoGrid) {
     const [config, projects] = await Promise.all([
@@ -89,12 +77,10 @@ export const init = async () => {
       view.renderEducation(config.education);
       view.renderAbout(config.about);
 
-      // Re-observe new elements
       document.querySelectorAll(".reveal").forEach((el) => {
         observeReveal(el);
       });
 
-      // Setup listeners for dynamic content
       initCertListeners();
     }
   }
@@ -123,23 +109,18 @@ export const init = async () => {
   // Initial render - fetch then render
   if (view.elements.blogList) {
     try {
-      console.log("Fetching notes...");
       const posts = await model.fetchBlogPosts();
-      console.log(`Fetched ${posts.length} notes`);
       view.renderBlogList(posts);
-
-      // Re-observe dynamically added reveal elements
-      const blogItems = document.querySelectorAll(".blog-item.reveal");
-      console.log(`Setting up reveal for ${blogItems.length} items`);
-      blogItems.forEach((el) => {
+      document.querySelectorAll(".blog-item.reveal").forEach((el) => {
         observeReveal(el);
       });
     } catch (error) {
       console.error("Failed to initialize blog list:", error);
     }
   }
+};
 
-  // Subscribe to Hi interactions
+const initContactInteractions = () => {
   if (view.elements.sayHiBtn) {
     view.elements.sayHiBtn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -166,7 +147,6 @@ export const init = async () => {
       const message = model.getMessage();
       if (!message) return;
 
-      // Visual feedback: disabling button during submission
       const originalText = view.elements.sendBtn.innerText;
       view.elements.sendBtn.innerText = "sending...";
       view.elements.sendBtn.disabled = true;
@@ -189,24 +169,20 @@ export const init = async () => {
       }
     });
   }
+};
 
-
-
-  // Blog interactions
+const initBlogRouting = () => {
   const handleRouting = async () => {
     if (!view.elements.blogList) return;
 
-    const hash = window.location.hash.replace("#", "");
+    const hash = globalThis.location.hash.replace("#", "");
     if (hash) {
-      // Show loading skeleton
       view.showSkeleton();
-      const posts = await model.fetchBlogPosts();
       const post = await model.fetchBlogPost(hash);
       if (post) {
         view.showBlogPost(post.content);
       } else {
-        // Fallback or 404
-        window.location.hash = "";
+        globalThis.location.hash = "";
       }
     } else {
       view.hideBlogPost();
@@ -214,9 +190,7 @@ export const init = async () => {
   };
 
   if (view.elements.blogList) {
-    // Listen for deep links
-    window.addEventListener("hashchange", handleRouting);
-    // Initial check
+    globalThis.addEventListener("hashchange", handleRouting);
     handleRouting();
 
     view.elements.blogList.addEventListener("click", (e) => {
@@ -226,23 +200,25 @@ export const init = async () => {
       const postId = link.dataset.postId;
       if (postId) {
         e.preventDefault();
-        window.location.hash = postId;
+        globalThis.location.hash = postId;
       }
     });
   }
 
   if (view.elements.closeBlog) {
     view.elements.closeBlog.addEventListener("click", () => {
-      window.location.hash = "";
+      globalThis.location.hash = "";
     });
   }
 
   if (view.elements.copyLinkBtn) {
     view.elements.copyLinkBtn.addEventListener("click", () => {
-      view.copyToClipboard(window.location.href);
+      view.copyToClipboard(globalThis.location.href);
     });
   }
+};
 
+const initNewsletterInteraction = () => {
   if (view.elements.subscribeForm) {
     view.elements.subscribeForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -251,7 +227,6 @@ export const init = async () => {
 
       if (!email) return;
 
-      // Visual feedback
       const originalBtnText = view.elements.subscribeBtn.innerText;
       view.elements.subscribeBtn.innerText = "...";
       view.elements.subscribeBtn.disabled = true;
@@ -274,26 +249,24 @@ export const init = async () => {
         view.elements.subscribeBtn.disabled = false;
       }, 2000);
     });
-
   }
+};
 
-  // Resources logic moved to resourcesController.js
-
-  // Feature: Photography Gallery
+const initPhotography = async () => {
   if (view.elements.photoGallery) {
     const photos = await model.fetchPhotos();
     view.renderPhotographyGallery(photos);
 
-    // Re-observe new gallery items
     document.querySelectorAll(".gallery-item.reveal").forEach((el) => {
       observeReveal(el);
     });
 
     initPhotographyListeners(photos);
   }
+};
 
-  // Feature: Product Purchase Logging
-  window.addEventListener("initiate-purchase", async (e) => {
+const initProductPurchaseLogging = () => {
+  globalThis.addEventListener("initiate-purchase", async (e) => {
     const { product, type, email, paymentMethod, senderNumber, transactionId } = e.detail;
     await model.submitToSheet({
       type: "Product Purchase",
@@ -356,7 +329,7 @@ const initPhotographyListeners = (allPhotos) => {
     const item = e.target.closest(".gallery-item");
     if (!item || item.classList.contains("hidden")) return;
 
-    const indexInAll = parseInt(item.dataset.index);
+    const indexInAll = Number.parseInt(item.dataset.index);
     const photo = allPhotos[indexInAll];
     const indexInVisible = lightboxState.visiblePhotos.findIndex(p => p.id === photo.id);
 

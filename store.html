@@ -13,37 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="src/styles/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: ['selector', '[data-theme="dark"]'],
-            theme: {
-                extend: {
-                    colors: {
-                        main: 'var(--bg-main)',
-                        secondary: 'var(--bg-secondary)',
-                        tertiary: 'var(--bg-tertiary)',
-                        primary: 'var(--text-primary)',
-                        accent: {
-                            blue: 'var(--accent-blue)',
-                            emerald: 'var(--accent-emerald)',
-                            indigo: 'var(--accent-indigo)',
-                            rose: 'var(--accent-rose)',
-                            amber: 'var(--accent-amber)',
-                            violet: 'var(--accent-violet)',
-                        }
-                    },
-                    fontFamily: {
-                        sans: 'var(--font-sans)',
-                        mono: 'var(--font-mono)',
-                        serif: 'var(--font-serif)',
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="src/scripts/tailwind-config.js"></script>
     <style>
         .store-hero {
-            padding: 140px 0 60px;
+            padding: calc(var(--section-padding) * 1.5) 0 var(--section-padding);
             text-align: center;
         }
 
@@ -202,10 +175,8 @@
             min-height: 85vh;
             display: flex;
             align-items: flex-start;
-            /* Change from center to flex-start and add padding */
             justify-content: center;
-            padding: 160px 20px 40px;
-            /* Increased top padding from 40px to 160px */
+            padding: calc(var(--section-padding) * 1.5) var(--gutter) var(--section-padding);
         }
 
         .coming-soon-content {

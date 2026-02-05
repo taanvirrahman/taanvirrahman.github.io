@@ -1,10 +1,12 @@
+import { initApp } from "./app.js";
 import * as controller from "./controller.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  initApp();
   controller.init();
 });
 
-window.addEventListener("load", () => {
+globalThis.addEventListener("load", () => {
   const splash = document.getElementById("splash-screen");
 
   const finishLoading = () => {
@@ -12,13 +14,13 @@ window.addEventListener("load", () => {
 
     if (!splash) {
       document.body.classList.add("loaded");
-      window.dispatchEvent(new CustomEvent("page-reveal"));
+      globalThis.dispatchEvent(new CustomEvent("page-reveal"));
       return;
     }
 
     const minDelay = 2000;
     // Accuracy fix: ensure we use the early timestamp from index.html
-    const startTime = window.splashStartTime || Date.now();
+    const startTime = globalThis.splashStartTime || Date.now();
     const elapsed = Date.now() - startTime;
     const remaining = Math.max(0, minDelay - elapsed);
 
@@ -27,7 +29,7 @@ window.addEventListener("load", () => {
       document.body.classList.add("loaded");
 
       // Dispatch a custom event to start reveal animations
-      window.dispatchEvent(new CustomEvent("page-reveal"));
+      globalThis.dispatchEvent(new CustomEvent("page-reveal"));
 
       setTimeout(() => {
         splash.remove();

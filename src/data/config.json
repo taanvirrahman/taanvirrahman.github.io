@@ -106,7 +106,39 @@
         }
     ],
     "about": {
-        "lead": "Building efficient backend systems with a focus on concurrency and minimalist logic.",
-        "bio": "I architect scalable solutions using Go and Java, driven by a passion for clean systems and visual aesthetics. Beyond the terminal, I explore the world through minimalist design and photography."
+        "hero": {
+            "label": "Discovery",
+            "title": "about",
+            "highlight": "me",
+            "lead": "Building efficient backend systems with a focus on concurrency and minimalist logic.",
+            "bio": "I'm currently exploring distributed systems, concurrency patterns, and the art of making complex things simple. Beyond code, I find clarity through photography and thoughtful visual design."
+        },
+        "quickFacts": [
+            {
+                "id": "base",
+                "label": "Base",
+                "value": "Dhaka, Bangladesh",
+                "icon": "map"
+            },
+            {
+                "id": "education",
+                "label": "Education",
+                "value": "BSc CS, AIUB",
+                "icon": "grad"
+            },
+            {
+                "id": "focus",
+                "label": "Focus",
+                "value": "System Architectures",
+                "icon": "code"
+            },
+            {
+                "id": "status",
+                "label": "Status",
+                "value": "Open for Work",
+                "icon": "bolt",
+                "color": "emerald"
+            }
+        ]
     }
 }

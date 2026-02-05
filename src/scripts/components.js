@@ -14,7 +14,8 @@ const components = {
       <a href="index.html" class="nav-logo" aria-label="Tanvir Rahman Home">tanvir.</a>
       <div class="nav-right">
         <ul class="nav-list" role="list">
-          <li><a href="research.html" class="nav-link">research</a></li>
+          <li><a href="about.html" class="nav-link">about</a></li>
+          <li><a href="projects.html" class="nav-link">work</a></li>
           <li><a href="notes.html" class="nav-link">notes</a></li>
           <li><a href="resources.html" class="nav-link">resources</a></li>
           <li><a href="photography.html" class="nav-link">photography</a></li>
@@ -35,7 +36,8 @@ const components = {
     <div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Mobile navigation">
       <div class="mobile-nav-content" role="list">
         <a href="index.html" class="mobile-nav-link">home</a>
-        <a href="research.html" class="mobile-nav-link">research</a>
+        <a href="about.html" class="mobile-nav-link">about</a>
+        <a href="projects.html" class="mobile-nav-link">work</a>
         <a href="notes.html" class="mobile-nav-link">notes</a>
         <a href="resources.html" class="mobile-nav-link">resources</a>
         <a href="photography.html" class="mobile-nav-link">photography</a>
@@ -46,76 +48,86 @@ const components = {
   `,
 
   footer: `
-    <div class="relative overflow-hidden text-white border-t-0 mt-0" role="contentinfo" 
-         style="background-color: var(--bg-secondary); background-image: url('src/assets/images/footerbg.jpg'); background-size: 100% auto; background-repeat: no-repeat; background-position: top center;">
-      
-      <!-- Overlay -->
-      <div class="absolute inset-0 z-[1] pointer-events-none" 
-           style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.95));">
+    <footer class="relative pt-24 pb-12 overflow-hidden bg-main font-sans" role="contentinfo">
+      <!-- Ghost Typography (Dynamic Theme Opacity) -->
+      <div class="absolute bottom-[-5%] left-[-2%] z-0 select-none pointer-events-none opacity-[0.06] dark:opacity-[0.02]">
+        <h2 class="text-[12rem] md:text-[18rem] font-serif italic tracking-tighter leading-none">tanvir</h2>
       </div>
 
-      <div class="container relative z-[2] pt-10 pb-8 mx-auto px-[var(--gutter)] w-full max-w-[var(--max-width)]">
-        
-        <!-- Top CTA -->
-        <div class="flex flex-col items-center gap-8 text-center max-w-3xl mx-auto mb-8">
-          <h2 class="font-serif text-[clamp(1.75rem,5vw,2.5rem)] leading-[1.1] font-medium tracking-tight text-white">Let's build something meaningful together.</h2>
-          <a href="mailto:tanvir.rahman@aiub.edu" class="group inline-flex flex-col items-center gap-2 text-xl text-white/90 transition-transform duration-300 hover:-translate-y-0.5 no-underline" aria-label="Send an email to Tanvir Rahman">
-            <span class="text-xs uppercase tracking-widest opacity-60">Drop a line →</span>
-            <span class="font-mono border-b border-[var(--border-secondary)] pb-[2px] transition-colors group-hover:border-[var(--accent-indigo)]">mailtanvirrahman@gmail.com</span>
-          </a>
-        </div>
- 
-        <!-- Split Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-y border-[var(--border-main)] py-6 mb-6">
-          
-          <!-- Left Column -->
-          <div class="flex flex-col gap-6 text-left items-start">
-            <h3 class="text-[2.5rem] font-extrabold tracking-tighter leading-[0.8] text-white/10 opacity-80 select-none relative" style="-webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);">
-              TANVIR<span class="text-[1.5rem] align-super ml-1 text-white/60 tracking-normal" style="-webkit-text-stroke: 0;">®</span>
-            </h3>
-            <div class="font-mono text-sm text-white/60 leading-relaxed">
-              <p>Software Engineer Aspiring</p>
-              <p>Dhaka</p>
-            </div>
-            <a href="https://maps.google.com/?q=Dhaka" target="_blank" rel="noopener noreferrer" class="text-[0.95rem] font-semibold uppercase tracking-wider text-white/95 border-b border-transparent transition-colors hover:text-[var(--accent-indigo)] hover:border-[var(--accent-indigo)] w-fit">View on Map →</a>
-          </div>
- 
-          <!-- Right Column -->
-          <div class="flex flex-col gap-6 text-left items-start md:items-end md:text-right">
-            <h3 class="text-[2.5rem] font-extrabold tracking-tighter leading-[0.8] text-white/10 opacity-80 select-none relative" style="-webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);">
-              OPEN TO<span class="text-[1.5rem] align-super ml-1 text-white/60 tracking-normal" style="-webkit-text-stroke: 0;">work</span>
-            </h3>
-            <div class="font-mono text-sm text-white/60 leading-relaxed">
-              <p>Freelance & Collaboration</p>
-              <p>Remote / Worldwide</p>
-            </div>
-            <a href="notes.html" class="text-[0.95rem] font-semibold uppercase tracking-wider text-white/95 border-b border-transparent transition-colors hover:text-[var(--accent-indigo)] hover:border-[var(--accent-indigo)] w-fit">Read Notes →</a>
-            <button type="button" class="newsletter-trigger text-[0.95rem] font-semibold uppercase tracking-wider text-white/95 border-b border-transparent transition-colors hover:text-[var(--accent-indigo)] hover:border-[var(--accent-indigo)] w-fit bg-transparent border-0 p-0 cursor-pointer">Subscribe →</button>
-          </div>
- 
-        </div>
- 
-        <!-- Bottom Bar -->
-        <div class="flex flex-wrap justify-between items-end gap-8 mb-4">
-          <p class="text-sm text-white/60 font-mono">© ${new Date().getFullYear()} Tanvir Rahman</p>
-          <div class="flex flex-wrap gap-8" role="navigation" aria-label="Footer Navigation">
-            <a href="index.html" class="text-base text-white/85 uppercase tracking-wider font-medium relative hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-[width] after:duration-300 hover:after:w-full">Home</a>
-            <a href="notes.html" class="text-base text-white/85 uppercase tracking-wider font-medium relative hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-[width] after:duration-300 hover:after:w-full">Notes</a>
-            <a href="resources.html" class="text-base text-white/85 uppercase tracking-wider font-medium relative hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-[width] after:duration-300 hover:after:w-full">Resources</a>
-            <a href="research.html" class="text-base text-white/85 uppercase tracking-wider font-medium relative hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-[width] after:duration-300 hover:after:w-full">Research</a>
-            <a href="store.html" class="text-base text-white/85 uppercase tracking-wider font-medium relative hover:text-white transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-[width] after:duration-300 hover:after:w-full">Store</a>
-          </div>
-        </div>
- 
-        <!-- Social Pills -->
-        <div class="flex flex-wrap gap-3" role="list" aria-label="Social Links">
-          <a href="https://github.com/taanvirrahman" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 border border-[var(--border-main)] rounded-full text-sm text-white/90 bg-[rgba(var(--bg-secondary-rgb),0.5)] transition-all hover:bg-white hover:text-[var(--bg-main)] hover:-translate-y-0.5 hover:shadow-lg">GitHub</a>
-          <a href="https://x.com/tanvir_tweet" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 border border-[var(--border-main)] rounded-full text-sm text-white/90 bg-[rgba(var(--bg-secondary-rgb),0.5)] transition-all hover:bg-white hover:text-[var(--bg-main)] hover:-translate-y-0.5 hover:shadow-lg">X</a>
-          <a href="https://www.linkedin.com/in/muhammud-tanvir-rahman/" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 border border-[var(--border-main)] rounded-full text-sm text-white/90 bg-[rgba(var(--bg-secondary-rgb),0.5)] transition-all hover:bg-white hover:text-[var(--bg-main)] hover:-translate-y-0.5 hover:shadow-lg">LinkedIn</a>
-        </div>
- 
+      <!-- Atmospheric Overlay (High Clarity) -->
+      <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute inset-0 bg-no-repeat bg-right bg-contain opacity-[0.4] dark:opacity-[0.25] grayscale mix-blend-multiply dark:mix-blend-luminosity transition-opacity duration-1000" style="background-image: url('./src/assets/images/footerbg.jpg')"></div>
+        <div class="absolute inset-0 bg-gradient-to-l from-transparent via-main/20 to-main/95"></div>
       </div>
-    </div>
+
+      <div class="container relative z-10 mx-auto px-6 max-w-7xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+          
+          <!-- Brand & Mission (Compact) -->
+          <div class="lg:col-span-6 space-y-8">
+            <div class="space-y-4">
+              <a href="index.html" class="text-5xl font-serif italic tracking-tighter text-primary hover:text-accent-indigo transition-all duration-500">tanvir<span class="text-accent-indigo">.</span></a>
+              <p class="text-lg md:text-xl font-light text-primary/90 leading-snug tracking-tight max-w-md">
+                Architecting the <span class="italic text-accent-indigo font-serif">invisible systems</span> powering the web.
+              </p>
+            </div>
+            
+            <div class="flex flex-col space-y-3">
+               <div class="flex items-center gap-3">
+                 <span class="w-1.5 h-1.5 rounded-full bg-accent-emerald"></span>
+                 <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-secondary/60">Currently in Dhaka, BD</span>
+               </div>
+               <a href="mailto:mailtanvirrahman@gmail.com" class="text-[9px] font-black uppercase tracking-[0.4em] text-accent-indigo hover:text-primary transition-colors py-1 group w-fit">
+                 Get in Touch <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+               </a>
+            </div>
+          </div>
+
+          <!-- Quick Access Grid -->
+          <div class="lg:col-span-6 grid grid-cols-3 gap-4 lg:gap-8">
+            <div class="space-y-6">
+              <h4 class="text-[9px] font-bold uppercase tracking-[0.5em] text-secondary/30">Explore</h4>
+              <ul class="flex flex-col gap-4 text-[11px] font-bold uppercase tracking-[0.15em] text-secondary/80">
+                <li><a href="about.html" class="hover:text-primary transition-all">About</a></li>
+                <li><a href="projects.html" class="hover:text-primary transition-all">Projects</a></li>
+                <li><a href="notes.html" class="hover:text-primary transition-all">Writing</a></li>
+              </ul>
+            </div>
+
+            <div class="space-y-6">
+              <h4 class="text-[9px] font-bold uppercase tracking-[0.5em] text-secondary/30">Social</h4>
+              <ul class="flex flex-col gap-4 text-[11px] font-bold uppercase tracking-[0.15em] text-secondary/80">
+                <li><a href="https://github.com/taanvirrahman" class="hover:text-primary transition-all">GitHub</a></li>
+                <li><a href="https://x.com/tanvir_tweet" class="hover:text-primary transition-all">Twitter</a></li>
+              <li><a href="https://www.linkedin.com/in/muhammud-tanvir-rahman/" class="hover:text-primary transition-all">LinkedIn</a></li>
+              </ul>
+            </div>
+
+            <div class="space-y-6">
+              <h4 class="text-[9px] font-bold uppercase tracking-[0.5em] text-secondary/30">Library</h4>
+              <ul class="flex flex-col gap-4 text-[11px] font-bold uppercase tracking-[0.15em] text-secondary/80">
+                <li><a href="photography.html" class="hover:text-primary transition-all">Photography</a></li>
+                <li><a href="resources.html" class="hover:text-primary transition-all">Resources</a></li>
+                <li><button class="newsletter-trigger hover:text-primary transition-all text-left uppercase">Newsletter</button></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Meta Strip -->
+        <div class="mt-20 pt-8 border-t border-main/5 flex flex-col md:flex-row justify-between items-center gap-6">
+           <div class="flex gap-8">
+             <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-secondary/20">© ${new Date().getFullYear()} TANVIR</span>
+             <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-secondary/20">Precision Build</span>
+           </div>
+           
+           <div class="text-[8px] font-bold uppercase tracking-[0.4em] text-secondary/20 font-mono">
+               23.8103N // 90.4125E
+           </div>
+        </div>
+      </div>
+    </footer>
   `
 };
 
@@ -141,7 +153,9 @@ const initMobileMenu = () => {
   if (!menuBtn || !mobileNav) return;
 
   const toggleMenu = (forceClose = null) => {
-    const isNowActive = forceClose !== null ? !forceClose : !mobileNav.classList.contains('active');
+    const isNowActive = forceClose === null
+      ? !mobileNav.classList.contains('active')
+      : !forceClose;
 
     menuBtn.setAttribute('aria-expanded', isNowActive);
     menuBtn.classList.toggle('active', isNowActive);
@@ -158,7 +172,7 @@ const initMobileMenu = () => {
   });
 
   // Close on ESC key
-  window.addEventListener('keydown', (e) => {
+  globalThis.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
       toggleMenu(true);
     }
@@ -166,7 +180,7 @@ const initMobileMenu = () => {
 };
 
 const setActiveNavLink = () => {
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  const currentPath = globalThis.location.pathname.split('/').pop() || 'index.html';
   const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
 
   navLinks.forEach(link => {
