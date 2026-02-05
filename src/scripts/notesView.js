@@ -1,4 +1,4 @@
-import { renderItemList, renderPopularList as renderPopular, initToggle, showItem, hideItem } from "./viewUtils.js";
+import { renderItemList, showItem, hideItem } from "./viewUtils.js";
 
 export const elements = {};
 
@@ -8,10 +8,8 @@ export const refreshResourceElements = () => {
     elements.closeResource = document.getElementById("close-blog");
     elements.copyLinkResource = document.getElementById("copy-link");
     elements.markdownContainerResource = document.getElementById("markdown-container");
-    elements.headlinesToggle = document.getElementById("headlines-toggle");
     elements.listingHeader = document.querySelector("main header");
     elements.listingGrid = document.querySelector(".notes-page-grid");
-    elements.popularResourceList = document.getElementById("popular-resource-list");
     elements.listingView = document.getElementById("notes-listing-view");
 };
 
@@ -23,12 +21,8 @@ export const renderResourceList = (resources) => {
         showThumbnails: false,
         defaultSnippet: null // Notes use readingTime instead
     });
-    initToggle(elements.headlinesToggle);
 };
 
-export const renderPopularList = (resources) => {
-    renderPopular(elements.popularResourceList, resources, 3);
-};
 
 export const showResource = (resource) => {
     showItem(resource, elements, {

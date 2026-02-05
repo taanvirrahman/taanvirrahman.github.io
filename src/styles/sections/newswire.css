@@ -1,4 +1,4 @@
-/* Resources - News Wire Style (TechCrunch Inspired) */
+/* Newswire Layout - Shared between Notes and Resources */
 
 :root {
     /* Default (Dark Mode) - Mapping to existing system tokens */
@@ -10,20 +10,16 @@
     --resource-text-meta: var(--text-muted);
     --resource-border: var(--border-main);
     --resource-accent: var(--accent-indigo);
-    /* Lighter green for dark mode */
     --resource-thumb-bg: var(--bg-tertiary);
 
     --sidebar-ad-bg: var(--bg-secondary);
     --sidebar-ad-border: var(--resource-accent);
     --sidebar-ad-text: var(--text-secondary);
 
-    --toggle-bg-off: var(--neutral-700);
 }
 
-
-
 /* Layout & Containers */
-.resources-page-grid {
+.newswire-grid {
     display: grid;
     grid-template-columns: 1fr 350px;
     gap: 3rem;
@@ -32,19 +28,10 @@
     padding: 0 1rem;
 }
 
-/* Headlines Toggle - Minimal Pill */
-#headlines-toggle {
-    transition: background-color 0.2s ease;
-}
 
-#headlines-toggle div {
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* News List Items */
+/* List Items */
 .resource-item {
     transition: background-color 0.2s ease, border-color 0.2s ease;
-    /* Border removed */
 }
 
 .resource-item:hover {
@@ -88,25 +75,23 @@
     color: var(--white);
     padding: 2.5rem;
     position: relative;
-    /* Force specific look for popular card as it is a brand element */
 }
 
-/* Typography Overrides for News Feel */
+/* Typography Overrides */
 .resource-headline {
     font-family: var(--font-serif);
     font-weight: 500;
-    /* Serif looks better with less weight */
     letter-spacing: -0.01em;
 }
 
-/* Utility for Toggle */
+/* Utility */
 .hidden {
     display: none !important;
 }
 
 /* Responsiveness */
 @media (max-width: 900px) {
-    .resources-page-grid {
+    .newswire-grid {
         grid-template-columns: 1fr;
         gap: 4rem;
     }

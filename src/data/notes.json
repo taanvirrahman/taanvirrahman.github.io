@@ -1,39 +1,38 @@
 [
   {
-    "id": "what-is-the-purpose-of-life",
-    "title": "What is the purpose of life?",
+    "id": "database-sharding-strategies",
+    "title": "Database Sharding Strategies",
     "date": "Jan 29, 2026",
     "tags": [
-      "Philosophy",
-      "Life",
-      "Meaning"
+      "Database",
+      "Architecture",
+      "Scaling"
     ],
-    "readingTime": "7 min read",
-    "file": "content/notes/what-is-the-purpose-of-life.md"
+    "readingTime": "12 min read",
+    "file": "content/notes/database-sharding.md"
   },
   {
-    "id": "build-with-purpose",
-    "title": "Build With Purpose",
-    "date": "Jan 29, 2026",
+    "id": "docker-container-internals",
+    "title": "Docker Internals: Namespaces & Cgroups",
+    "date": "Jan 25, 2026",
     "tags": [
-      "Purpose",
-      "Ethics",
-      "Design"
-
+      "DevOps",
+      "Linux",
+      "Containers"
     ],
-    "readingTime": "5 min read",
-    "file": "content/notes/build-with-purpose.md"
+    "readingTime": "8 min read",
+    "file": "content/notes/docker-internals.md"
   },
   {
-    "id": "mistakes-are-part-of-growth",
-    "title": "Mistakes Are Part of Growth",
+    "id": "grpc-vs-rest-performance",
+    "title": "gRPC vs REST: Performance Analysis",
     "date": "Jan 15, 2026",
     "tags": [
-      "Ethics",
-      "Design",
-      "Code"  
+      "API",
+      "Performance",
+      "Protocol"
     ],
-    "readingTime": "3 min read",
-    "file": "content/notes/mistakes-are-part-of-growth.md"
+    "readingTime": "10 min read",
+    "file": "content/notes/grpc-vs-rest.md"
   }
 ]

@@ -143,6 +143,58 @@ img {
     display: none !important;
 }
 
+/* --- BUTTONS (Clean & Simple) --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background: var(--text-primary);
+    color: var(--bg-main);
+}
+
+.btn-primary:hover {
+    background: var(--accent-indigo);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(var(--bg-main-rgb), 0.2);
+}
+
+.btn-secondary {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-main);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--border-secondary);
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background: var(--accent-emerald) !important;
+    color: var(--white) !important;
+}
+
+.btn-error {
+    background: var(--accent-rose) !important;
+    color: var(--white) !important;
+}
+
 /* Motion Accessibility */
 @media (prefers-reduced-motion: reduce) {
 

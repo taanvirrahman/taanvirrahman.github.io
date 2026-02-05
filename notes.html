@@ -18,7 +18,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="src/styles/style.css" />
-  <link rel="stylesheet" href="src/styles/sections/notes.css" />
+
   <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
   <script src="src/scripts/tailwind-config.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
@@ -59,20 +59,9 @@
             technical nuances of building scalable systems.
           </p>
 
-          <!-- Headlines Only Toggle -->
-          <div class="flex items-center gap-3 mb-8">
-            <span class="text-[11px] font-medium tracking-[0.2em] uppercase"
-              style="font-variant: small-caps; color: var(--resource-text-meta)">headlines only</span>
-            <button id="headlines-toggle" class="relative w-11 h-6 rounded-full transition-colors focus:outline-none"
-              style="background-color: var(--toggle-bg-off)" role="switch" aria-checked="false">
-              <div
-                class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-200 transform">
-              </div>
-            </button>
-          </div>
         </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12 pb-20 notes-page-grid">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12 pb-20 newswire-grid">
           <!-- Main Notes Feed -->
           <div id="blog-list" class="flex flex-col border-t" style="border-color: var(--resource-border)">
             <div class="py-20 text-center font-mono tracking-widest uppercase text-xs"
@@ -120,10 +109,10 @@
       <div id="blog-content" class="hidden max-w-4xl mx-auto pb-20">
         <div class="flex items-center justify-between mb-12 py-4 border-b" style="border-color: var(--resource-border)">
           <button id="close-blog"
-            class="group flex items-center gap-2 text-sm font-bold transition-opacity hover:opacity-70"
+            class="group inline-flex items-center gap-2 px-4 py-2 border border-black/10 rounded-lg text-xs font-bold transition-all hover:bg-black/5"
             style="color: var(--resource-text-snippet)">
-            <span class="group-hover:-translate-x-1 transition-transform">←</span> <span
-              class="uppercase tracking-widest font-black">back to notes</span>
+            <span class="group-hover:-translate-x-1 transition-transform">←</span>
+            <span class="uppercase tracking-widest font-black">back to notes</span>
           </button>
           <button id="copy-link"
             class="text-[11px] font-black hover:text-black transition-opacity hover:opacity-70 uppercase tracking-[0.2em]"

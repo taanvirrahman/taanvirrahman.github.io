@@ -39,37 +39,6 @@ export const renderPopularList = (container, items, limit = 3) => {
         .join("");
 };
 
-/**
- * Initialize toggle for headlines-only view
- */
-export const initToggle = (toggleElement) => {
-    if (!toggleElement) return;
-
-    toggleElement.addEventListener("click", () => {
-        const isChecked = toggleElement.getAttribute("aria-checked") === "true";
-        const newStatus = !isChecked;
-
-        toggleElement.setAttribute("aria-checked", newStatus);
-
-        if (newStatus) {
-            toggleElement.style.backgroundColor = "var(--resource-accent)";
-        } else {
-            toggleElement.style.backgroundColor = "var(--toggle-bg-off)";
-        }
-
-        const dot = toggleElement.querySelector("div");
-        if (dot) {
-            dot.style.transform = newStatus ? "translateX(20px)" : "translateX(0)";
-        }
-
-        // Toggle content visibility
-        const thumbnails = document.querySelectorAll(".resource-thumbnail-container");
-        const snippets = document.querySelectorAll(".resource-snippet");
-
-        thumbnails.forEach(el => el.classList.toggle("hidden", newStatus));
-        snippets.forEach(el => el.classList.toggle("hidden", newStatus));
-    });
-};
 
 /**
  * Show a single item (note or resource) in full view
@@ -104,8 +73,6 @@ export const showItem = (item, elements, options = {}) => {
       </div>
       <h1 class="text-3xl md:text-5xl font-black tracking-tighter mb-6 leading-tight" style="color: var(--resource-text-headline)">${item.title}</h1>
       <div class="flex items-center text-[10px] font-bold uppercase tracking-[0.3em] opacity-40">
-        <span>by Tanvir Rahman</span>
-        <span class="mx-3">•</span>
         <span>${item.date}</span>
       </div>
     </header>

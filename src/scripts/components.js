@@ -110,7 +110,7 @@ export const templates = {
               View Project
             </div>
           </div>
-          <!-- Visuals removed for clean list view -->
+          ${data.icon ? `<div class="bento-visual opacity-10 group-hover:opacity-20 transition-opacity">${data.icon}</div>` : ""}
         </a>
       `;
     }
@@ -146,8 +146,6 @@ export const templates = {
               <h3 class="text-2xl font-bold tracking-tight text-primary mb-3 group-hover:text-accent-indigo transition-colors">${title}</h3>
               <p class="text-sm font-light text-secondary/60 leading-relaxed mb-4 max-w-2xl">${desc || readingTime || 'A curated resource for developers.'}</p>
               <div class="flex items-center gap-4 text-[9px] font-bold uppercase tracking-[0.3em] text-secondary/30">
-                <span class="text-primary/40 italic font-serif">by Tanvir Rahman</span>
-                <span>•</span>
                 <span>${date}</span>
               </div>
           </div>
@@ -189,7 +187,7 @@ const components = {
           <li><a href="research.html" class="nav-link">research</a></li>
           <li><a href="notes.html" class="nav-link">notes</a></li>
           <li><a href="resources.html" class="nav-link">resources</a></li>
-          <li><a href="/contact.html" class="nav-link">contact</a></li>
+          <li><a href="contact.html" class="nav-link">contact</a></li>
         </ul>
 
         <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -207,7 +205,7 @@ const components = {
         <a href="research.html" class="mobile-nav-link">research</a>
         <a href="notes.html" class="mobile-nav-link">notes</a>
         <a href="resources.html" class="mobile-nav-link">resources</a>
-        <a href="/contact.html" class="mobile-nav-link">contact</a>
+        <a href="contact.html" class="mobile-nav-link">contact</a>
       </div>
     </div>
   `,
@@ -286,7 +284,6 @@ const components = {
             <div class="space-y-6">
               <h4 class="text-[9px] font-bold uppercase tracking-[0.5em] text-secondary/30">Library</h4>
               <ul class="flex flex-col gap-4 text-[11px] font-bold uppercase tracking-[0.15em] text-secondary/80">
-                <li><a href="photography.html" class="hover:text-primary transition-all">Photography</a></li>
                 <li><a href="resources.html" class="hover:text-primary transition-all">Resources</a></li>
               </ul>
             </div>
@@ -295,16 +292,11 @@ const components = {
         </div>
 
         <!-- Meta Strip -->
-        <div class="mt-20 pt-8 border-t border-main/5 flex flex-col md:flex-row justify-between items-center gap-6">
-           <div class="flex gap-8">
-             <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-secondary/20">© ${new Date().getFullYear()} TANVIR</span>
-             <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-secondary/20">Precision Build</span>
-           </div>
-           
-           <div class="text-[8px] font-bold uppercase tracking-[0.4em] text-secondary/20 font-mono">
-               23.8103N // 90.4125E
-           </div>
-        </div>
+         <div class="mt-20 pt-8 border-t border-main/5 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex gap-8">
+              <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-secondary/20">© ${new Date().getFullYear()} TANVIR</span>
+            </div>
+         </div>
       </div>
     </div>
   `

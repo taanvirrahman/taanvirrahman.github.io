@@ -1,87 +1,68 @@
 [
     {
-        "id": "neural-logic-2025",
+        "id": "raft-consensus-impl",
         "type": "publication",
-        "title": "Neural Logic: Bridging Symbolic Reasoning and Gradient Descent",
-        "authors": "Tanvir Rahman, A. Smith, J. Doe",
-        "venue": "International Conference on Machine Learning (ICML)",
+        "title": "Implementation of Raft Consensus in Golang",
+        "authors": "Tanvir Rahman",
+        "venue": "Term Project (Dist. Systems)",
         "year": "2025",
-        "abstract": "This paper explores the integration of symbolic logic into neural network architectures to improve interpretability and logical consistency in large language models.",
+        "abstract": "A from-scratch implementation of the Raft consensus algorithm, handling leader election, log replication, and brain-split scenarios.",
         "tags": [
-            "AI",
-            "Neural Networks",
-            "Logic"
+            "Golang",
+            "Distributed Systems"
         ],
         "links": {
-            "paper": "#",
+            "code": "#",
+            "report": "#"
+        }
+    },
+    {
+        "id": "sorting-analysis",
+        "type": "publication",
+        "title": "Comparative Analysis of Parallel Sorting Algorithms",
+        "authors": "Tanvir Rahman",
+        "venue": "Algorithms Lab",
+        "year": "2024",
+        "abstract": "Benchmarking QuickSort vs MergeSort performance on multi-core architectures using OpenMP in C++.",
+        "tags": [
+            "C++",
+            "HPC"
+        ],
+        "links": {
             "code": "#",
             "slides": "#"
         }
     },
     {
-        "id": "generative-art-glsl",
-        "type": "publication",
-        "title": "Procedural Aesthetics: Reactive GLSL Paradigms in Modern Web Art",
-        "authors": "Tanvir Rahman",
-        "venue": "Web Graphics Symposium (WGS)",
-        "year": "2024",
-        "abstract": "An investigation into high-performance shader techniques for creating immersive, reactive generative art in browser-based environments.",
-        "tags": [
-            "Graphics",
-            "GLSL",
-            "UX"
-        ],
-        "links": {
-            "paper": "#",
-            "demo": "#"
-        }
-    },
-    {
-        "id": "attention-is-all-you-need",
+        "id": "ddia",
         "type": "recommendation",
-        "title": "Attention Is All You Need",
-        "authors": "Vaswani et al.",
-        "venue": "NeurIPS 2017",
+        "title": "Designing Data-Intensive Applications",
+        "authors": "Martin Kleppmann",
+        "venue": "O'Reilly Media",
         "year": "2017",
-        "abstract": "The seminal paper introducing the Transformer architecture, replacing recurrent layers with self-attention mechanisms.",
+        "abstract": "The definitive guide to the underlying principles of modern distributed data systems.",
         "tags": [
-            "NLP",
-            "Deep Learning"
+            "Architecture",
+            "Database"
         ],
         "links": {
-            "paper": "https://arxiv.org/abs/1706.03762"
+            "read": "https://dataintensive.net/"
         }
     },
     {
-        "id": "unreasonable-effectiveness",
+        "id": "google-fs",
         "type": "recommendation",
-        "title": "The Unreasonable Effectiveness of Recurrent Neural Networks",
-        "authors": "Andrej Karpathy",
-        "venue": "Blog Post",
-        "year": "2015",
-        "abstract": "A legendary exploration of the capabilities of RNNs in generating text and code.",
+        "title": "The Google File System",
+        "authors": "Ghemawat et al.",
+        "venue": "SOSP",
+        "year": "2003",
+        "abstract": "A foundational paper on distributed file system design that paved the way for HDFS and Big Data.",
         "tags": [
-            "RNN",
-            "AI History"
+            "Distributed Systems",
+            "Storage"
         ],
         "links": {
-            "read": "http://karpathy.github.io/2015/05/21/rnn-effectiveness/"
-        }
-    },
-    {
-        "id": "distill-gans",
-        "type": "recommendation",
-        "title": "Deconvolution and Checkerboard Artifacts",
-        "authors": "Odena et al. (Distill)",
-        "venue": "Distill.pub",
-        "year": "2016",
-        "abstract": "An interactive explanation of how deconvolution layers can cause artifacts in generated images.",
-        "tags": [
-            "GANs",
-            "Vis"
-        ],
-        "links": {
-            "read": "https://distill.pub/2016/deconv-checkerboard/"
+            "paper": "https://research.google.com/archive/gfs-sosp2003.pdf"
         }
     }
 ]

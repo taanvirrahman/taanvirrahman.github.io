@@ -17,24 +17,13 @@ if (typeof marked !== "undefined" && typeof hljs !== "undefined") {
 
 
 export const refreshElements = () => {
-  elements.sayHiBtn = document.getElementById("say-hi-btn");
   elements.resumeBtn = document.getElementById("resume-btn");
-  elements.messageContainer = document.getElementById("message-container");
-  elements.backBtn = document.getElementById("back-btn");
-  elements.messageInput = document.getElementById("message-input");
-  elements.sendBtn = document.getElementById("send-btn");
-  elements.blogList = document.getElementById("blog-list");
-  elements.blogContent = document.getElementById("blog-content");
-  elements.closeBlog = document.getElementById("close-blog");
-  elements.copyLinkBtn = document.getElementById("copy-link");
-  elements.markdownContainer = document.getElementById("markdown-container");
 
-  // Resources Elements (Moved to resourcesView.js)
-
-  elements.subscribeForm = document.querySelector(".footer-form");
-  elements.subscribeBtn = document.querySelector(".footer-submit");
+  // Hero Badges
   elements.latestNoteBadge = document.getElementById("latest-note-badge");
   elements.latestResearchBadge = document.getElementById("latest-research-badge");
+
+  // Core Grids
   elements.bentoGrid = document.querySelector(".bento-grid");
   elements.skillsGrid = document.querySelector(".skills-grid");
   elements.certificationsGrid = document.querySelector(".certifications-grid");
@@ -43,9 +32,6 @@ export const refreshElements = () => {
   elements.recommendedList = document.getElementById("recommended-list");
   elements.educationList = document.getElementById("education-list");
   elements.latestNotesGrid = document.querySelector(".latest-notes-grid");
-  elements.photoGallery = document.getElementById("gallery");
-  elements.photoStats = document.querySelector(".gallery-stats");
-  elements.lightboxTotal = document.getElementById("lightbox-total");
   elements.aboutLead = document.getElementById("about-lead");
   elements.aboutBio = document.getElementById("about-bio");
 };
@@ -53,32 +39,6 @@ export const refreshElements = () => {
 // Initial run
 refreshElements();
 
-export const renderBlogList = (posts) => {
-  if (!elements.blogList) return;
-
-  if (posts.length === 0) {
-    elements.blogList.innerHTML =
-      '<p class="loading-indicator">No notes found or error loading notes.</p>';
-    return;
-  }
-
-  elements.blogList.innerHTML = posts
-    .map(
-      (post, index) => `
-    <article class="blog-item reveal" style="transition-delay: ${index * 100}ms">
-      <div class="blog-meta">
-        <span class="blog-date">${post.date}</span>
-        <span class="blog-reading-time">${post.readingTime}</span>
-      </div>
-      <h3 class="blog-title"><a href="#${post.id}" data-post-id="${post.id}">${post.title}</a></h3>
-      <div class="blog-tags">
-        ${post.tags.map((tag) => `<span class="blog-tag">${tag}</span>`).join("")}
-      </div>
-    </article>
-  `,
-    )
-    .join("");
-};
 
 export const renderLatestNoteBadge = (note) => {
   if (!elements.latestNoteBadge || !note) return;
@@ -100,109 +60,7 @@ export const renderLatestResearchBadge = (paper) => {
   elements.latestResearchBadge.classList.remove("hidden");
 };
 
-export const showBlogPost = (content) => {
-  if (!elements.blogList) return;
-  elements.blogList.classList.add("hidden");
-  elements.blogContent.classList.remove("hidden");
 
-  // High-performance rendering with a refined editorial fade + transition
-  elements.markdownContainer.style.opacity = "0";
-  elements.markdownContainer.style.transform = "translateY(20px)";
-  elements.markdownContainer.innerHTML = marked.parse(content);
-
-  // Apply highlighting
-  elements.markdownContainer.querySelectorAll("pre code").forEach((block) => {
-    hljs.highlightElement(block);
-  });
-
-
-  // Re-scroll to top of content
-  window.scrollTo({ top: 0, behavior: "smooth" });
-
-  setTimeout(() => {
-    elements.markdownContainer.style.opacity = "1";
-    elements.markdownContainer.style.transform = "translateY(0)";
-    elements.markdownContainer.style.transition =
-      "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
-  }, 100);
-};
-
-export const copyToClipboard = async (text) => {
-  try {
-    await navigator.clipboard.writeText(text);
-    const originalText = elements.copyLinkBtn.innerText;
-    elements.copyLinkBtn.innerText = "copied!";
-    setTimeout(() => {
-      elements.copyLinkBtn.innerText = originalText;
-    }, 2000);
-  } catch (err) {
-    console.error("Failed to copy link:", err);
-  }
-};
-
-export const showSkeleton = () => {
-  if (!elements.markdownContainer) return;
-  elements.blogList.classList.add("hidden");
-  elements.blogContent.classList.remove("hidden");
-  elements.markdownContainer.innerHTML = `
-    <div class="skeleton-title"></div>
-    <div class="skeleton-line" style="width: 100%"></div>
-    <div class="skeleton-line" style="width: 90%"></div>
-    <div class="skeleton-line" style="width: 95%"></div>
-    <div class="skeleton-line" style="width: 40%"></div>
-  `;
-};
-
-export const hideBlogPost = () => {
-  if (elements.blogContent) elements.blogContent.classList.add("hidden");
-  if (elements.blogList) elements.blogList.classList.remove("hidden");
-};
-
-export const showMessageInput = () => {
-  elements.sayHiBtn.classList.add("hidden");
-  // Resume button stays visible
-  elements.messageContainer.classList.remove("hidden");
-  elements.messageInput.focus();
-};
-
-export const hideMessageInput = () => {
-  elements.messageContainer.classList.add("hidden");
-  elements.sayHiBtn.classList.remove("hidden");
-  // Resume button was never hidden
-  elements.messageInput.value = "";
-  elements.sendBtn.classList.add("hidden");
-};
-
-export const toggleSendButton = (isVisible) => {
-  if (isVisible) {
-    elements.sendBtn.classList.remove("hidden");
-  } else {
-    elements.sendBtn.classList.add("hidden");
-  }
-};
-
-export const showThankYou = () => {
-  elements.messageContainer.classList.add("hidden");
-  elements.sayHiBtn.innerText = "thank you";
-  elements.sayHiBtn.classList.remove("hidden");
-  elements.sayHiBtn.style.borderColor = "#888888";
-  elements.sayHiBtn.style.color = "#888888";
-  elements.messageInput.value = "";
-  elements.sendBtn.classList.add("hidden");
-};
-
-export const showSubscribeSuccess = () => {
-  if (!elements.subscribeBtn) return;
-  const originalText = elements.subscribeBtn.innerText;
-  elements.subscribeBtn.innerText = "Joined!";
-  elements.subscribeBtn.style.backgroundColor = "var(--accent-emerald)";
-  elements.subscribeBtn.style.color = "var(--white)";
-  setTimeout(() => {
-    elements.subscribeBtn.innerText = originalText;
-    elements.subscribeBtn.style.backgroundColor = "";
-    elements.subscribeBtn.style.color = "";
-  }, 2000);
-};
 
 export const triggerConfetti = () => {
   const duration = 2.5 * 1000;
@@ -264,18 +122,6 @@ export const renderProjects = (projects) => {
   elements.bentoGrid.innerHTML = projects
     .map((project) => templates.card(project, 'project'))
     .join("");
-
-  // Add Interactive Tilt/Glow Logic
-  const cards = document.querySelectorAll(".bento-card[data-tilt]");
-  cards.forEach((card) => {
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      card.style.setProperty("--mouse-x", `${x}%`);
-      card.style.setProperty("--mouse-y", `${y}%`);
-    });
-  });
 };
 
 export const renderSkills = (skills) => {
@@ -312,6 +158,29 @@ export const renderCertifications = (certifications) => {
   elements.certificationsGrid.innerHTML = certifications
     .map((cert, index) => templates.certification(cert, index))
     .join("");
+
+  initCertListeners();
+};
+
+const initCertListeners = () => {
+  document.querySelectorAll(".cert-item").forEach((card) => {
+    // Prevent duplicate listeners if re-rendered
+    if (card.dataset.listened) return;
+    card.dataset.listened = "true";
+
+    card.addEventListener("click", () => {
+      const url = card.dataset.url;
+      if (url) globalThis.open(url, "_blank");
+    });
+
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const url = card.dataset.url;
+        if (url) globalThis.open(url, "_blank");
+      }
+    });
+  });
 };
 
 export const renderResearchList = (papers) => {
@@ -428,44 +297,7 @@ export const renderLatestNotes = (posts) => {
     .join("");
 };
 
-export const renderPhotographyGallery = (photos) => {
-  if (!elements.photoGallery || !photos) return;
-
-  elements.photoGallery.innerHTML = photos
-    .map(
-      (photo, index) => `
-    <div class="gallery-item ${photo.size || "standard"} reveal" data-category="${photo.category}" data-index="${index}">
-        <div class="gallery-img-wrapper">
-            <img src="${photo.src}" alt="${photo.alt}" loading="lazy" />
-            <div class="gallery-overlay">
-                <div class="gallery-overlay-content">
-                    <span class="gallery-category">${photo.category}</span>
-                    <h3 class="gallery-title">${photo.title}</h3>
-                    <p class="gallery-location">${photo.location}</p>
-                    <div class="gallery-preview-hint" style="margin-top: 1rem; font-size: 0.65rem; color: var(--accent-indigo); text-transform: uppercase; letter-spacing: 0.25em; font-weight: 800; opacity: 0.9;">
-                        Explore Vision →
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  `,
-    )
-    .join("");
-
-  // Update stats
-  if (elements.lightboxTotal) elements.lightboxTotal.textContent = photos.length;
-
-  const statNumbers = document.querySelectorAll(".stat-number");
-  if (statNumbers.length >= 2) {
-    statNumbers[0].textContent = photos.length;
-    const categories = new Set(photos.map(p => p.category)).size;
-    statNumbers[1].textContent = categories;
-  }
-};
-
 // Resources logic moved to resourcesView.js
-
 
 export const renderAbout = (aboutData) => {
 
@@ -493,3 +325,4 @@ export const renderAbout = (aboutData) => {
       .join("");
   }
 };
+

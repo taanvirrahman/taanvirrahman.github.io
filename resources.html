@@ -52,21 +52,9 @@
                         style="color: var(--resource-accent)">
                         resource.</h1>
 
-                    <!-- Headlines Only Toggle -->
-                    <div class="flex items-center gap-3 mb-8">
-                        <span class="text-[11px] font-medium tracking-[0.2em] uppercase"
-                            style="font-variant: small-caps; color: var(--resource-text-meta)">headlines only</span>
-                        <button id="headlines-toggle"
-                            class="relative w-11 h-6 bg-[#ddd] rounded-full transition-colors focus:outline-none"
-                            role="switch" aria-checked="false">
-                            <div
-                                class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-200 transform">
-                            </div>
-                        </button>
-                    </div>
                 </header>
 
-                <div class="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12 pb-20 resources-page-grid">
+                <div class="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12 pb-20 newswire-grid">
                     <!-- Main News Feed -->
                     <div id="resource-list" class="flex flex-col border-t" style="border-color: var(--resource-border)">
                         <div class="py-20 text-center font-mono tracking-widest uppercase text-xs"
@@ -110,10 +98,10 @@
                 <div class="flex items-center justify-between mb-12 py-4 border-b"
                     style="border-color: var(--resource-border)">
                     <button id="close-resource"
-                        class="group flex items-center gap-2 text-sm font-bold transition-opacity hover:opacity-70"
+                        class="group inline-flex items-center gap-2 px-4 py-2 border border-black/10 rounded-lg text-xs font-bold transition-all hover:bg-black/5"
                         style="color: var(--resource-text-snippet)">
-                        <span class="group-hover:-translate-x-1 transition-transform">←</span> <span
-                            class="uppercase tracking-widest font-black">back to resources</span>
+                        <span class="group-hover:-translate-x-1 transition-transform">←</span>
+                        <span class="uppercase tracking-widest font-black">back to resources</span>
                     </button>
                     <button id="copy-link-resource"
                         class="text-[11px] font-black transition-opacity hover:opacity-70 uppercase tracking-[0.2em]"

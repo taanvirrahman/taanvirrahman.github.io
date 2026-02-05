@@ -1,54 +1,54 @@
 [
     {
-        "id": "best-vscode-extensions",
-        "title": "Essential VS Code Extensions",
-        "date": "Jan 20, 2026",
-        "thumbnail": "src/assets/images/resources/vscode-extensions.png",
-        "tags": [
-            "DevTools",
-            "Productivity"
-        ],
-        "snippet": "A curated list of extensions that supercharge my daily workflow, from intelligent debugging to aesthetic syntax highlighting.",
-        "file": "content/resources/vscode-extensions.md",
-        "size": "long"
-    },
-    {
-        "id": "productivity-stack-2026",
-        "title": "My 2026 Productivity Stack",
-        "date": "Jan 28, 2026",
-        "thumbnail": "src/assets/images/resources/productivity-stack.png",
-        "tags": [
-            "Workflow",
-            "Apps"
-        ],
-        "snippet": "The software and hardware tools I use to stay organized and efficient. Includes calendar management, task tracking, and note-taking systems.",
-        "file": "content/resources/productivity-stack.md",
-        "size": "normal"
-    },
-    {
-        "id": "coding-fonts",
-        "title": "Top 5 Aesthetic Fonts",
-        "date": "Feb 01, 2026",
-        "thumbnail": "src/assets/images/resources/coding-fonts.png",
-        "tags": [
-            "Design",
-            "Setup"
-        ],
-        "snippet": "Typography matters in code. I explore five monospaced fonts that offer excellent readability and ligature support.",
-        "file": "content/resources/coding-fonts.md",
-        "size": "normal"
-    },
-    {
-        "id": "system-design-resources",
-        "title": "System Design Guide",
+        "id": "system-design-primer",
+        "title": "System Design Primer",
         "date": "Feb 05, 2026",
         "thumbnail": "src/assets/images/resources/system-design.png",
         "tags": [
-            "Backend",
-            "Architecture"
+            "Architecture",
+            "Scalability"
         ],
-        "snippet": "A comprehensive collection of guides, papers, and case studies for mastering large-scale distributed system architecture.",
-        "file": "content/resources/system-design.md",
+        "snippet": "My go-to reference for designing large-scale distributed systems. Covers CAP theorem, load balancing, and consistent hashing.",
+        "file": "content/resources/system-design-primer.md",
         "size": "wide"
+    },
+    {
+        "id": "postgresql-internals",
+        "title": "PostgreSQL Internals",
+        "date": "Jan 28, 2026",
+        "thumbnail": "src/assets/images/resources/vscode-extensions.png",
+        "tags": [
+            "Database",
+            "Deep Dive"
+        ],
+        "snippet": "Understanding MVCC, WAL, and Indexing strategies in Postgres. Essential for optimizing query performance.",
+        "file": "content/resources/postgresql-internals.md",
+        "size": "long"
+    },
+    {
+        "id": "effective-go",
+        "title": "Effective Go Patterns",
+        "date": "Jan 20, 2026",
+        "thumbnail": "src/assets/images/resources/coding-fonts.png",
+        "tags": [
+            "Golang",
+            "Concurrency"
+        ],
+        "snippet": "Best practices for writing idiomatic Go. A focus on goroutines and channel management for high-throughput services.",
+        "file": "content/resources/effective-go.md",
+        "size": "normal"
+    },
+    {
+        "id": "linux-kernel-map",
+        "title": "Linux Kernel Map",
+        "date": "Feb 01, 2026",
+        "thumbnail": "src/assets/images/resources/productivity-stack.png",
+        "tags": [
+            "OS",
+            "Kernel"
+        ],
+        "snippet": "Navigating the subsystems of the Linux Kernel. Bridging the gap between user space and kernel space.",
+        "file": "content/resources/linux-kernel-map.md",
+        "size": "normal"
     }
 ]

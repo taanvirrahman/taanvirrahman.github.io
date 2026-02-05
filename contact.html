@@ -38,9 +38,9 @@
                     hello<span class="text-accent-indigo">.</span>
                 </h1>
                 <p class="text-secondary/70 text-lg md:text-xl font-light max-w-lg mx-auto leading-relaxed">
-                    Have an idea or project? Let's collaborate.
+                    Recruiting for Backend Engineering roles?
                     <br class="hidden md:block" />
-                    Send an email to
+                    Reach out directly at
                     <button onclick="copyEmail(this)"
                         class="group inline-flex items-center gap-2 text-primary font-medium border-b border-primary/10 hover:border-accent-indigo transition-all cursor-pointer">
                         <span>mailtanvirrahman@gmail.com</span>
@@ -73,10 +73,10 @@
                 </div>
 
                 <div class="pt-6">
-                    <button type="submit" id="submit-btn"
-                        class="w-full bg-primary text-main font-bold py-5 rounded-2xl hover:bg-accent-indigo hover:text-white hover:shadow-2xl hover:shadow-accent-indigo/20 transition-all duration-300 transform active:scale-[0.98] flex items-center justify-center gap-3">
+                    <button type="submit" id="submit-btn" class="btn btn-primary w-full group py-5">
                         <span>Send Message</span>
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="22" y1="2" x2="11" y2="13" />
                             <polygon points="22 2 15 22 11 13 2 9 22 2" />
                         </svg>
@@ -165,23 +165,20 @@
                     console.log('SUCCESS!', response.status, response.text);
                     // Success State
                     btn.innerHTML = '<span class="text-white">Message Sent!</span>';
-                    btn.classList.remove('bg-primary', 'text-main');
-                    btn.classList.add('bg-accent-emerald', 'text-white');
+                    btn.classList.add('btn-success');
 
                     setTimeout(() => {
                         // Reset Form
                         e.target.reset();
                         btn.innerHTML = originalContent;
-                        btn.classList.remove('opacity-70', 'cursor-not-allowed', 'bg-accent-emerald', 'text-white');
-                        btn.classList.add('bg-primary', 'text-main');
+                        btn.classList.remove('opacity-70', 'cursor-not-allowed', 'btn-success');
                         btn.disabled = false;
                     }, 3000);
                 }, (err) => {
                     // Error State
                     console.error('FAILED...', err);
                     btn.innerHTML = '<span>Failed to Send</span>';
-                    btn.classList.remove('bg-primary', 'text-main');
-                    btn.classList.add('bg-accent-rose', 'text-white');
+                    btn.classList.add('btn-error');
 
                     // More detailed error message
                     let errorMsg = "Failed to send message.\n\n";
@@ -202,8 +199,7 @@
 
                     setTimeout(() => {
                         btn.innerHTML = originalContent;
-                        btn.classList.remove('opacity-70', 'cursor-not-allowed', 'bg-accent-rose', 'text-white');
-                        btn.classList.add('bg-primary', 'text-main');
+                        btn.classList.remove('opacity-70', 'cursor-not-allowed', 'btn-error');
                         btn.disabled = false;
                     }, 3000);
                 });

@@ -27,18 +27,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const papers = await model.fetchResearchPapers();
-        if (papers) {
-            view.renderResearchList(papers);
+        if (papers && papers.length > 0) {
+            view.renderResearchList(papers.slice(0, 3));
             // Observe papers
             document.querySelectorAll("#research-list .reveal").forEach(el => observeReveal(el));
         }
 
-        const posts = await model.fetchBlogPosts();
-        if (posts) {
-            view.renderLatestNotes(posts);
-            // Observe notes
-            document.querySelectorAll("#latest-notes-grid .reveal").forEach(el => observeReveal(el));
-        }
     } catch (error) {
         console.error("About page initialization failed:", error);
     }

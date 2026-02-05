@@ -1,46 +1,46 @@
 {
     "skills": [
         {
-            "category": "Programming Languages",
+            "category": "Backend Engineering",
             "items": [
-                "C/C++",
+                "Golang",
                 "Java",
-                "Python",
-                "C#",
-                "Golang"
+                "C++",
+                "gRPC"
             ]
         },
         {
-            "category": "Web Development",
+            "category": "Infrastructure & Cloud",
             "items": [
-                "HTML",
-                "CSS",
-                "JavaScript",
-                "PHP"
+                "Docker",
+                "Kubernetes",
+                "AWS",
+                "Linux"
             ]
         },
         {
             "category": "Databases",
             "items": [
+                "PostgreSQL",
                 "MySQL",
-                "PostgreSQL"
-            ]
-        },
-        {
-            "category": "Tools & Technologies",
-            "items": [
-                "Git",
-                "Linux",
-                "Agile Methodologies"
+                "Redis"
             ]
         },
         {
             "category": "Core Competencies",
             "items": [
+                "System Design",
+                "Distributed Systems",
                 "Data Structures",
-                "Algorithms",
-                "Object-Oriented Programming",
-                "Software Development"
+                "Algorithms"
+            ]
+        },
+        {
+            "category": "Frontend (Familiar)",
+            "items": [
+                "JavaScript",
+                "HTML/CSS",
+                "React"
             ]
         }
     ],
@@ -107,16 +107,16 @@
     ],
     "about": {
         "hero": {
-            "label": "Discovery",
-            "title": "about",
-            "highlight": "me",
-            "lead": "Building efficient backend systems with a focus on concurrency and minimalist logic.",
-            "bio": "I'm currently exploring distributed systems, concurrency patterns, and the art of making complex things simple. Beyond code, I find clarity through photography and thoughtful visual design."
+            "label": "Engineering",
+            "title": "system",
+            "highlight": "design",
+            "lead": "Backend Engineer and Computer Science Student (Major in Software Engineering) at AIUB. Obsessed with concurrency, data consistency, and building scalable infrastructure.",
+            "bio": "I don't just write code; I design systems. Currently diving deep into distributed architectures (Go/Java) and database internals. My goal is to build software that is robust, performant, and maintainable."
         },
         "quickFacts": [
             {
                 "id": "base",
-                "label": "Base",
+                "label": "Location",
                 "value": "Dhaka, Bangladesh",
                 "icon": "map"
             },
@@ -129,7 +129,7 @@
             {
                 "id": "focus",
                 "label": "Focus",
-                "value": "Backend Engineering",
+                "value": "Backend Systems",
                 "icon": "code"
             }
         ]

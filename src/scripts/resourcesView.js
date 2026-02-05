@@ -1,4 +1,4 @@
-import { renderItemList, renderPopularList as renderPopular, initToggle, showItem, hideItem } from "./viewUtils.js";
+import { renderItemList, renderPopularList as renderPopular, showItem, hideItem } from "./viewUtils.js";
 
 export const elements = {};
 
@@ -8,7 +8,6 @@ export const refreshResourceElements = () => {
     elements.closeResource = document.getElementById("close-resource");
     elements.copyLinkResource = document.getElementById("copy-link-resource");
     elements.markdownContainerResource = document.getElementById("markdown-container-resource");
-    elements.headlinesToggle = document.getElementById("headlines-toggle");
     elements.listingHeader = document.querySelector("main header");
     elements.listingGrid = document.querySelector(".resources-page-grid");
     elements.popularResourceList = document.getElementById("popular-resource-list");
@@ -23,7 +22,6 @@ export const renderResourceList = (resources) => {
         showThumbnails: true,
         defaultSnippet: 'Exploring the boundaries of technical innovation and design excellence...'
     });
-    initToggle(elements.headlinesToggle);
 };
 
 export const renderPopularList = (resources) => {

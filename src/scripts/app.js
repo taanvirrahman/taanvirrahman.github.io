@@ -49,7 +49,7 @@ const handlePageLoad = () => {
     globalThis.addEventListener("load", () => {
         // Accuracy fix: ensure we use the early timestamp from index.html if available
         const startTime = globalThis.splashStartTime || Date.now();
-        const minDelay = 1500; // Minimum splash duration
+        const minDelay = 500; // Reduced splash duration
         const elapsed = Date.now() - startTime;
         const remaining = Math.max(0, minDelay - elapsed);
 
