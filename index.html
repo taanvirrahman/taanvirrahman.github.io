@@ -12,25 +12,22 @@
   <!-- Preload critical assets -->
   <link rel="preload" href="src/assets/images/herobg.jpg" as="image" fetchpriority="high" />
 
-  <!-- Preconnect to external origins -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-
-  <!-- Fonts with display swap for better LCP -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
 
-  <!-- Main stylesheet -->
+  <!-- Main Styles -->
   <link rel="stylesheet" href="src/styles/style.css" />
 
-  <!-- Tailwind Play CDN -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="src/scripts/tailwind-config.js"></script>
 
+  <!-- Critical CSS for splash screen and theme -->
   <style>
-    /* Critical CSS: Instant Splash Screen & Theme-Aware Background */
     :root {
       --bg-main: #0a0a0a;
       --text-primary: #ffffff;
@@ -45,9 +42,9 @@
       background: var(--bg-main);
       margin: 0;
       overflow: hidden;
-      transition: background-color 0s;
     }
 
+    /* Lock scroll initially */
     .splash-screen {
       position: fixed;
       inset: 0;
@@ -58,63 +55,51 @@
       background: var(--bg-main);
     }
 
-    .splash-curtain {
-      position: absolute;
-      inset: 0;
-      background: var(--bg-main);
-      z-index: -1;
+    /* FIX: Allow scrolling when loaded */
+    body.loaded {
+      overflow: auto !important;
     }
 
     .splash-text {
-      font-size: clamp(2.5rem, 10vw, 5rem);
-      font-weight: 700;
+      font-family: serif;
+      font-size: clamp(3rem, 15vw, 6rem);
+      font-weight: 300;
       color: var(--text-primary);
-      display: flex;
       opacity: 0;
-      animation: fadeIn 0.5s ease forwards 0.2s;
+      animation: initialFade 0.3s ease forwards;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
+    @keyframes initialFade {
       to {
         opacity: 1;
-        transform: translateY(0);
       }
     }
   </style>
 
   <script>
+    // Immediate Theme Application
     (function () {
       const savedTheme = localStorage.getItem('theme');
       const prefersDark = globalThis.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-      document.documentElement.dataset.theme = theme;
+      document.documentElement.dataset.theme = savedTheme || (prefersDark ? 'dark' : 'light');
       globalThis.splashStartTime = Date.now();
     })();
   </script>
 
-  <!-- Defer non-critical scripts -->
+  <!-- Defer Parsing -->
   <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
-  <!-- Premium Splash Screen -->
+  <!-- Splash Screen -->
   <div id="splash-screen" class="splash-screen">
     <div class="splash-curtain"></div>
     <div class="splash-content">
       <div class="splash-text-wrapper">
         <div class="splash-text">
-          <span class="letter">t</span>
-          <span class="letter">a</span>
-          <span class="letter">n</span>
-          <span class="letter">v</span>
-          <span class="letter">i</span>
-          <span class="letter">r</span>
+          <span class="letter">t</span><span class="letter">a</span><span class="letter">n</span>
+          <span class="letter">v</span><span class="letter">i</span><span class="letter">r</span>
           <span class="dot">.</span>
         </div>
       </div>
@@ -125,115 +110,71 @@
     </div>
   </div>
 
+  <!-- Scroll Progress -->
   <div class="scroll-progress-container">
     <div class="scroll-progress-bar" id="progress-bar"></div>
   </div>
+
+  <!-- Header -->
   <header class="header"></header>
 
-  <!-- Hero backgrounds are now integrated directly into the hero section for better performance and z-control -->
-
+  <!-- Hero Section -->
   <section
     class="relative h-screen flex items-center overflow-hidden bg-main transition-colors duration-500 hero reveal group"
-    id="hero" aria-label="Hero section">
-    <!-- Hero Background Context -->
+    id="hero">
+    <!-- Hero Background -->
     <div class="absolute inset-0 z-0">
-      <!-- Base Image -->
       <img src="src/assets/images/herobg.jpg" alt=""
         class="w-full h-full object-cover opacity-50 dark:opacity-40 group-hover:scale-105 transition-transform duration-1000"
         fetchpriority="high" />
-
-      <!-- Background Grid Texture -->
       <div class="absolute inset-0 opacity-[0.3] dark:opacity-20"
         style="background-image: radial-gradient(var(--border-main) 1.5px, transparent 1.5px); background-size: 32px 32px;">
       </div>
-
-      <!-- Dynamic Mesh Ambient Glow (Nested for masking) -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          class="absolute -top-[10%] -left-[10%] w-[70%] h-[70%] bg-accent-indigo/20 dark:bg-accent-indigo/15 rounded-full blur-[120px] animate-pulse">
-        </div>
-        <div
-          class="absolute top-[20%] right-[-5%] w-[40%] h-[40%] bg-accent-violet/10 dark:bg-accent-violet/10 rounded-full blur-[100px] animate-pulse"
-          style="animation-duration: 10s;"></div>
-        <div
-          class="absolute -bottom-[10%] left-[20%] w-[50%] h-[50%] bg-accent-emerald/10 dark:bg-accent-emerald/5 rounded-full blur-[100px] animate-pulse"
-          style="animation-duration: 8s;"></div>
-      </div>
-
-      <!-- Masking Gradient: This blends everything together -->
       <div class="absolute inset-0 bg-gradient-to-b from-main via-transparent to-main"></div>
     </div>
 
     <div class="container relative z-10">
       <div class="max-w-7xl">
-
-        <!-- Left Aligned Hero Content -->
         <div class="hero-content flex flex-col items-start text-left">
-          <!-- Status Badges -->
+          <!-- Badges -->
           <div class="flex flex-wrap items-center gap-4 mb-10">
-            <div
-              class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-accent-emerald/10 border border-accent-emerald/20 backdrop-blur-md">
-              <span class="relative flex h-2 w-2">
-                <span
-                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-emerald/40 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span class="text-[10px] font-bold text-accent-emerald uppercase tracking-[0.2em]">Open to Work</span>
-            </div>
 
             <a href="#" id="latest-note-badge"
               class="group flex items-center gap-2 px-4 py-1.5 rounded-full bg-tertiary/20 border border-[var(--border-main)] text-[11px] font-medium hover:bg-secondary transition-all duration-300 hero-badge hidden">
               <span class="text-accent-indigo font-bold uppercase tracking-wider">Note</span>
               <span
                 class="text-[var(--text-secondary)] group-hover:text-primary transition-colors badge-text">Loading...</span>
-              <span
-                class="opacity-0 group-hover:opacity-100 transition-all transform -translate-x-1 group-hover:translate-x-0">→</span>
             </a>
           </div>
 
-          <!-- Refined Personal Headline -->
+          <!-- Title -->
           <h1
             class="text-6xl md:text-8xl lg:text-[112px] font-extrabold tracking-tight leading-[0.85] text-primary mb-10 hero-title reveal">
             hey, i'm <span
               class="bg-gradient-to-r from-accent-indigo to-accent-violet bg-clip-text text-transparent italic font-serif font-light opacity-90">tanvir</span>.
           </h1>
 
-          <!-- Minimalist Description -->
+          <!-- Description -->
           <p
             class="max-w-2xl text-lg md:text-2xl text-[var(--text-secondary)] font-light leading-relaxed mb-12 hero-description reveal opacity-90">
             Computer Science student and Backend Engineer exploring the technical
             rigor of <span class="italic font-serif opacity-80">distributed systems</span> and minimalist design.
           </p>
 
-          <!-- Action Buttons -->
+          <!-- Actions -->
           <div class="flex flex-wrap items-center gap-5 hero-actions reveal">
             <a href="#" id="say-hi-btn"
-              class="group relative inline-flex items-center justify-center px-9 py-4 bg-primary text-main font-bold rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl dark:hover:shadow-[0_0_40px_rgba(255,255,255,0.08)]">
-              <span class="relative z-10 flex items-center gap-2">
-                Say Hello
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                  class="transition-transform duration-500 group-hover:translate-x-1" stroke="currentColor"
-                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14m-7-7 7 7-7 7" />
-                </svg>
-              </span>
+              class="group relative inline-flex items-center justify-center px-9 py-4 bg-primary text-main font-bold rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl">
+              <span class="relative z-10 flex items-center gap-2">Say Hello</span>
               <div
                 class="absolute inset-0 bg-accent-indigo scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out">
               </div>
             </a>
+            <a href="src/assets/docs/tanvir-rahman-resume.pdf" target="_blank" id="resume-btn"
+              class="group inline-flex items-center gap-3 px-9 py-4 bg-tertiary border border-[var(--border-main)] text-primary font-semibold rounded-2xl hover:bg-secondary transition-all">Get
+              Resume</a>
 
-            <a href="src/assets/docs/tanvir-rahman-resume.pdf" id="resume-btn" target="_blank" rel="noopener noreferrer"
-              class="group inline-flex items-center gap-3 px-9 py-4 bg-tertiary border border-[var(--border-main)] text-primary font-semibold rounded-2xl hover:bg-secondary hover:border-accent-indigo/30 transition-all duration-300">
-              Get Resume
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                class="text-[var(--text-muted)] group-hover:text-primary transition-all transform group-hover:scale-110"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-            </a>
-
+            <!-- Inline Message Input (Hidden by default) -->
             <div class="message-container hidden" id="message-container">
               <button class="back-btn" id="back-btn">←</button>
               <input type="text" id="message-input" placeholder="write something..." autocomplete="off" />
@@ -245,27 +186,168 @@
     </div>
   </section>
 
-  <!-- Content has been moved to dedicated pages (about.html and projects.html) -->
-
-
-
-  <!-- Latest Notes Preview -->
-  <section class="latest-notes-section">
+  <!-- Projects Section -->
+  <section class="py-32 bg-main relative z-10" id="featured-work">
     <div class="container">
-      <div class="latest-notes-header">
-        <h2 class="section-title-small">latest notes.</h2>
-        <a href="notes.html" class="view-all-link">view all →</a>
+      <div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+        <div class="max-w-xl">
+          <p class="text-[10px] font-bold text-accent-indigo uppercase tracking-[0.4em] mb-4">Portfolio Preview</p>
+          <h2 class="text-4xl md:text-6xl font-bold tracking-tighter text-primary leading-none">
+            Selected <span class="font-serif italic font-light text-accent-indigo">works</span>.
+          </h2>
+        </div>
+        <a href="projects.html"
+          class="flex items-center gap-3 text-xs font-black uppercase tracking-widest text-secondary hover:text-primary transition-colors">View
+          full index →</a>
       </div>
-      <div class="latest-notes-grid">
-        <!-- Rendered by JS -->
+      <!-- Bento Grid - Rendered via JS -->
+      <div class="bento-grid" id="featured-projects-grid">
+        <!-- JS populates this -->
       </div>
     </div>
   </section>
 
+  <!-- About Preview Section (ID added for hydration fix) -->
+  <section class="py-32 bg-secondary/10 border-y border-main/5 relative overflow-hidden" id="about-preview">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 gap-20 items-center">
+        <div>
+          <!-- IDs added for hydration -->
+          <h2 class="text-3xl md:text-5xl font-serif italic text-primary mb-10 leading-tight" id="about-lead">
+            Building digital systems with <span class="text-accent-indigo">technical rigor</span>.
+          </h2>
+          <p class="text-lg text-secondary leading-relaxed mb-10 opacity-80" id="about-bio">
+            Loading bio...
+          </p>
+          <div class="flex gap-10">
+            <div>
+              <div class="text-3xl font-bold text-primary mb-1">20+</div>
+              <div class="text-[10px] uppercase tracking-widest text-secondary/60 font-black">Global Projects</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-primary mb-1">04+</div>
+              <div class="text-[10px] uppercase tracking-widest text-secondary/60 font-black">Tech Certs</div>
+            </div>
+          </div>
+        </div>
+        <!-- Interactive Skills Mini Grid -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="p-8 bg-main/40 border border-main/10 rounded-2xl backdrop-blur-sm">
+            <h3 class="font-bold text-lg mb-2">Backend</h3>
+            <p class="text-xs text-secondary/60 leading-relaxed">Node.js, Python, Go</p>
+          </div>
+          <div class="p-8 bg-main/40 border border-main/10 rounded-2xl backdrop-blur-sm">
+            <h3 class="font-bold text-lg mb-2">Cloud</h3>
+            <p class="text-xs text-secondary/60 leading-relaxed">Docker, AWS</p>
+          </div>
+          <div class="p-8 bg-main/40 border border-main/10 rounded-2xl backdrop-blur-sm">
+            <h3 class="font-bold text-lg mb-2">Frontend</h3>
+            <p class="text-xs text-secondary/60 leading-relaxed">React, Next.js</p>
+          </div>
+          <div class="p-8 bg-main/40 border border-main/10 rounded-2xl backdrop-blur-sm">
+            <h3 class="font-bold text-lg mb-2">DevOps</h3>
+            <p class="text-xs text-secondary/60 leading-relaxed">CI/CD, Terraform</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Latest Notes -->
+  <section class="py-32 bg-main">
+    <div class="container text-center mb-20">
+      <h2 class="text-xs font-black uppercase tracking-[0.5em] text-secondary/40 mb-4">Latest Insights</h2>
+      <h3 class="text-4xl md:text-5xl font-bold tracking-tighter text-primary">Notes on engineering & <span
+          class="font-serif italic font-light text-accent-indigo">life</span>.</h3>
+    </div>
+    <div class="container">
+      <div class="latest-notes-grid"></div>
+      <div class="mt-20 text-center">
+        <a href="notes.html"
+          class="inline-flex px-10 py-4 border border-main/20 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-primary hover:text-main transition-all">Explore
+          technical notes</a>
+      </div>
+    </div>
+  </section>
 
-  <footer class="footer" id="contact"></footer>
+  <!-- Collaboration CTA -->
+  <section class="py-32 bg-secondary/10 relative overflow-hidden">
+    <div class="container text-center relative z-10">
+      <h2 class="text-4xl md:text-7xl font-serif italic text-primary mb-12">Have a complex problem to <span
+          class="text-accent-indigo">solve?</span></h2>
+      <a href="contact.html"
+        class="inline-flex items-center gap-4 px-12 py-6 bg-primary text-main font-black rounded-2xl hover:bg-accent-indigo transition-all duration-500">
+        Initiate Collaboration
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M5 12h14m-7-7 7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </section>
 
+  <!-- Footer - Static Content for SEO & Performance -->
+  <footer class="footer" id="contact">
+    <div class="relative py-24 overflow-hidden bg-main font-sans">
+      <div
+        class="absolute bottom-[-5%] left-[-2%] z-0 select-none pointer-events-none opacity-[0.06] dark:opacity-[0.02]">
+        <h2 class="text-[12rem] md:text-[18rem] font-serif italic tracking-tighter leading-none">tanvir</h2>
+      </div>
+      <div class="container relative z-10 mx-auto px-6 max-w-7xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+          <div class="lg:col-span-6 space-y-8">
+            <div class="space-y-4">
+              <a href="index.html" class="text-5xl font-serif italic tracking-tighter text-primary">tanvir<span
+                  class="text-accent-indigo">.</span></a>
+              <p class="text-lg md:text-xl font-light text-primary/90 leading-snug tracking-tight max-w-md">Architecting
+                the <span class="italic text-accent-indigo font-serif">invisible systems</span> powering the web.</p>
+            </div>
+            <div class="flex flex-col space-y-3">
+              <div class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-accent-emerald"></span><span
+                  class="text-[9px] font-bold uppercase tracking-[0.4em] text-secondary/60">Currently in Dhaka,
+                  BD</span></div>
+              <a href="mailto:mailtanvirrahman@gmail.com"
+                class="text-[9px] font-black uppercase tracking-[0.4em] text-accent-indigo hover:text-primary transition-colors py-1 group w-fit">Get
+                in Touch →</a>
+            </div>
+          </div>
+          <div class="lg:col-span-6 grid grid-cols-3 gap-4 lg:gap-8">
+            <div class="space-y-6">
+              <h4 class="text-[9px] font-bold uppercase tracking-[0.5em] text-secondary/30">Explore</h4>
+              <ul class="flex flex-col gap-4 text-[11px] font-bold uppercase tracking-[0.15em] text-secondary/80">
+                <li><a href="about.html" class="hover:text-primary">About</a></li>
+                <li><a href="projects.html" class="hover:text-primary">Projects</a></li>
+                <li><a href="notes.html" class="hover:text-primary">Writing</a></li>
+              </ul>
+            </div>
+            <div class="space-y-6">
+              <h4 class="text-[9px] font-bold uppercase tracking-[0.5em] text-secondary/30">Social</h4>
+              <ul class="flex flex-col gap-4 text-[11px] font-bold uppercase tracking-[0.15em] text-secondary/80">
+                <li><a href="https://github.com/taanvirrahman" class="hover:text-primary">GitHub</a></li>
+                <li><a href="https://x.com/tanvir_tweet" class="hover:text-primary">Twitter</a></li>
+                <li><a href="https://www.linkedin.com/in/muhammud-tanvir-rahman/"
+                    class="hover:text-primary">LinkedIn</a></li>
+              </ul>
+            </div>
+            <div class="space-y-6">
+              <h4 class="text-[9px] font-bold uppercase tracking-[0.5em] text-secondary/30">Library</h4>
+              <ul class="flex flex-col gap-4 text-[11px] font-bold uppercase tracking-[0.15em] text-secondary/80">
+                <li><a href="photography.html" class="hover:text-primary transition-all">Photography</a></li>
+                <li><a href="resources.html" class="hover:text-primary transition-all">Resources</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="mt-20 pt-8 border-t border-main/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div class="flex gap-8 text-[9px] font-bold uppercase tracking-[0.4em] text-secondary/20"><span>© 2026
+              TANVIR</span><span>Precision Build</span></div>
+          <div class="text-[8px] font-bold uppercase tracking-[0.4em] text-secondary/20 font-mono">23.8103N // 90.4125E
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main Entry Module -->
   <script type="module" src="src/scripts/main.js"></script>
 </body>
 

@@ -1,7 +1,6 @@
 import { initComponents } from "./components.js";
 import { initEffects } from "./effects.js";
 import { initTheme } from "./theme.js";
-import { initNewsletter } from "./newsletter.js";
 import * as model from "./model.js";
 import * as view from "./view.js";
 
@@ -25,8 +24,6 @@ export const initApp = () => {
     // 5. Interactive Effects (Scroll, Reveal, Canvas)
     initEffects();
 
-    // 6. Marketing/Newsletter
-    initNewsletter();
 
     // 7. Global Page Load Handling (Splash Screen & Reveal)
     handlePageLoad();

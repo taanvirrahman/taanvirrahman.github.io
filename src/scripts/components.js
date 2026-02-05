@@ -71,7 +71,7 @@ export const templates = {
       <h3 class="skills-cat-title">${group.category}</h3>
       <div class="skills-items">
         ${group.items
-        .map((item) => `<div class="skill-item" tabindex="0">${item}</div>`)
+        .map((item) => `<div class="skill-item">${item}</div>`)
         .join("")}
       </div>
     </div>
@@ -105,7 +105,8 @@ export const templates = {
 
     // 1. PROJECT (BENTO) LAYOUT
     if (layout === 'project') {
-      const sizeClass = size === "large" ? "bento-large" : size === "wide" ? "bento-wide" : "bento-normal";
+      const sizeMap = { large: "bento-large", wide: "bento-wide" };
+      const sizeClass = sizeMap[size] || "bento-normal";
       return `
         <a href="${url}" class="bento-card ${sizeClass} github-project reveal group" data-tilt>
           <div class="bento-content">
@@ -227,7 +228,7 @@ const components = {
   `,
 
   footer: `
-    <footer class="relative pt-24 pb-12 overflow-hidden bg-main font-sans" role="contentinfo">
+    <div class="relative py-24 overflow-hidden bg-main font-sans">
       <!-- Ghost Typography (Dynamic Theme Opacity) -->
       <div class="absolute bottom-[-5%] left-[-2%] z-0 select-none pointer-events-none opacity-[0.06] dark:opacity-[0.02]">
         <h2 class="text-[12rem] md:text-[18rem] font-serif italic tracking-tighter leading-none">tanvir</h2>
@@ -320,7 +321,7 @@ const components = {
            </div>
         </div>
       </div>
-    </footer>
+    </div>
   `
 };
 

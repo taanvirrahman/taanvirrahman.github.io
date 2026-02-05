@@ -159,7 +159,7 @@ export const hideBlogPost = () => {
 
 export const showMessageInput = () => {
   elements.sayHiBtn.classList.add("hidden");
-  if (elements.resumeBtn) elements.resumeBtn.classList.add("hidden");
+  // Resume button stays visible
   elements.messageContainer.classList.remove("hidden");
   elements.messageInput.focus();
 };
@@ -167,7 +167,7 @@ export const showMessageInput = () => {
 export const hideMessageInput = () => {
   elements.messageContainer.classList.add("hidden");
   elements.sayHiBtn.classList.remove("hidden");
-  if (elements.resumeBtn) elements.resumeBtn.classList.remove("hidden");
+  // Resume button was never hidden
   elements.messageInput.value = "";
   elements.sendBtn.classList.add("hidden");
 };
@@ -250,6 +250,16 @@ export const triggerConfetti = () => {
 export const renderProjects = (projects) => {
   if (!elements.bentoGrid || !projects) return;
 
+
+  if (projects.length === 0) {
+    elements.bentoGrid.innerHTML = `
+      <div class="col-span-full py-12 text-center text-secondary/40 font-mono text-sm capitalize">
+        Projects are being updated. Check back soon.
+      </div>
+    `;
+    return;
+  }
+
   elements.bentoGrid.innerHTML = projects
     .map((project) => templates.card(project, 'project'))
     .join("");
@@ -276,7 +286,7 @@ export const renderSkills = (skills) => {
 };
 
 export const applyTheme = (theme) => {
-  document.documentElement.setAttribute("data-theme", theme);
+  document.documentElement.dataset.theme = theme;
 
   // Update hljs theme dynamically
   const hljsThemeLink = document.getElementById("hljs-theme");
@@ -374,10 +384,8 @@ export const renderLatestNotes = (posts) => {
     return;
   }
 
-  // Show only 3 latest
-  const latestPosts = posts.slice(0, 3);
-
-  elements.latestNotesGrid.innerHTML = latestPosts
+  // Controller already handles slicing
+  elements.latestNotesGrid.innerHTML = posts
     .map((post) => templates.card(post, 'note'))
     .join("");
 };
@@ -435,10 +443,7 @@ export const renderAbout = (aboutData) => {
     const bioEl = document.getElementById("about-bio");
 
     if (leadEl) leadEl.innerHTML = hero.lead;
-    else console.warn("Element #about-lead not found");
-
     if (bioEl) bioEl.innerHTML = `<p>${hero.bio}</p>`;
-    else console.warn("Element #about-bio not found");
   }
 
   // 2. Render Quick Facts Grid
