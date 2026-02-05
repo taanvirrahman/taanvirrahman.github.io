@@ -46,12 +46,7 @@
     transition: all 1s ease;
 }
 
-[data-theme="light"] .about-section::before {
-    opacity: 0.35;
-    /* Significant boost for Light Mode */
-    mix-blend-mode: multiply;
-    filter: grayscale(100%) contrast(1.1) brightness(1.1);
-}
+
 
 .about-container {
     position: relative;
@@ -142,9 +137,7 @@
     opacity: 0.45;
 }
 
-[data-theme="light"] .about-section.active::before {
-    opacity: 0.35;
-}
+
 
 .about-section.active .about-content>*:nth-child(1) {
     opacity: 1;

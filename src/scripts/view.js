@@ -38,8 +38,9 @@ export const refreshElements = () => {
   elements.bentoGrid = document.querySelector(".bento-grid");
   elements.skillsGrid = document.querySelector(".skills-grid");
   elements.certificationsGrid = document.querySelector(".certifications-grid");
-  elements.themeToggle = document.getElementById("theme-toggle");
+
   elements.researchList = document.getElementById("research-list");
+  elements.recommendedList = document.getElementById("recommended-list");
   elements.educationList = document.getElementById("education-list");
   elements.latestNotesGrid = document.querySelector(".latest-notes-grid");
   elements.photoGallery = document.getElementById("gallery");
@@ -322,32 +323,69 @@ export const renderResearchList = (papers) => {
     return;
   }
 
-  elements.researchList.innerHTML = papers
-    .map(
-      (paper, index) => `
-    <article class="research-item reveal" style="transition-delay: ${index * 100}ms">
-      <div class="research-meta">
-        <span class="research-venue">${paper.venue}</span>
-        <span class="research-year">${paper.year}</span>
-      </div>
-      <h3 class="research-title">${paper.title}</h3>
-      <p class="research-authors">${paper.authors}</p>
-      <p class="research-abstract">${paper.abstract}</p>
-      <div class="research-tags">
-        ${paper.tags.map((tag) => `<span class="research-tag">${tag}</span>`).join("")}
-      </div>
-      <div class="research-links">
-        ${Object.entries(paper.links)
-          .map(
-            ([label, url]) =>
-              `<a href="${url}" class="research-link" target="_blank">${label} ↗</a>`,
-          )
-          .join("")}
-      </div>
-    </article>
-  `,
-    )
-    .join("");
+  // Use List View from Projects (Global Style)
+  elements.researchList.innerHTML = `
+    <div class="bento-grid list-view">
+        ${papers.map((paper, index) => `
+            <div class="bento-card reveal" style="transition-delay: ${index * 100}ms">
+                <!-- Col 1: Meta -->
+                <div class="bento-header">
+                    <span class="bento-tag">${paper.venue}</span>
+                    <span class="bento-desc" style="font-family: var(--font-mono); font-size: 0.8rem;">${paper.year}</span>
+                </div>
+                
+                <!-- Col 2: Main Content -->
+                <div class="bento-content">
+                    <h3 class="bento-title">${paper.title}</h3>
+                    <p class="bento-desc" style="font-style: italic; margin-bottom: 0.5rem;">${paper.authors}</p>
+                    <p class="bento-desc">${paper.abstract}</p>
+                    <div class="flex gap-2 mt-2">
+                        ${paper.tags.map(tag => `<span class="text-xs border border-neutral-800 px-2 py-1 rounded-full text-neutral-500 uppercase tracking-wider">${tag}</span>`).join('')}
+                    </div>
+                </div>
+
+                <!-- Col 3: Link -->
+                <div class="flex flex-col gap-2 items-end justify-center">
+                     ${Object.entries(paper.links).map(([label, url]) => `
+                        <a href="${url}" target="_blank" class="bento-link text-sm">${label}</a>
+                     `).join('')}
+                </div>
+            </div>
+        `).join("")}
+    </div>
+  `;
+};
+
+export const renderRecommendedList = (items) => {
+  if (!elements.recommendedList || !items) return;
+
+  if (items.length === 0) {
+    elements.recommendedList.innerHTML =
+      '<p class="loading-indicator">No recommendations found.</p>';
+    return;
+  }
+
+  // Use Standard Bento Grid (Global Style)
+  elements.recommendedList.innerHTML = `
+    <div class="bento-grid">
+        ${items.map((item, index) => `
+            <a href="${item.links.read || item.links.paper || '#'}" target="_blank" class="bento-card reveal group" style="transition-delay: ${index * 100}ms; text-decoration: none;">
+                <div class="bento-content">
+                    <div class="flex justify-between items-start">
+                        <span class="bento-tag">${item.venue || 'Read'}</span>
+                        <span class="text-neutral-600 font-mono text-xs">${item.year}</span>
+                    </div>
+                    
+                    <h3 class="bento-title group-hover:text-white transition-colors">${item.title}</h3>
+                    <p class="bento-desc text-sm">by ${item.authors}</p>
+                    <p class="bento-desc line-clamp-3">${item.abstract}</p>
+                    
+                    <div class="bento-link mt-auto group-hover:translate-x-1 transition-transform">Read Now</div>
+                </div>
+            </a>
+        `).join("")}
+    </div>
+  `;
 };
 
 export const renderEducation = (education) => {

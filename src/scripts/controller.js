@@ -97,11 +97,22 @@ const initDynamicContent = async () => {
   }
 
   // Research list initialization
-  if (view.elements.researchList) {
+  // Research list initialization
+  if (view.elements.researchList || view.elements.recommendedList) {
     const papers = await model.fetchResearchPapers();
-    view.renderResearchList(papers);
 
-    document.querySelectorAll(".research-item.reveal").forEach((el) => {
+    const publications = papers.filter(p => !p.type || p.type === 'publication');
+    const recommendations = papers.filter(p => p.type === 'recommendation');
+
+    if (view.elements.researchList) {
+      view.renderResearchList(publications);
+    }
+
+    if (view.elements.recommendedList) {
+      view.renderRecommendedList(recommendations);
+    }
+
+    document.querySelectorAll(".reveal").forEach((el) => {
       observeReveal(el);
     });
   }

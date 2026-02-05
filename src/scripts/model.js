@@ -15,7 +15,7 @@ const _state = {
   projects: [],
   photos: [],
   cache: new Map(),
-  theme: localStorage.getItem("theme") || "dark",
+  theme: "dark",
   clientIP: "unknown",
 };
 

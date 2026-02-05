@@ -1,6 +1,7 @@
 [
     {
         "id": "neural-logic-2025",
+        "type": "publication",
         "title": "Neural Logic: Bridging Symbolic Reasoning and Gradient Descent",
         "authors": "Tanvir Rahman, A. Smith, J. Doe",
         "venue": "International Conference on Machine Learning (ICML)",
@@ -19,6 +20,7 @@
     },
     {
         "id": "generative-art-glsl",
+        "type": "publication",
         "title": "Procedural Aesthetics: Reactive GLSL Paradigms in Modern Web Art",
         "authors": "Tanvir Rahman",
         "venue": "Web Graphics Symposium (WGS)",
@@ -32,6 +34,54 @@
         "links": {
             "paper": "#",
             "demo": "#"
+        }
+    },
+    {
+        "id": "attention-is-all-you-need",
+        "type": "recommendation",
+        "title": "Attention Is All You Need",
+        "authors": "Vaswani et al.",
+        "venue": "NeurIPS 2017",
+        "year": "2017",
+        "abstract": "The seminal paper introducing the Transformer architecture, replacing recurrent layers with self-attention mechanisms.",
+        "tags": [
+            "NLP",
+            "Deep Learning"
+        ],
+        "links": {
+            "paper": "https://arxiv.org/abs/1706.03762"
+        }
+    },
+    {
+        "id": "unreasonable-effectiveness",
+        "type": "recommendation",
+        "title": "The Unreasonable Effectiveness of Recurrent Neural Networks",
+        "authors": "Andrej Karpathy",
+        "venue": "Blog Post",
+        "year": "2015",
+        "abstract": "A legendary exploration of the capabilities of RNNs in generating text and code.",
+        "tags": [
+            "RNN",
+            "AI History"
+        ],
+        "links": {
+            "read": "http://karpathy.github.io/2015/05/21/rnn-effectiveness/"
+        }
+    },
+    {
+        "id": "distill-gans",
+        "type": "recommendation",
+        "title": "Deconvolution and Checkerboard Artifacts",
+        "authors": "Odena et al. (Distill)",
+        "venue": "Distill.pub",
+        "year": "2016",
+        "abstract": "An interactive explanation of how deconvolution layers can cause artifacts in generated images.",
+        "tags": [
+            "GANs",
+            "Vis"
+        ],
+        "links": {
+            "read": "https://distill.pub/2016/deconv-checkerboard/"
         }
     }
 ]

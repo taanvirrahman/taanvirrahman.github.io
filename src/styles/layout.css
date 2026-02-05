@@ -114,9 +114,7 @@
     }
 }
 
-[data-theme="light"] .ambient-glow {
-    opacity: 0.15;
-}
+
 
 .grid-line {
     width: 1px;

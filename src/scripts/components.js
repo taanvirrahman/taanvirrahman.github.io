@@ -4,8 +4,7 @@
  */
 
 const ICONS = {
-  sun: `<svg class="sun-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
-  moon: `<svg class="moon-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
+
   map: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
   grad: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
   code: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
@@ -93,7 +92,7 @@ export const templates = {
    * Supports Bento (Project), Note, and Resource layouts.
    */
   card: (data, layout = 'note') => {
-    const { id, title, desc, tag, date, url, icon, thumbnail, readingTime, size } = data;
+    const { id, title, desc, tag, date, url, thumbnail, readingTime, size } = data;
 
     // 1. PROJECT (BENTO) LAYOUT
     if (layout === 'project') {
@@ -187,15 +186,12 @@ const components = {
         <ul class="nav-list" role="list">
           <li><a href="about.html" class="nav-link">about</a></li>
           <li><a href="projects.html" class="nav-link">projects</a></li>
+          <li><a href="research.html" class="nav-link">research</a></li>
           <li><a href="notes.html" class="nav-link">notes</a></li>
           <li><a href="resources.html" class="nav-link">resources</a></li>
-          <li><a href="photography.html" class="nav-link">photography</a></li>
           <li><a href="/contact.html" class="nav-link">contact</a></li>
         </ul>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark and light theme" title="Toggle theme">
-          ${ICONS.sun}
-          ${ICONS.moon}
-        </button>
+
         <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-nav">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
@@ -208,9 +204,9 @@ const components = {
         <a href="index.html" class="mobile-nav-link">home</a>
         <a href="about.html" class="mobile-nav-link">about</a>
         <a href="projects.html" class="mobile-nav-link">projects</a>
+        <a href="research.html" class="mobile-nav-link">research</a>
         <a href="notes.html" class="mobile-nav-link">notes</a>
         <a href="resources.html" class="mobile-nav-link">resources</a>
-        <a href="photography.html" class="mobile-nav-link">photography</a>
         <a href="/contact.html" class="mobile-nav-link">contact</a>
       </div>
     </div>

@@ -59,53 +59,7 @@
     }
 }
 
-.theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text-secondary);
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    padding: 0;
-}
 
-.theme-toggle:hover {
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-}
-
-.theme-toggle svg {
-    width: 18px;
-    height: 18px;
-    position: absolute;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Hide icons based on theme */
-[data-theme="light"] .sun-icon {
-    opacity: 0;
-    transform: rotate(90deg) scale(0);
-}
-
-[data-theme="light"] .moon-icon {
-    opacity: 1;
-    transform: rotate(0) scale(1);
-}
-
-:root:not([data-theme="light"]) .sun-icon {
-    opacity: 1;
-    transform: rotate(0) scale(1);
-}
-
-:root:not([data-theme="light"]) .moon-icon {
-    opacity: 0;
-    transform: rotate(-90deg) scale(0);
-}
 
 .nav-link {
     color: var(--text-tertiary);

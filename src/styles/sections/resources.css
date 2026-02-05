@@ -20,24 +20,7 @@
     --toggle-bg-off: var(--neutral-700);
 }
 
-[data-theme="light"] {
-    /* Mapped to Light Mode Global Tokens */
-    --resource-bg: var(--bg-main);
-    --resource-card-bg: transparent;
-    --resource-card-hover: var(--bg-tertiary);
-    --resource-text-headline: var(--text-primary);
-    --resource-text-snippet: var(--text-secondary);
-    --resource-text-meta: var(--text-muted);
-    --resource-border: var(--border-main);
-    --resource-accent: var(--accent-indigo);
-    --resource-thumb-bg: var(--bg-tertiary);
 
-    --sidebar-ad-bg: var(--bg-secondary);
-    --sidebar-ad-border: var(--resource-accent);
-    --sidebar-ad-text: var(--text-secondary);
-
-    --toggle-bg-off: var(--neutral-300);
-}
 
 /* Layout & Containers */
 .resources-page-grid {

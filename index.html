@@ -33,10 +33,7 @@
       --text-primary: #ffffff;
     }
 
-    :root[data-theme="light"] {
-      --bg-main: #fbfbfd;
-      --text-primary: #111112;
-    }
+
 
     body {
       background: var(--bg-main);
@@ -79,9 +76,9 @@
   <script>
     // Immediate Theme Application
     (function () {
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = globalThis.matchMedia('(prefers-color-scheme: dark)').matches;
-      document.documentElement.dataset.theme = savedTheme || (prefersDark ? 'dark' : 'light');
+      // Force Dark Mode
+      document.documentElement.dataset.theme = 'dark';
+      localStorage.setItem('theme', 'dark');
       globalThis.splashStartTime = Date.now();
     })();
   </script>
