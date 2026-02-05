@@ -4,10 +4,10 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 1rem 0;
+    padding: var(--space-4) 0;
     z-index: 100;
     background: transparent;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: var(--transition-base);
 }
 
 .header.scrolled {
@@ -27,11 +27,11 @@
     color: var(--text-primary);
     text-decoration: none;
     font-family: var(--font-serif);
-    font-size: 1.5rem;
+    font-size: var(--text-2xl);
     font-style: italic;
-    letter-spacing: -0.01em;
+    letter-spacing: var(--tracking-tight);
     text-transform: lowercase;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: var(--transition-base);
     display: flex;
     align-items: center;
 }
@@ -44,12 +44,12 @@
 .nav-right {
     display: flex;
     align-items: center;
-    gap: 2.5rem;
+    gap: var(--space-10);
 }
 
 .nav-list {
     display: flex;
-    gap: 2rem;
+    gap: var(--space-8);
     list-style: none;
 }
 
@@ -110,10 +110,10 @@
 .nav-link {
     color: var(--text-tertiary);
     text-decoration: none;
-    font-size: 0.8125rem;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    transition: color 0.2s ease;
+    font-size: var(--text-sm);
+    font-weight: var(--font-normal);
+    letter-spacing: var(--tracking-normal);
+    transition: var(--transition-fast);
 }
 
 .nav-link:hover,
@@ -141,8 +141,8 @@
     width: 22px;
     height: 2px;
     background: var(--text-primary);
-    border-radius: 2px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: var(--radius-sm);
+    transition: var(--transition-base);
 }
 
 .mobile-menu-btn.active .hamburger-line:nth-child(1) {
@@ -194,14 +194,14 @@
 }
 
 .mobile-nav-link {
-    font-size: 2.5rem;
-    font-weight: 600;
+    font-size: var(--text-4xl);
+    font-weight: var(--font-semibold);
     color: var(--text-primary);
     text-decoration: none;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--tracking-tight);
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: var(--transition-base);
 }
 
 .mobile-nav.active .mobile-nav-link {

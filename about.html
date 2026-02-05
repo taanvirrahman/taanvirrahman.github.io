@@ -38,10 +38,23 @@
             <div class="max-w-4xl">
                 <div class="flex flex-col justify-center">
                     <p class="text-[11px] font-bold text-accent-indigo uppercase tracking-[0.4em] mb-6">Discovery</p>
-                    <h1
-                        class="text-6xl md:text-8xl lg:text-[112px] font-extrabold tracking-tighter leading-[0.85] text-primary mb-10">
-                        about <span class="font-serif italic font-light text-accent-indigo opacity-90">me</span>.
-                    </h1>
+                    <div class="flex flex-wrap items-center gap-6 mb-10">
+                        <h1
+                            class="text-6xl md:text-8xl lg:text-[112px] font-extrabold tracking-tighter leading-[0.85] text-primary">
+                            about <span class="font-serif italic font-light text-accent-indigo opacity-90">me</span>.
+                        </h1>
+                        <!-- Floating Status Badge -->
+                        <div
+                            class="inline-flex items-center gap-2 px-5 py-3 bg-accent-emerald/10 border border-accent-emerald/30 rounded-full backdrop-blur-sm animate-pulse-slow">
+                            <span class="relative flex h-2.5 w-2.5">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-emerald opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent-emerald"></span>
+                            </span>
+                            <span class="text-[10px] font-bold text-accent-emerald uppercase tracking-widest">Open for
+                                Work</span>
+                        </div>
+                    </div>
                     <p id="about-lead"
                         class="text-xl md:text-2xl lg:text-3xl text-primary/90 font-medium leading-tight mb-8">
                         Computer Science undergraduate at AIUB, focused on building efficient backend systems
@@ -60,20 +73,20 @@
 
         <!-- Background Portrait Element -->
         <div
-            class="absolute inset-y-0 right-0 w-full lg:w-[60%] z-0 pointer-events-none opacity-20 dark:opacity-40 animate-float overflow-hidden">
+            class="absolute inset-y-0 top-[10%] right-[-5%] w-full lg:w-[50%] z-0 pointer-events-none opacity-70 dark:opacity-70 overflow-hidden">
             <div class="relative w-full h-full">
                 <img src="src/assets/images/about_tanvir.png" alt=""
-                    class="w-full h-full object-cover object-center lg:object-right-top grayscale dark:grayscale-0 [mask-image:radial-gradient(circle_at_center,black_20%,transparent_80%)] [-webkit-mask-image:radial-gradient(circle_at_center,black_20%,transparent_80%)]">
-                <div class="absolute inset-0 bg-gradient-to-l from-transparent via-main/80 to-main"></div>
+                    class="w-full h-full object-cover object-right lg:object-right-top grayscale-[30%] dark:grayscale-0 [mask-image:radial-gradient(ellipse_90%_90%_at_75%_50%,black_50%,transparent_85%)] [-webkit-mask-image:radial-gradient(ellipse_90%_90%_at_75%_50%,black_50%,transparent_85%)]">
+                <div class="absolute inset-0 bg-gradient-to-l from-transparent via-main/30 to-main dark:via-main/40">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Quick Facts Grid with Tailwind -->
+    <!-- Quick Facts - Minimal Horizontal Layout -->
     <section class="reveal">
         <div class="container mx-auto px-6">
-            <div class="about-divider"></div>
-            <div id="quick-facts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div id="quick-facts-grid" class="grid grid-cols-1 md:grid-cols-3">
                 <!-- Quick Facts loaded dynamically -->
             </div>
         </div>
@@ -95,7 +108,7 @@
                 </p>
             </div>
             <div class="skills-grid" id="skills-grid">
-                <div class="loading-indicator">Mapping expertise...</div>
+                <div class="loading-indicator">Loading skills...</div>
             </div>
         </div>
     </section>
@@ -113,7 +126,7 @@
                                 class="text-accent-indigo">.</span></h2>
                     </header>
                     <div class="education-list" id="education-list">
-                        <div class="loading-indicator">Fetching academic history...</div>
+                        <div class="loading-indicator">Loading education...</div>
                     </div>
                 </div>
 
@@ -126,7 +139,7 @@
                                 class="text-accent-indigo">.</span></h2>
                     </header>
                     <div id="certifications-grid" class="flex flex-col gap-4">
-                        <div class="loading-indicator">Validating certifications...</div>
+                        <div class="loading-indicator">Loading credentials...</div>
                     </div>
                 </div>
             </div>
@@ -142,7 +155,7 @@
                         class="text-accent-indigo">.</span></h2>
             </header>
             <div id="research-list" class="grid grid-cols-1 gap-12">
-                <div class="loading-indicator">Retrieving scholarly papers...</div>
+                <div class="loading-indicator">Loading research...</div>
             </div>
         </div>
     </section>
@@ -167,7 +180,7 @@
                 </a>
             </div>
             <div id="latest-notes-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="loading-indicator">Synchronizing archive...</div>
+                <div class="loading-indicator">Loading notes...</div>
             </div>
         </div>
     </section>
@@ -184,7 +197,7 @@
                     <a href="mailto:mailtanvirrahman@gmail.com"
                         class="group relative inline-flex items-center gap-4 px-12 py-6 bg-primary text-main font-black rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,255,255,0.1)]">
                         <span class="relative z-10 flex items-center gap-3">
-                            Initiate Discussion
+                            Start a Conversation
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="3" class="transition-transform duration-500 group-hover:translate-x-1">
                                 <path d="M5 12h14m-7-7 7 7-7 7" />
@@ -196,7 +209,7 @@
                     </a>
                     <a href="src/assets/docs/tanvir-rahman-resume.pdf" target="_blank" rel="noopener noreferrer"
                         class="group inline-flex items-center gap-4 px-12 py-6 border border-main text-primary font-bold rounded-2xl hover:bg-secondary transition-all duration-300">
-                        Technical Resume
+                        Download Resume
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5"
                             class="transition-all transform group-hover:scale-110 opacity-60 group-hover:opacity-100">

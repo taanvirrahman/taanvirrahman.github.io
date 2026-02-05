@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/* Content paths for Tailwind to scan */
+@source "../../*.html";
+@source "../scripts/**/*.js";
+
+/* Import design tokens first */
+@import './tokens.css';
+
+/* Custom Theme Configuration for Tailwind v4 */
+@theme {
+    /* Colors */
+    --color-main: var(--bg-main);
+    --color-secondary: var(--bg-secondary);
+    --color-tertiary: var(--bg-tertiary);
+    --color-primary: var(--text-primary);
+
+    /* Accent colors */
+    --color-accent-blue: var(--accent-blue);
+    --color-accent-emerald: var(--accent-emerald);
+    --color-accent-indigo: var(--accent-indigo);
+    --color-accent-rose: var(--accent-rose);
+    --color-accent-amber: var(--accent-amber);
+    --color-accent-violet: var(--accent-violet);
+
+    /* Fonts */
+    --font-sans: var(--font-sans);
+    --font-mono: var(--font-mono);
+    --font-serif: var(--font-serif);
+}
+
+/* Import base styles */
+@import './utilities/spacing.css';
+@import './base.css';
+@import './layout.css';
+
+/* Import component styles */
+@import './ui.css';
+@import './sections.css';
+@import './sections/payment.css';

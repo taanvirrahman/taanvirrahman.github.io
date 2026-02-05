@@ -18,9 +18,12 @@
 }
 
 .education-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-bottom: 2rem;
+    /* Border removed for cleaner look */
     position: relative;
-    padding: 2rem 0;
-    border-bottom: 1px solid var(--border-main);
     transition: all 0.2s ease;
 }
 

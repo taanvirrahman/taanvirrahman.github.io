@@ -43,23 +43,15 @@ export const templates = {
   },
 
   /**
-   * Quick Fact / Stat Card
+   * Quick Fact / Stat Card - Minimal Horizontal Design
    */
   fact: (fact, index = 0) => {
-    const isStatus = fact.id === 'status';
-    const accentColor = isStatus ? 'text-accent-emerald' : 'text-accent-indigo';
-    const badgeClass = isStatus ? 'text-accent-emerald uppercase tracking-tight' : 'text-primary';
-    const borderHover = isStatus ? 'hover:border-accent-rose/30' : 'hover:border-accent-indigo/30';
-
     return `
-            <div class="group bg-secondary/50 p-10 rounded-[2.5rem] border border-main ${borderHover} hover:bg-secondary transition-all duration-500 reveal" style="transition-delay: ${index * 100}ms">
-                <div class="mb-6 transform transition-transform group-hover:-rotate-12 ${accentColor}">
-                    ${ICONS[fact.icon] || ''}
-                </div>
-                <h3 class="text-xs font-black text-primary/40 uppercase tracking-widest mb-2">${fact.label}</h3>
-                <p class="text-lg font-bold ${badgeClass}">${fact.value}</p>
-            </div>
-          `;
+          <div class="group py-5 md:py-6 px-4 md:px-6 text-center transition-all duration-500 reveal hover:bg-secondary/20" style="transition-delay: ${index * 100}ms">
+              <p class="text-base md:text-lg lg:text-xl font-semibold text-primary tracking-tight mb-1 group-hover:text-accent-indigo transition-colors">${fact.value}</p>
+              <h3 class="text-[8px] md:text-[9px] font-medium text-secondary/40 uppercase tracking-[0.2em]">${fact.label}</h3>
+          </div>
+        `;
   },
 
   /**
@@ -110,19 +102,16 @@ export const templates = {
       return `
         <a href="${url}" class="bento-card ${sizeClass} github-project reveal group" data-tilt>
           <div class="bento-content">
-            <div class="bento-icon text-accent-indigo mb-4">${icon}</div>
-            <span class="text-[9px] font-bold uppercase tracking-[0.3em] text-secondary/40 mb-2 block">${tag}</span>
-            <h3 class="text-xl font-bold tracking-tight text-primary mb-2 group-hover:text-accent-indigo transition-colors">${title}</h3>
-            <p class="text-sm font-light text-secondary/70 leading-relaxed mb-6">${desc}</p>
-            <span class="inline-flex items-center text-[9px] font-black uppercase tracking-[0.4em] text-accent-indigo">
-              View Project <span class="ml-2 transition-transform group-hover:translate-x-1">→</span>
-            </span>
+            <div class="bento-header">
+                <span class="bento-tag">${tag}</span>
+                <h3 class="bento-title group-hover:text-accent-indigo transition-colors">${title}</h3>
+            </div>
+            <p class="bento-desc">${desc}</p>
+            <div class="bento-link group-hover:text-accent-indigo">
+              View Project
+            </div>
           </div>
-          <div class="bento-visual">
-             <div class="absolute bottom-[-10%] right-[-10%] w-32 h-32 opacity-[0.03] rotate-[-12deg] group-hover:rotate-0 group-hover:opacity-[0.07] transition-all duration-700 pointer-events-none text-accent-indigo">
-                ${icon}
-             </div>
-          </div>
+          <!-- Visuals removed for clean list view -->
         </a>
       `;
     }
@@ -137,7 +126,7 @@ export const templates = {
           </div>
           <h3 class="text-xl md:text-2xl font-serif italic text-primary group-hover:text-accent-rose transition-colors mb-8">${title}</h3>
           <div class="flex items-center text-[10px] font-black uppercase tracking-[0.4em] text-primary/40 group-hover:text-primary transition-colors">
-            Read Entry <span class="ml-2 transition-transform group-hover:translate-x-1">→</span>
+            Read Article <span class="ml-2 transition-transform group-hover:translate-x-1">→</span>
           </div>
         </a>
       `;
@@ -156,7 +145,7 @@ export const templates = {
                 <span class="text-[9px] font-black uppercase tracking-[0.4em] text-accent-indigo/60">${tag || 'Resource'}</span>
               </div>
               <h3 class="text-2xl font-bold tracking-tight text-primary mb-3 group-hover:text-accent-indigo transition-colors">${title}</h3>
-              <p class="text-sm font-light text-secondary/60 leading-relaxed mb-4 max-w-2xl">${desc || readingTime || 'Technical study and resource documentation.'}</p>
+              <p class="text-sm font-light text-secondary/60 leading-relaxed mb-4 max-w-2xl">${desc || readingTime || 'A curated resource for developers.'}</p>
               <div class="flex items-center gap-4 text-[9px] font-bold uppercase tracking-[0.3em] text-secondary/30">
                 <span class="text-primary/40 italic font-serif">by Tanvir Rahman</span>
                 <span>•</span>

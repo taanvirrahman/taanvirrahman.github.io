@@ -129,15 +129,8 @@
             {
                 "id": "focus",
                 "label": "Focus",
-                "value": "System Architectures",
+                "value": "Backend Engineering",
                 "icon": "code"
-            },
-            {
-                "id": "status",
-                "label": "Status",
-                "value": "Open for Work",
-                "icon": "bolt",
-                "color": "emerald"
             }
         ]
     }

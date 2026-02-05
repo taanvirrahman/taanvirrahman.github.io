@@ -50,14 +50,87 @@ body {
     background-color: var(--bg-main);
     color: var(--text-secondary);
     font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--font-normal);
+    line-height: var(--leading-normal);
+    letter-spacing: var(--tracking-tight);
     overflow-x: hidden;
     min-height: 100vh;
-    line-height: 1.6;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   GLOBAL TYPOGRAPHY
+   ======================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-sans);
+    font-weight: var(--font-bold);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+}
+
+h1 {
+    font-size: var(--text-5xl);
+    font-weight: var(--font-extrabold);
+    letter-spacing: var(--tracking-tighter);
+}
+
+h2 {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-extrabold);
+    letter-spacing: var(--tracking-tighter);
+}
+
+h3 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+}
+
+h4 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+}
+
+h5 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+}
+
+h6 {
+    font-size: var(--text-md);
+    font-weight: var(--font-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+}
+
+p {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+}
+
+small,
+.text-small {
+    font-size: var(--text-sm);
+}
+
+.text-xs {
+    font-size: var(--text-xs);
+}
+
+.text-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--text-muted);
 }
 
 img {
